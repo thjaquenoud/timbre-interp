@@ -3,8 +3,9 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior() 
-import tensorflow.keras 
+tf.disable_v2_behavior()
+#import tensorflow as tf
+import tensorflow.keras
 from tensorflow.keras.layers import Input, Dense, Lambda, Concatenate, Dropout, LeakyReLU, Multiply, Add
 from tensorflow.keras.models import Model, Sequential, load_model, clone_model
 from tensorflow.keras.activations import linear
