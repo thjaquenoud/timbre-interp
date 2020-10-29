@@ -4,7 +4,6 @@ from __future__ import print_function
 
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
-#import tensorflow as tf
 import tensorflow.keras
 from tensorflow.keras.layers import Input, Dense, Lambda, Concatenate, Dropout, LeakyReLU, Multiply, Add
 from tensorflow.keras.models import Model, Sequential, load_model, clone_model
@@ -211,19 +210,33 @@ class Manne:
 				)
 
 
+		mode = Input(shape=(1,))
 		modalpha1 = Input(shape=(self.encoder_widths[-1],))
 		modnegalpha1 = Input(shape=(self.encoder_widths[-1],))
 		final_spec_1 = Input(shape=(decoder_outdim,))
 		final_spec_2 = Input(shape=(decoder_outdim,))
 		my_batch0 = [final_spec_1]
 		my_batch1 = [final_spec_2]
-		my_encoded0 = self.encoder(my_batch0)
-		my_encoded1 = self.encoder(my_batch1)
-		blarg0 = Multiply()([my_encoded0,modalpha1])
-		blarg1 = Multiply()([my_encoded1,modnegalpha1])
-		mod_latent1 = Add()([blarg0,blarg1])
-		final_decoded = self.decoder([mod_latent1])
-		self.dnb_net = Model(inputs=[final_spec_1,final_spec_2,modalpha1,modnegalpha1],
+		
+		# synthesis
+		if mode == 0:
+			latent = [modalpha1]
+			final_decoded = self.decoder(latent)
+		# effects
+		elif mode == 1:
+			my_encoded = self.encoder(my_batch0)
+			mod_latent = Multiply()([my_encoded,modalpha1])
+			final_decoded = self.decoder([mod_latent])
+		# mixing
+		else:
+			my_encoded0 = self.encoder(my_batch0)
+			my_encoded1 = self.encoder(my_batch1)
+			blarg0 = Multiply()([my_encoded0,modalpha1])
+			blarg1 = Multiply()([my_encoded1,modnegalpha1])
+			mod_latent1 = Add()([blarg0,blarg1])
+			final_decoded = self.decoder([mod_latent1])
+		
+		self.dnb_net = Model(inputs=[mode,final_spec_1,final_spec_2,modalpha1,modnegalpha1],
 			outputs=final_decoded)
 		self.dnb_net.save('models/'+self.filename_out+'_trained_network.h5')
 
