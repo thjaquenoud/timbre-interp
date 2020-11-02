@@ -5,7 +5,7 @@ from __future__ import print_function
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 import tensorflow.keras
-from tensorflow.keras.layers import Input, Dense, Lambda, Concatenate, Dropout, LeakyReLU, Multiply, Add
+from tensorflow.keras.layers import Input, Dense, Lambda, Concatenate, Dropout, LeakyReLU, Multiply, Add, Conv2D, MaxPooling2D, Flatten, Reshape, UpSampling2D, Conv2DTranspose
 from tensorflow.keras.models import Model, Sequential, load_model, clone_model
 from tensorflow.keras.activations import linear
 
@@ -95,66 +95,62 @@ class Manne:
 		self.decoder = load_model(dec_filename,custom_objects={'sampling': self.sampling}, compile=False)
 
 	def load_dataset(self):
+		global sample_length
+
 		filename = 'frames/'+self.filename_in+'_frames.npy'	#Static Data used for training net
 		filepath = os.path.join(os.getcwd(),filename)
 		orig_frames = np.load(filepath)
 		orig_frames_1 = np.asarray(orig_frames)
-		np.random.shuffle(orig_frames_1)
-		print(orig_frames_1.shape)
-		orig_frames_1 = orig_frames_1[:50000,:]
-		print(orig_frames_1.shape)
+		
+		sample_length = 24
 		len_frames = orig_frames_1.shape[0]
+		num_samples = len_frames // sample_length
+		num_frames = num_samples * sample_length
+		orig_frames_cnn = np.reshape(orig_frames_1[:num_frames,:], (num_samples,sample_length,-1,1))
+		
+		np.random.shuffle(orig_frames_cnn)
 
-
-		self.frames = orig_frames_1
+		self.frames = orig_frames_cnn
 		orig_frames = None
 		orig_frames_1 = None
 
-
-		if args.filename_in == 'one_octave':
-			self.X_train = self.frames[:16685,:]
-			self.X_val = self.frames[16685:17998,:]
-			self.X_test = self.frames[17998:,:]
-		elif args.filename_in == 'five_octave':
-			self.X_train = self.frames[:78991,:]
-			self.X_val = self.frames[78991:84712,:]
-			self.X_test = self.frames[84712:,:]
-		elif args.filename_in == 'guitar':
-			self.X_train = self.frames[:62018,:]
-			self.X_val = self.frames[62018:66835,:]
-			self.X_test = self.frames[66835:,:]
-		elif args.filename_in == 'violin':
-			self.X_train = self.frames[:90571,:]
-			self.X_val = self.frames[90571:100912,:]
-			self.X_test = self.frames[100912:,:]
-		else:
-			in_size = int(self.frames.shape[0])
-			self.X_train =  self.frames[:int(0.95*in_size),:] 
-			self.X_val =  self.frames[int(0.95*in_size):int(0.975*in_size),:]
-			self.X_test =  self.frames[int(0.975*in_size):,:]
+		self.X_train =  self.frames[:int(0.95*num_samples),:,:] 
+		self.X_val =  self.frames[int(0.95*num_samples):int(0.975*num_samples),:,:]
+		self.X_test =  self.frames[int(0.975*num_samples):,:,:]
 
 
 
 	def define_net(self):
 		global decoder_outdim
+		global sample_length
 
 		l2_penalty = 1e-7
 
-		self.encoder_widths = [256,128,64,32,16,10]
-		self.decoder_widths = [16,32,64,128,256]
-
-
 		decoder_outdim = 2049
+		self.encoder_widths = [256,128,64,32,16,10]
+		self.decoder_widths = [16,32,64,128,256,454]
+		self.cnn_filters = [32,16]
+
 		drop = 0.0
 		alpha_val=0.1
-		input_spec1 = Input(shape=(decoder_outdim,))
+		input_spec1 = Input(shape=(sample_length,decoder_outdim,1))
 
-		encoded1 = Dense(units=self.encoder_widths[0],
-				activation=None,
-				kernel_regularizer=l2(l2_penalty))(input_spec1)
-
+		encoded1 = Conv2D(self.cnn_filters[0], 3, padding='same', kernel_regularizer=l2(l2_penalty))(input_spec1)
 		encoded1 = LeakyReLU(alpha=alpha_val)(encoded1)
-		for width in self.encoder_widths[1:-1]:
+
+		encoded1 = Conv2D(self.cnn_filters[0], 3, padding='same', kernel_regularizer=l2(l2_penalty))(encoded1)
+		encoded1 = LeakyReLU(alpha=alpha_val)(encoded1)
+		encoded1 = MaxPooling2D(3)(encoded1)
+
+		for i in range(2):
+			encoded1 = Conv2D(self.cnn_filters[1], 3, padding='same', kernel_regularizer=l2(l2_penalty))(encoded1)
+			encoded1 = LeakyReLU(alpha=alpha_val)(encoded1)
+
+		encoded1 = MaxPooling2D(3)(encoded1)
+
+		encoded1 = Flatten()(encoded1)
+
+		for width in self.encoder_widths[0:-1]:
 			encoded1 = Dense(units=width,
 				activation=None,
 				kernel_regularizer=l2(l2_penalty))(encoded1)
@@ -168,16 +164,30 @@ class Manne:
 			activation=None,
 			kernel_regularizer=l2(l2_penalty))(input_latent1)
 		decoded1 = LeakyReLU(alpha=alpha_val)(decoded1)
-		for width in self.decoder_widths[1:]:
+		for width in self.decoder_widths[1:-1]:
 			decoded1 = Dense(units=width,
 				activation=None,
 				kernel_regularizer=l2(l2_penalty))(decoded1)
 			decoded1 = LeakyReLU(alpha=alpha_val)(decoded1)
 
-		decoded1 = Dense(units=int(decoder_outdim),
-			activation='relu',
+		decoded1 = Dense(units=self.decoder_widths[-1],
 			kernel_regularizer=l2(l2_penalty))(decoded1)
+		decoded1 = LeakyReLU(alpha=alpha_val)(decoded1)
 
+		decoded1 = Reshape((2, 227, 1))(decoded1)
+		decoded1 = UpSampling2D(3)(decoded1)
+		
+		decoded1 = Conv2DTranspose(self.cnn_filters[1], 3, padding='same', kernel_regularizer=l2(l2_penalty))(decoded1)
+		decoded1 = LeakyReLU(alpha=alpha_val)(decoded1)
+
+		decoded1 = Conv2DTranspose(self.cnn_filters[1], 3, kernel_regularizer=l2(l2_penalty))(decoded1)
+		decoded1 = LeakyReLU(alpha=alpha_val)(decoded1)
+		decoded1 = UpSampling2D(3)(decoded1)
+
+		decoded1 = Conv2DTranspose(self.cnn_filters[0], 3, padding='same', kernel_regularizer=l2(l2_penalty))(decoded1)
+		decoded1 = LeakyReLU(alpha=alpha_val)(decoded1)
+
+		decoded1 = Conv2DTranspose(1, 3, padding='same', activation='relu', kernel_regularizer=l2(l2_penalty))(decoded1)
 
 		self.decoder = Model(inputs=[input_latent1], outputs=[decoded1])
 
@@ -197,11 +207,12 @@ class Manne:
 
 	def train_net(self):
 		global decoder_outdim
+		global sample_length
 		adam_rate = 1e-4
-		train_data = [self.X_train[:,:2049]]
-		train_target = [self.X_train[:,:2049]]
-		val_data = [self.X_val[:,:2049]]
-		val_target = [self.X_val[:,:2049]]
+		train_data = [self.X_train[:,:sample_length,:decoder_outdim]]
+		train_target = [self.X_train[:,:sample_length,:decoder_outdim]]
+		val_data = [self.X_val[:,:sample_length,:decoder_outdim]]
+		val_target = [self.X_val[:,:sample_length,:decoder_outdim]]
 
 		self.network.compile(optimizer=Adam(lr=adam_rate), loss=mse)
 		self.network.fit(x=train_data, y=train_target,
@@ -215,8 +226,8 @@ class Manne:
 		mode = Input(shape=(1,))
 		modalpha1 = Input(shape=(self.encoder_widths[-1],))
 		modnegalpha1 = Input(shape=(self.encoder_widths[-1],))
-		final_spec_1 = Input(shape=(decoder_outdim,))
-		final_spec_2 = Input(shape=(decoder_outdim,))
+		final_spec_1 = Input(shape=(sample_length, decoder_outdim,))
+		final_spec_2 = Input(shape=(sample_length, decoder_outdim,))
 		my_batch0 = [final_spec_1]
 		my_batch1 = [final_spec_2]
 		
@@ -250,10 +261,13 @@ class Manne:
 
 
 	def evaluate_net(self):
-		test_data = self.X_test[:,:2049]
-		test_target = self.X_test[:,:2049]
-		val_data = self.X_val[:,:2049]
-		val_target = self.X_val[:,:2049]
+		global decoder_outdim
+		global sample_length
+
+		test_data = self.X_test[:,:sample_length,:decoder_outdim]
+		test_target = self.X_test[:,:sample_length,:decoder_outdim]
+		val_data = self.X_val[:,:sample_length,:decoder_outdim]
+		val_target = self.X_val[:,:sample_length,:decoder_outdim]
 
 
 		if args.filename_in == 'one_octave':
