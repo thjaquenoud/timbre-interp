@@ -77,7 +77,7 @@ class Application(Frame):
         E = out_mag*np.exp(1j*temp_phase)
         _, now_out = np.float32(signal.istft(0.24*E, fs=44100, noverlap=3*1024))
         out = now_out[CHUNK:-2*CHUNK]
-        newdim = int(len(out)/CHUNK)
+        newdim = len(out)//CHUNK
         print(len(out)/CHUNK)
         new_data = out.reshape((newdim,CHUNK))
 

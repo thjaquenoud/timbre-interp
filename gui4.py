@@ -9,6 +9,8 @@ from kivy.uix.anchorlayout import AnchorLayout
 from kivy.properties import ListProperty
 from kivy.uix.slider import Slider
 from kivy.graphics import *
+from kivy.clock import Clock
+
 
 class LoginScreen(GridLayout):
 
@@ -42,6 +44,14 @@ class LoginScreen(GridLayout):
         self.padAnchor2.add_widget(self.playButton)
         self.add_widget(self.padAnchor2)
 
+
+        self.padAnchor3 = AnchorLayout(size_hint_y=0.3)
+        self.textinput = TextInput(text='File', size_hint_y=None, height=45, font_size=24)
+        self.padAnchor3.add_widget(self.textinput)
+        self.add_widget(self.padAnchor3)
+
+        Clock.schedule_interval(self.loop, 0.01)
+
     
     def reset(self, instance):
         for slider in self.sliders:
@@ -55,9 +65,13 @@ class LoginScreen(GridLayout):
         for slider in self.sliders:
             print(slider.value)
 
+    def loop(self, *args, **kwargs):
+    	print("LOOP")
+
 class MusicAE(App):
 
     def build(self):
+
         return LoginScreen()
 
 if __name__ == '__main__':
