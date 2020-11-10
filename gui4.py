@@ -1,12 +1,10 @@
 from tkinter import *
-import pandas as pd
 import os
 import librosa
 import soundfile as sf
 import argparse
 import pyaudio
 import numpy as np
-from tensorflow.keras.layers import Input, Dense, LeakyReLU
 from tensorflow.keras.models import Model, load_model
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior() 
@@ -14,7 +12,7 @@ from scipy import signal
 import time
 import sys
 import scipy, pylab
-
+from kivy.core.window import Window
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
@@ -39,9 +37,14 @@ LEN_WINDOW = 4*CHUNK    #Specified length of analysis window
 xfade_in = np.linspace(0,1,num=CHUNK)
 xfade_out = np.flip(xfade_in)
 
-class LoginScreen(GridLayout):
+class LoginScreen(BoxLayout):
 
     def __init__(self, **kwargs):
+
+        upper = GridLayout(cols=10)
+        lower = BoxLayout(orientation='vertical', spacing=2)
+        self.orientation = 'horizontal'
+        Window.size = (1000, 500)
 
         self.alpha = 1
         self.num_latents = 10
@@ -55,41 +58,54 @@ class LoginScreen(GridLayout):
             Color(0, 0.05, 0.15)
             Rectangle(pos=(0, 0), size=(2000, 2000))
 
-        self.cols = 10
 
         self.sliders = []
         for i in range(0,10):
             print(i)
             self.sliders.append(Slider(min=0, max=100, value=50, orientation='vertical'))
             self.sliders[i].fbind('value', self.slide)
-            self.add_widget(self.sliders[i])
+            upper.add_widget(self.sliders[i])
+
+        #Button to start music by calling useSliderVals(). This will be changed to a more relevant function soon
+        self.padAnchor6 = AnchorLayout(size_hint_y=0.3)
+        self.playButton = Button(text='Play', size_hint_y=None, height=50, size_hint_x=0.3, font_size=24, background_color=[0, 1, 0])
+        self.playButton.bind(on_press=self.load_tracks)
+        self.padAnchor6.add_widget(self.playButton)
+        lower.add_widget(self.padAnchor6)
+
 
         #Button to reset values by calling reset() when clicked
         self.padAnchor = AnchorLayout(size_hint_y=0.3)
-        self.resetButton = Button(text='Reset', size_hint_y=None, height=75, size_hint_x=0.8, font_size=24)
+        self.resetButton = Button(text='Reset', size_hint_y=None, height=50, size_hint_x=0.3, font_size=24)
         self.resetButton.bind(on_press=self.reset)
         self.padAnchor.add_widget(self.resetButton)
-        self.add_widget(self.padAnchor)
+        lower.add_widget(self.padAnchor)
 
 
         #Button to start music by calling useSliderVals(). This will be changed to a more relevant function soon
-        self.padAnchor2 = AnchorLayout(size_hint_y=0.3)
-        self.playButton = Button(text='Play', size_hint_y=None, height=75, size_hint_x=0.8, font_size=24, background_color=[0, 1, 0])
-        self.playButton.bind(on_press=self.load_tracks)
-        self.padAnchor2.add_widget(self.playButton)
-        self.add_widget(self.padAnchor2)
+        self.padAnchor6 = AnchorLayout(size_hint_y=0.3)
+        self.textinput3 = TextInput(hint_text='Model', size_hint_y=None, height=45, font_size=24, size_hint_x=None, width=300, multiline='false')
+        self.padAnchor6.add_widget(self.textinput3)
+        lower.add_widget(self.padAnchor6)
 
 
         self.padAnchor3 = AnchorLayout(size_hint_y=0.3)
-        self.textinput1 = TextInput(text='Audio File', size_hint_y=None, height=45, font_size=24)
+        self.textinput1 = TextInput(hint_text='Audio File 1', size_hint_y=None, height=45, size_hint_x=None, width=300, font_size=24, multiline='false')
         self.padAnchor3.add_widget(self.textinput1)
-        self.add_widget(self.padAnchor3)
+        lower.add_widget(self.padAnchor3)
 
         self.padAnchor4 = AnchorLayout(size_hint_y=0.3)
-        self.textinput2 = TextInput(text='Audio File', size_hint_y=None, height=45, font_size=24)
+        self.textinput2 = Slider(min=0, max=100, value=50, orientation='horizontal')
         self.padAnchor4.add_widget(self.textinput2)
-        self.add_widget(self.padAnchor4)
+        lower.add_widget(self.padAnchor4)
 
+        self.padAnchor5 = AnchorLayout(size_hint_y=0.3)
+        self.textinput2 = TextInput(hint_text='Audio File 2', size_hint_x=None, width=300, size_hint_y=None, height=45, font_size=24, multiline='false')
+        self.padAnchor5.add_widget(self.textinput2)
+        lower.add_widget(self.padAnchor5)
+
+        self.add_widget(upper)
+        self.add_widget(lower)
         Clock.schedule_interval(self.loop, POLL_TIME)
 
     def reset(self, instance):
@@ -133,7 +149,7 @@ class LoginScreen(GridLayout):
         temp_negalpha = np.tile((1-self.alpha)*self.temp_sliders,(NUM_CHUNKS+5,1))    #
         temp_phase = self.alpha*phaseA+(1-self.alpha)*phaseB #Unstack and Interpolate Phase
         temp_max = self.alpha*max_A+(1-self.alpha)*max_B #Unstack and Interpolate Normalizing gains
-        temp_out_mag = self.full_net.predict([magA,magB,temp_alpha,temp_negalpha])
+        temp_out_mag = self.full_net.predict([ magA, magB, temp_alpha ,temp_negalpha ])
 
         out_mag = temp_out_mag.T * temp_max
         E = out_mag*np.exp(1j*temp_phase)
