@@ -164,6 +164,7 @@ class Manne:
 			activation=None,
 			kernel_regularizer=l2(l2_penalty))(input_latent1)
 		decoded1 = LeakyReLU(alpha=alpha_val)(decoded1)
+
 		for width in self.decoder_widths[1:-1]:
 			decoded1 = Dense(units=width,
 				activation=None,
@@ -173,6 +174,8 @@ class Manne:
 		decoded1 = Dense(units=self.decoder_widths[-1],
 			kernel_regularizer=l2(l2_penalty))(decoded1)
 		decoded1 = LeakyReLU(alpha=alpha_val)(decoded1)
+
+		###
 
 		decoded1 = Reshape((2, 227, 1))(decoded1)
 		decoded1 = UpSampling2D(3)(decoded1)

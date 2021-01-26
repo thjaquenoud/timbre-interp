@@ -46,7 +46,7 @@ class LoginScreen(BoxLayout):
         self.orientation = 'horizontal'
         Window.size = (1000, 500)
 
-        self.alpha = 1
+        self.alpha = 0.5
         self.num_latents = 10
         self.temp_sliders = np.ones(self.num_latents)
         self.make_audio = False
@@ -94,10 +94,15 @@ class LoginScreen(BoxLayout):
         self.padAnchor3.add_widget(self.textinput1)
         lower.add_widget(self.padAnchor3)
 
-        self.padAnchor4 = AnchorLayout(size_hint_y=0.3)
-        self.textinput2 = Slider(min=0, max=100, value=50, orientation='horizontal')
-        self.padAnchor4.add_widget(self.textinput2)
-        lower.add_widget(self.padAnchor4)
+        self.alphaarr = []
+        self.padAnchor42 = AnchorLayout(size_hint_y=0.3)
+        self.alphaarr.append(Slider(min=0, max=100, value=50, orientation='horizontal'))
+        self.alphaarr[0].fbind('value', self.slide)
+        #self.alphaarr.append(Slider(min=0, max=100, value=50, orientation='horizontal'))
+        #self.alphaSlider.fbind('value', self.slide)
+        #self.padAnchor42.add_widget(self.alphaSlider)
+        self.padAnchor42.add_widget(self.alphaarr[0])
+        lower.add_widget(self.padAnchor42)
 
         self.padAnchor5 = AnchorLayout(size_hint_y=0.3)
         self.textinput2 = TextInput(hint_text='Audio File 2', size_hint_x=None, width=300, size_hint_y=None, height=45, font_size=24, multiline='false')
@@ -117,8 +122,9 @@ class LoginScreen(BoxLayout):
         self.useSliderVals()
 
     def useSliderVals(self, *args, **kwargs):
-        for slider in self.sliders:
-            print(slider.value)
+        #for slider in self.sliders:
+        #    print(slider.value)
+        print()
 
     def gen_audio(self, seg_length, prog_ind):
         num_samps = seg_length*CHUNK
@@ -145,6 +151,7 @@ class LoginScreen(BoxLayout):
         phaseB = np.angle(B) #Phase response of STFT
         
 
+        print(self.alpha)
         temp_alpha = np.tile(self.alpha*self.temp_sliders,(NUM_CHUNKS+5,1))      #NUM_CHUNKS+5 is really sus, might have
         temp_negalpha = np.tile((1-self.alpha)*self.temp_sliders,(NUM_CHUNKS+5,1))    #
         temp_phase = self.alpha*phaseA+(1-self.alpha)*phaseB #Unstack and Interpolate Phase
@@ -156,13 +163,14 @@ class LoginScreen(BoxLayout):
         _, temp_out = np.float32(signal.istft(0.24*E, fs=SAMP_RATE, noverlap=3*CHUNK))  #0.24 sus
         out = temp_out[CHUNK:-2*CHUNK]
         newdim = len(out)//CHUNK
-        print(len(out)/CHUNK)
+        #print(len(out)/CHUNK)
         self.new_data = out.reshape((newdim,CHUNK))
 
     def loop(self, *args, **kwargs):
         #print("LOOP")
-        FADE = 50 ################### this is the value of horizontal slider
-        self.alpha = FADE/100
+        #FADE = 50 ################### this is the value of horizontal slider
+        self.alpha = self.alphaarr[0].value/100
+
         
         if self.make_audio:
             t = time.time() ################### we could get rid of it?

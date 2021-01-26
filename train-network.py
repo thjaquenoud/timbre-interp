@@ -322,7 +322,6 @@ class Manne:
 			plt.savefig(plotname, format = 'pdf', bbox_inches='tight')
 			plt.clf()
 
-
 if __name__ == '__main__':
 	args = get_arguments()
 	my_manne = Manne(args)
