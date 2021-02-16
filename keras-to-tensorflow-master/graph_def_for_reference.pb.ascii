@@ -1,0 +1,4051 @@
+node {
+  name: "Latent_Input"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+        dim {
+          size: 10
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Input"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+        dim {
+          size: 10
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense1/kernel/Initializer/random_uniform/shape"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense1/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\n\000\000\000\020\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense1/kernel/Initializer/random_uniform/min"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense1/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: -0.4803844690322876
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense1/kernel/Initializer/random_uniform/max"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense1/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.4803844690322876
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense1/kernel/Initializer/random_uniform/RandomUniform"
+  op: "RandomUniform"
+  input: "Decoder_Dense1/kernel/Initializer/random_uniform/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense1/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "seed"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "seed2"
+    value {
+      i: 0
+    }
+  }
+}
+node {
+  name: "Decoder_Dense1/kernel/Initializer/random_uniform/sub"
+  op: "Sub"
+  input: "Decoder_Dense1/kernel/Initializer/random_uniform/max"
+  input: "Decoder_Dense1/kernel/Initializer/random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense1/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense1/kernel/Initializer/random_uniform/mul"
+  op: "Mul"
+  input: "Decoder_Dense1/kernel/Initializer/random_uniform/RandomUniform"
+  input: "Decoder_Dense1/kernel/Initializer/random_uniform/sub"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense1/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense1/kernel/Initializer/random_uniform"
+  op: "Add"
+  input: "Decoder_Dense1/kernel/Initializer/random_uniform/mul"
+  input: "Decoder_Dense1/kernel/Initializer/random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense1/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense1/kernel"
+  op: "VarHandleOp"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense1/kernel"
+      }
+    }
+  }
+  attr {
+    key: "allowed_devices"
+    value {
+      list {
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 10
+        }
+        dim {
+          size: 16
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: "Decoder_Dense1/kernel"
+    }
+  }
+}
+node {
+  name: "Decoder_Dense1/kernel/IsInitialized/VarIsInitializedOp"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense1/kernel"
+}
+node {
+  name: "Decoder_Dense1/kernel/Assign"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense1/kernel"
+  input: "Decoder_Dense1/kernel/Initializer/random_uniform"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense1/kernel/Read/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense1/kernel"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense1/bias/Initializer/zeros"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense1/bias"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 16
+          }
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense1/bias"
+  op: "VarHandleOp"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense1/bias"
+      }
+    }
+  }
+  attr {
+    key: "allowed_devices"
+    value {
+      list {
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 16
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: "Decoder_Dense1/bias"
+    }
+  }
+}
+node {
+  name: "Decoder_Dense1/bias/IsInitialized/VarIsInitializedOp"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense1/bias"
+}
+node {
+  name: "Decoder_Dense1/bias/Assign"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense1/bias"
+  input: "Decoder_Dense1/bias/Initializer/zeros"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense1/bias/Read/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense1/bias"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense1/MatMul/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense1/kernel"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense1/MatMul"
+  op: "MatMul"
+  input: "Decoder_Input"
+  input: "Decoder_Dense1/MatMul/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "Decoder_Dense1/BiasAdd/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense1/bias"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense1/BiasAdd"
+  op: "BiasAdd"
+  input: "Decoder_Dense1/MatMul"
+  input: "Decoder_Dense1/BiasAdd/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "Decoder_LeakyRelu1/LeakyRelu"
+  op: "LeakyRelu"
+  input: "Decoder_Dense1/BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "alpha"
+    value {
+      f: 0.10000000149011612
+    }
+  }
+}
+node {
+  name: "Decoder_Dense2/kernel/Initializer/random_uniform/shape"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense2/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\020\000\000\000 \000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense2/kernel/Initializer/random_uniform/min"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense2/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: -0.3535533845424652
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense2/kernel/Initializer/random_uniform/max"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense2/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.3535533845424652
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense2/kernel/Initializer/random_uniform/RandomUniform"
+  op: "RandomUniform"
+  input: "Decoder_Dense2/kernel/Initializer/random_uniform/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense2/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "seed"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "seed2"
+    value {
+      i: 0
+    }
+  }
+}
+node {
+  name: "Decoder_Dense2/kernel/Initializer/random_uniform/sub"
+  op: "Sub"
+  input: "Decoder_Dense2/kernel/Initializer/random_uniform/max"
+  input: "Decoder_Dense2/kernel/Initializer/random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense2/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense2/kernel/Initializer/random_uniform/mul"
+  op: "Mul"
+  input: "Decoder_Dense2/kernel/Initializer/random_uniform/RandomUniform"
+  input: "Decoder_Dense2/kernel/Initializer/random_uniform/sub"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense2/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense2/kernel/Initializer/random_uniform"
+  op: "Add"
+  input: "Decoder_Dense2/kernel/Initializer/random_uniform/mul"
+  input: "Decoder_Dense2/kernel/Initializer/random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense2/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense2/kernel"
+  op: "VarHandleOp"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense2/kernel"
+      }
+    }
+  }
+  attr {
+    key: "allowed_devices"
+    value {
+      list {
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 16
+        }
+        dim {
+          size: 32
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: "Decoder_Dense2/kernel"
+    }
+  }
+}
+node {
+  name: "Decoder_Dense2/kernel/IsInitialized/VarIsInitializedOp"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense2/kernel"
+}
+node {
+  name: "Decoder_Dense2/kernel/Assign"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense2/kernel"
+  input: "Decoder_Dense2/kernel/Initializer/random_uniform"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense2/kernel/Read/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense2/kernel"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense2/bias/Initializer/zeros"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense2/bias"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 32
+          }
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense2/bias"
+  op: "VarHandleOp"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense2/bias"
+      }
+    }
+  }
+  attr {
+    key: "allowed_devices"
+    value {
+      list {
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 32
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: "Decoder_Dense2/bias"
+    }
+  }
+}
+node {
+  name: "Decoder_Dense2/bias/IsInitialized/VarIsInitializedOp"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense2/bias"
+}
+node {
+  name: "Decoder_Dense2/bias/Assign"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense2/bias"
+  input: "Decoder_Dense2/bias/Initializer/zeros"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense2/bias/Read/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense2/bias"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense2/MatMul/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense2/kernel"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense2/MatMul"
+  op: "MatMul"
+  input: "Decoder_LeakyRelu1/LeakyRelu"
+  input: "Decoder_Dense2/MatMul/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "Decoder_Dense2/BiasAdd/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense2/bias"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense2/BiasAdd"
+  op: "BiasAdd"
+  input: "Decoder_Dense2/MatMul"
+  input: "Decoder_Dense2/BiasAdd/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "Decoder_LeakyRelu2/LeakyRelu"
+  op: "LeakyRelu"
+  input: "Decoder_Dense2/BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "alpha"
+    value {
+      f: 0.10000000149011612
+    }
+  }
+}
+node {
+  name: "Decoder_Dense3/kernel/Initializer/random_uniform/shape"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense3/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: " \000\000\000@\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense3/kernel/Initializer/random_uniform/min"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense3/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: -0.25
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense3/kernel/Initializer/random_uniform/max"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense3/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.25
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense3/kernel/Initializer/random_uniform/RandomUniform"
+  op: "RandomUniform"
+  input: "Decoder_Dense3/kernel/Initializer/random_uniform/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense3/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "seed"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "seed2"
+    value {
+      i: 0
+    }
+  }
+}
+node {
+  name: "Decoder_Dense3/kernel/Initializer/random_uniform/sub"
+  op: "Sub"
+  input: "Decoder_Dense3/kernel/Initializer/random_uniform/max"
+  input: "Decoder_Dense3/kernel/Initializer/random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense3/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense3/kernel/Initializer/random_uniform/mul"
+  op: "Mul"
+  input: "Decoder_Dense3/kernel/Initializer/random_uniform/RandomUniform"
+  input: "Decoder_Dense3/kernel/Initializer/random_uniform/sub"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense3/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense3/kernel/Initializer/random_uniform"
+  op: "Add"
+  input: "Decoder_Dense3/kernel/Initializer/random_uniform/mul"
+  input: "Decoder_Dense3/kernel/Initializer/random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense3/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense3/kernel"
+  op: "VarHandleOp"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense3/kernel"
+      }
+    }
+  }
+  attr {
+    key: "allowed_devices"
+    value {
+      list {
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 32
+        }
+        dim {
+          size: 64
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: "Decoder_Dense3/kernel"
+    }
+  }
+}
+node {
+  name: "Decoder_Dense3/kernel/IsInitialized/VarIsInitializedOp"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense3/kernel"
+}
+node {
+  name: "Decoder_Dense3/kernel/Assign"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense3/kernel"
+  input: "Decoder_Dense3/kernel/Initializer/random_uniform"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense3/kernel/Read/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense3/kernel"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense3/bias/Initializer/zeros"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense3/bias"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 64
+          }
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense3/bias"
+  op: "VarHandleOp"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense3/bias"
+      }
+    }
+  }
+  attr {
+    key: "allowed_devices"
+    value {
+      list {
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 64
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: "Decoder_Dense3/bias"
+    }
+  }
+}
+node {
+  name: "Decoder_Dense3/bias/IsInitialized/VarIsInitializedOp"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense3/bias"
+}
+node {
+  name: "Decoder_Dense3/bias/Assign"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense3/bias"
+  input: "Decoder_Dense3/bias/Initializer/zeros"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense3/bias/Read/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense3/bias"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense3/MatMul/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense3/kernel"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense3/MatMul"
+  op: "MatMul"
+  input: "Decoder_LeakyRelu2/LeakyRelu"
+  input: "Decoder_Dense3/MatMul/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "Decoder_Dense3/BiasAdd/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense3/bias"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense3/BiasAdd"
+  op: "BiasAdd"
+  input: "Decoder_Dense3/MatMul"
+  input: "Decoder_Dense3/BiasAdd/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "Decoder_LeakyRelu3/LeakyRelu"
+  op: "LeakyRelu"
+  input: "Decoder_Dense3/BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "alpha"
+    value {
+      f: 0.10000000149011612
+    }
+  }
+}
+node {
+  name: "Decoder_Dense4/kernel/Initializer/random_uniform/shape"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense4/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "@\000\000\000\200\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense4/kernel/Initializer/random_uniform/min"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense4/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: -0.1767766922712326
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense4/kernel/Initializer/random_uniform/max"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense4/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.1767766922712326
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense4/kernel/Initializer/random_uniform/RandomUniform"
+  op: "RandomUniform"
+  input: "Decoder_Dense4/kernel/Initializer/random_uniform/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense4/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "seed"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "seed2"
+    value {
+      i: 0
+    }
+  }
+}
+node {
+  name: "Decoder_Dense4/kernel/Initializer/random_uniform/sub"
+  op: "Sub"
+  input: "Decoder_Dense4/kernel/Initializer/random_uniform/max"
+  input: "Decoder_Dense4/kernel/Initializer/random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense4/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense4/kernel/Initializer/random_uniform/mul"
+  op: "Mul"
+  input: "Decoder_Dense4/kernel/Initializer/random_uniform/RandomUniform"
+  input: "Decoder_Dense4/kernel/Initializer/random_uniform/sub"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense4/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense4/kernel/Initializer/random_uniform"
+  op: "Add"
+  input: "Decoder_Dense4/kernel/Initializer/random_uniform/mul"
+  input: "Decoder_Dense4/kernel/Initializer/random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense4/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense4/kernel"
+  op: "VarHandleOp"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense4/kernel"
+      }
+    }
+  }
+  attr {
+    key: "allowed_devices"
+    value {
+      list {
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 64
+        }
+        dim {
+          size: 128
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: "Decoder_Dense4/kernel"
+    }
+  }
+}
+node {
+  name: "Decoder_Dense4/kernel/IsInitialized/VarIsInitializedOp"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense4/kernel"
+}
+node {
+  name: "Decoder_Dense4/kernel/Assign"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense4/kernel"
+  input: "Decoder_Dense4/kernel/Initializer/random_uniform"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense4/kernel/Read/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense4/kernel"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense4/bias/Initializer/zeros"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense4/bias"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 128
+          }
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense4/bias"
+  op: "VarHandleOp"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense4/bias"
+      }
+    }
+  }
+  attr {
+    key: "allowed_devices"
+    value {
+      list {
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 128
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: "Decoder_Dense4/bias"
+    }
+  }
+}
+node {
+  name: "Decoder_Dense4/bias/IsInitialized/VarIsInitializedOp"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense4/bias"
+}
+node {
+  name: "Decoder_Dense4/bias/Assign"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense4/bias"
+  input: "Decoder_Dense4/bias/Initializer/zeros"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense4/bias/Read/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense4/bias"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense4/MatMul/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense4/kernel"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense4/MatMul"
+  op: "MatMul"
+  input: "Decoder_LeakyRelu3/LeakyRelu"
+  input: "Decoder_Dense4/MatMul/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "Decoder_Dense4/BiasAdd/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense4/bias"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense4/BiasAdd"
+  op: "BiasAdd"
+  input: "Decoder_Dense4/MatMul"
+  input: "Decoder_Dense4/BiasAdd/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "Decoder_LeakyRelu4/LeakyRelu"
+  op: "LeakyRelu"
+  input: "Decoder_Dense4/BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "alpha"
+    value {
+      f: 0.10000000149011612
+    }
+  }
+}
+node {
+  name: "Decoder_Dense5/kernel/Initializer/random_uniform/shape"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense5/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\200\000\000\000\000\001\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense5/kernel/Initializer/random_uniform/min"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense5/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: -0.125
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense5/kernel/Initializer/random_uniform/max"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense5/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.125
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense5/kernel/Initializer/random_uniform/RandomUniform"
+  op: "RandomUniform"
+  input: "Decoder_Dense5/kernel/Initializer/random_uniform/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense5/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "seed"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "seed2"
+    value {
+      i: 0
+    }
+  }
+}
+node {
+  name: "Decoder_Dense5/kernel/Initializer/random_uniform/sub"
+  op: "Sub"
+  input: "Decoder_Dense5/kernel/Initializer/random_uniform/max"
+  input: "Decoder_Dense5/kernel/Initializer/random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense5/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense5/kernel/Initializer/random_uniform/mul"
+  op: "Mul"
+  input: "Decoder_Dense5/kernel/Initializer/random_uniform/RandomUniform"
+  input: "Decoder_Dense5/kernel/Initializer/random_uniform/sub"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense5/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense5/kernel/Initializer/random_uniform"
+  op: "Add"
+  input: "Decoder_Dense5/kernel/Initializer/random_uniform/mul"
+  input: "Decoder_Dense5/kernel/Initializer/random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense5/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense5/kernel"
+  op: "VarHandleOp"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense5/kernel"
+      }
+    }
+  }
+  attr {
+    key: "allowed_devices"
+    value {
+      list {
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 128
+        }
+        dim {
+          size: 256
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: "Decoder_Dense5/kernel"
+    }
+  }
+}
+node {
+  name: "Decoder_Dense5/kernel/IsInitialized/VarIsInitializedOp"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense5/kernel"
+}
+node {
+  name: "Decoder_Dense5/kernel/Assign"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense5/kernel"
+  input: "Decoder_Dense5/kernel/Initializer/random_uniform"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense5/kernel/Read/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense5/kernel"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense5/bias/Initializer/zeros"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense5/bias"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 256
+          }
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense5/bias"
+  op: "VarHandleOp"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense5/bias"
+      }
+    }
+  }
+  attr {
+    key: "allowed_devices"
+    value {
+      list {
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 256
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: "Decoder_Dense5/bias"
+    }
+  }
+}
+node {
+  name: "Decoder_Dense5/bias/IsInitialized/VarIsInitializedOp"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense5/bias"
+}
+node {
+  name: "Decoder_Dense5/bias/Assign"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense5/bias"
+  input: "Decoder_Dense5/bias/Initializer/zeros"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense5/bias/Read/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense5/bias"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense5/MatMul/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense5/kernel"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense5/MatMul"
+  op: "MatMul"
+  input: "Decoder_LeakyRelu4/LeakyRelu"
+  input: "Decoder_Dense5/MatMul/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "Decoder_Dense5/BiasAdd/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense5/bias"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense5/BiasAdd"
+  op: "BiasAdd"
+  input: "Decoder_Dense5/MatMul"
+  input: "Decoder_Dense5/BiasAdd/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "Decoder_LeakyRelu5/LeakyRelu"
+  op: "LeakyRelu"
+  input: "Decoder_Dense5/BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "alpha"
+    value {
+      f: 0.10000000149011612
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/kernel/Initializer/random_uniform/shape"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense6/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\000\001\000\000\001\010\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/kernel/Initializer/random_uniform/min"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense6/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: -0.05101996660232544
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/kernel/Initializer/random_uniform/max"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense6/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.05101996660232544
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/kernel/Initializer/random_uniform/RandomUniform"
+  op: "RandomUniform"
+  input: "Decoder_Dense6/kernel/Initializer/random_uniform/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense6/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "seed"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "seed2"
+    value {
+      i: 0
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/kernel/Initializer/random_uniform/sub"
+  op: "Sub"
+  input: "Decoder_Dense6/kernel/Initializer/random_uniform/max"
+  input: "Decoder_Dense6/kernel/Initializer/random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense6/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/kernel/Initializer/random_uniform/mul"
+  op: "Mul"
+  input: "Decoder_Dense6/kernel/Initializer/random_uniform/RandomUniform"
+  input: "Decoder_Dense6/kernel/Initializer/random_uniform/sub"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense6/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/kernel/Initializer/random_uniform"
+  op: "Add"
+  input: "Decoder_Dense6/kernel/Initializer/random_uniform/mul"
+  input: "Decoder_Dense6/kernel/Initializer/random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense6/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/kernel"
+  op: "VarHandleOp"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense6/kernel"
+      }
+    }
+  }
+  attr {
+    key: "allowed_devices"
+    value {
+      list {
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 256
+        }
+        dim {
+          size: 2049
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: "Decoder_Dense6/kernel"
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/kernel/IsInitialized/VarIsInitializedOp"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense6/kernel"
+}
+node {
+  name: "Decoder_Dense6/kernel/Assign"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense6/kernel"
+  input: "Decoder_Dense6/kernel/Initializer/random_uniform"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/kernel/Read/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense6/kernel"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/bias/Initializer/zeros/shape_as_tensor"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense6/bias"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 2049
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/bias/Initializer/zeros/Const"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense6/bias"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/bias/Initializer/zeros"
+  op: "Fill"
+  input: "Decoder_Dense6/bias/Initializer/zeros/shape_as_tensor"
+  input: "Decoder_Dense6/bias/Initializer/zeros/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense6/bias"
+      }
+    }
+  }
+  attr {
+    key: "index_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/bias"
+  op: "VarHandleOp"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Decoder_Dense6/bias"
+      }
+    }
+  }
+  attr {
+    key: "allowed_devices"
+    value {
+      list {
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 2049
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: "Decoder_Dense6/bias"
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/bias/IsInitialized/VarIsInitializedOp"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense6/bias"
+}
+node {
+  name: "Decoder_Dense6/bias/Assign"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense6/bias"
+  input: "Decoder_Dense6/bias/Initializer/zeros"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/bias/Read/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense6/bias"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/MatMul/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense6/kernel"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/MatMul"
+  op: "MatMul"
+  input: "Decoder_LeakyRelu5/LeakyRelu"
+  input: "Decoder_Dense6/MatMul/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/BiasAdd/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense6/bias"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/BiasAdd"
+  op: "BiasAdd"
+  input: "Decoder_Dense6/MatMul"
+  input: "Decoder_Dense6/BiasAdd/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "Decoder_Dense6/Relu"
+  op: "Relu"
+  input: "Decoder_Dense6/BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense1/MatMul/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense1/kernel"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense1/MatMul"
+  op: "MatMul"
+  input: "Latent_Input"
+  input: "functional_3/Decoder_Dense1/MatMul/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense1/BiasAdd/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense1/bias"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense1/BiasAdd"
+  op: "BiasAdd"
+  input: "functional_3/Decoder_Dense1/MatMul"
+  input: "functional_3/Decoder_Dense1/BiasAdd/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_LeakyRelu1/LeakyRelu"
+  op: "LeakyRelu"
+  input: "functional_3/Decoder_Dense1/BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "alpha"
+    value {
+      f: 0.10000000149011612
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense2/MatMul/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense2/kernel"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense2/MatMul"
+  op: "MatMul"
+  input: "functional_3/Decoder_LeakyRelu1/LeakyRelu"
+  input: "functional_3/Decoder_Dense2/MatMul/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense2/BiasAdd/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense2/bias"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense2/BiasAdd"
+  op: "BiasAdd"
+  input: "functional_3/Decoder_Dense2/MatMul"
+  input: "functional_3/Decoder_Dense2/BiasAdd/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_LeakyRelu2/LeakyRelu"
+  op: "LeakyRelu"
+  input: "functional_3/Decoder_Dense2/BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "alpha"
+    value {
+      f: 0.10000000149011612
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense3/MatMul/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense3/kernel"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense3/MatMul"
+  op: "MatMul"
+  input: "functional_3/Decoder_LeakyRelu2/LeakyRelu"
+  input: "functional_3/Decoder_Dense3/MatMul/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense3/BiasAdd/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense3/bias"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense3/BiasAdd"
+  op: "BiasAdd"
+  input: "functional_3/Decoder_Dense3/MatMul"
+  input: "functional_3/Decoder_Dense3/BiasAdd/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_LeakyRelu3/LeakyRelu"
+  op: "LeakyRelu"
+  input: "functional_3/Decoder_Dense3/BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "alpha"
+    value {
+      f: 0.10000000149011612
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense4/MatMul/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense4/kernel"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense4/MatMul"
+  op: "MatMul"
+  input: "functional_3/Decoder_LeakyRelu3/LeakyRelu"
+  input: "functional_3/Decoder_Dense4/MatMul/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense4/BiasAdd/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense4/bias"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense4/BiasAdd"
+  op: "BiasAdd"
+  input: "functional_3/Decoder_Dense4/MatMul"
+  input: "functional_3/Decoder_Dense4/BiasAdd/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_LeakyRelu4/LeakyRelu"
+  op: "LeakyRelu"
+  input: "functional_3/Decoder_Dense4/BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "alpha"
+    value {
+      f: 0.10000000149011612
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense5/MatMul/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense5/kernel"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense5/MatMul"
+  op: "MatMul"
+  input: "functional_3/Decoder_LeakyRelu4/LeakyRelu"
+  input: "functional_3/Decoder_Dense5/MatMul/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense5/BiasAdd/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense5/bias"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense5/BiasAdd"
+  op: "BiasAdd"
+  input: "functional_3/Decoder_Dense5/MatMul"
+  input: "functional_3/Decoder_Dense5/BiasAdd/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_LeakyRelu5/LeakyRelu"
+  op: "LeakyRelu"
+  input: "functional_3/Decoder_Dense5/BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "alpha"
+    value {
+      f: 0.10000000149011612
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense6/MatMul/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense6/kernel"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense6/MatMul"
+  op: "MatMul"
+  input: "functional_3/Decoder_LeakyRelu5/LeakyRelu"
+  input: "functional_3/Decoder_Dense6/MatMul/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense6/BiasAdd/ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense6/bias"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense6/BiasAdd"
+  op: "BiasAdd"
+  input: "functional_3/Decoder_Dense6/MatMul"
+  input: "functional_3/Decoder_Dense6/BiasAdd/ReadVariableOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "functional_3/Decoder_Dense6/Relu"
+  op: "Relu"
+  input: "functional_3/Decoder_Dense6/BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Placeholder"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+        dim {
+          size: -1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "AssignVariableOp"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense1/kernel"
+  input: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "ReadVariableOp"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense1/kernel"
+  input: "^AssignVariableOp"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Placeholder_1"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "AssignVariableOp_1"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense1/bias"
+  input: "Placeholder_1"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "ReadVariableOp_1"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense1/bias"
+  input: "^AssignVariableOp_1"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Placeholder_2"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+        dim {
+          size: -1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "AssignVariableOp_2"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense2/kernel"
+  input: "Placeholder_2"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "ReadVariableOp_2"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense2/kernel"
+  input: "^AssignVariableOp_2"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Placeholder_3"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "AssignVariableOp_3"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense2/bias"
+  input: "Placeholder_3"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "ReadVariableOp_3"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense2/bias"
+  input: "^AssignVariableOp_3"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Placeholder_4"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+        dim {
+          size: -1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "AssignVariableOp_4"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense3/kernel"
+  input: "Placeholder_4"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "ReadVariableOp_4"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense3/kernel"
+  input: "^AssignVariableOp_4"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Placeholder_5"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "AssignVariableOp_5"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense3/bias"
+  input: "Placeholder_5"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "ReadVariableOp_5"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense3/bias"
+  input: "^AssignVariableOp_5"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Placeholder_6"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+        dim {
+          size: -1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "AssignVariableOp_6"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense4/kernel"
+  input: "Placeholder_6"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "ReadVariableOp_6"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense4/kernel"
+  input: "^AssignVariableOp_6"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Placeholder_7"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "AssignVariableOp_7"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense4/bias"
+  input: "Placeholder_7"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "ReadVariableOp_7"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense4/bias"
+  input: "^AssignVariableOp_7"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Placeholder_8"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+        dim {
+          size: -1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "AssignVariableOp_8"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense5/kernel"
+  input: "Placeholder_8"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "ReadVariableOp_8"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense5/kernel"
+  input: "^AssignVariableOp_8"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Placeholder_9"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "AssignVariableOp_9"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense5/bias"
+  input: "Placeholder_9"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "ReadVariableOp_9"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense5/bias"
+  input: "^AssignVariableOp_9"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Placeholder_10"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+        dim {
+          size: -1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "AssignVariableOp_10"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense6/kernel"
+  input: "Placeholder_10"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "ReadVariableOp_10"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense6/kernel"
+  input: "^AssignVariableOp_10"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Placeholder_11"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+      }
+    }
+  }
+}
+node {
+  name: "AssignVariableOp_11"
+  op: "AssignVariableOp"
+  input: "Decoder_Dense6/bias"
+  input: "Placeholder_11"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "ReadVariableOp_11"
+  op: "ReadVariableOp"
+  input: "Decoder_Dense6/bias"
+  input: "^AssignVariableOp_11"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "VarIsInitializedOp"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense1/bias"
+}
+node {
+  name: "VarIsInitializedOp_1"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense3/bias"
+}
+node {
+  name: "VarIsInitializedOp_2"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense4/kernel"
+}
+node {
+  name: "VarIsInitializedOp_3"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense1/kernel"
+}
+node {
+  name: "VarIsInitializedOp_4"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense3/kernel"
+}
+node {
+  name: "VarIsInitializedOp_5"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense4/bias"
+}
+node {
+  name: "VarIsInitializedOp_6"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense5/kernel"
+}
+node {
+  name: "VarIsInitializedOp_7"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense5/bias"
+}
+node {
+  name: "VarIsInitializedOp_8"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense6/bias"
+}
+node {
+  name: "VarIsInitializedOp_9"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense6/kernel"
+}
+node {
+  name: "VarIsInitializedOp_10"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense2/kernel"
+}
+node {
+  name: "VarIsInitializedOp_11"
+  op: "VarIsInitializedOp"
+  input: "Decoder_Dense2/bias"
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^Decoder_Dense1/bias/Assign"
+  input: "^Decoder_Dense1/kernel/Assign"
+  input: "^Decoder_Dense2/bias/Assign"
+  input: "^Decoder_Dense2/kernel/Assign"
+  input: "^Decoder_Dense3/bias/Assign"
+  input: "^Decoder_Dense3/kernel/Assign"
+  input: "^Decoder_Dense4/bias/Assign"
+  input: "^Decoder_Dense4/kernel/Assign"
+  input: "^Decoder_Dense5/bias/Assign"
+  input: "^Decoder_Dense5/kernel/Assign"
+  input: "^Decoder_Dense6/bias/Assign"
+  input: "^Decoder_Dense6/kernel/Assign"
+}
+node {
+  name: "strided_slice/stack"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "strided_slice/stack_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "strided_slice/stack_2"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "strided_slice"
+  op: "StridedSlice"
+  input: "functional_3/Decoder_Dense6/Relu"
+  input: "strided_slice/stack"
+  input: "strided_slice/stack_1"
+  input: "strided_slice/stack_2"
+  attr {
+    key: "Index"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "begin_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "ellipsis_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "end_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "new_axis_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "shrink_axis_mask"
+    value {
+      i: 1
+    }
+  }
+}
+node {
+  name: "k2tfout_0"
+  op: "Identity"
+  input: "strided_slice"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+versions {
+  producer: 440
+}
