@@ -43,6 +43,6 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin/JUCE-6.0.7" TYPE PROGRAM FILES "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide/juceaide_artefacts/Debug/juceaide")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin/JUCE-6.0.7" TYPE PROGRAM FILES "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide/juceaide_artefacts/Debug/juceaide")
 endif()
 

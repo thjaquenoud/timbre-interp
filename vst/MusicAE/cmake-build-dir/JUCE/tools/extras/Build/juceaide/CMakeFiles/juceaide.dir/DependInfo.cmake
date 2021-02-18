@@ -4,13 +4,13 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/sam/JUCE/extras/Build/juceaide/Main.cpp" "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide/CMakeFiles/juceaide.dir/Main.cpp.o"
-  "/home/sam/JUCE/modules/juce_core/juce_core.cpp" "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.o"
-  "/home/sam/JUCE/modules/juce_data_structures/juce_data_structures.cpp" "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.o"
-  "/home/sam/JUCE/modules/juce_events/juce_events.cpp" "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.o"
-  "/home/sam/JUCE/modules/juce_graphics/juce_graphics.cpp" "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.o"
-  "/home/sam/JUCE/modules/juce_gui_basics/juce_gui_basics.cpp" "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.o"
-  "/home/sam/JUCE/extras/Build/juce_build_tools/juce_build_tools.cpp" "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide/CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.o"
+  "/home/sam/JUCE/extras/Build/juceaide/Main.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide/CMakeFiles/juceaide.dir/Main.cpp.o"
+  "/home/sam/JUCE/modules/juce_core/juce_core.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.o"
+  "/home/sam/JUCE/modules/juce_data_structures/juce_data_structures.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.o"
+  "/home/sam/JUCE/modules/juce_events/juce_events.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.o"
+  "/home/sam/JUCE/modules/juce_graphics/juce_graphics.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.o"
+  "/home/sam/JUCE/modules/juce_gui_basics/juce_gui_basics.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.o"
+  "/home/sam/JUCE/extras/Build/juce_build_tools/juce_build_tools.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide/CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

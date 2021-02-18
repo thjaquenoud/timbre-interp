@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/sam/Downloads/ece396/timbre-interp/MusicAE/JuceLibraryCode/JuceHeader.h
+/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/JuceLibraryCode/JuceHeader.h
 juce_audio_basics/juce_audio_basics.h
 -
 juce_audio_devices/juce_audio_devices.h
@@ -32,27 +32,29 @@ juce_gui_basics/juce_gui_basics.h
 juce_gui_extra/juce_gui_extra.h
 -
 
-/home/sam/Downloads/ece396/timbre-interp/MusicAE/Source/PluginEditor.cpp
+/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/Source/PluginEditor.cpp
 PluginProcessor.h
-/home/sam/Downloads/ece396/timbre-interp/MusicAE/Source/PluginProcessor.h
+/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/Source/PluginProcessor.h
 PluginEditor.h
-/home/sam/Downloads/ece396/timbre-interp/MusicAE/Source/PluginEditor.h
+/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/Source/PluginEditor.h
 
-/home/sam/Downloads/ece396/timbre-interp/MusicAE/Source/PluginEditor.h
+/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/Source/PluginEditor.h
+vector
+-
 ../JuceLibraryCode/JuceHeader.h
-/home/sam/Downloads/ece396/timbre-interp/MusicAE/JuceLibraryCode/JuceHeader.h
+/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/JuceLibraryCode/JuceHeader.h
 PluginProcessor.h
-/home/sam/Downloads/ece396/timbre-interp/MusicAE/Source/PluginProcessor.h
+/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/Source/PluginProcessor.h
 
-/home/sam/Downloads/ece396/timbre-interp/MusicAE/Source/PluginProcessor.cpp
+/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/Source/PluginProcessor.cpp
 PluginProcessor.h
-/home/sam/Downloads/ece396/timbre-interp/MusicAE/Source/PluginProcessor.h
+/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/Source/PluginProcessor.h
 PluginEditor.h
-/home/sam/Downloads/ece396/timbre-interp/MusicAE/Source/PluginEditor.h
+/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/Source/PluginEditor.h
 
-/home/sam/Downloads/ece396/timbre-interp/MusicAE/Source/PluginProcessor.h
+/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/Source/PluginProcessor.h
 ../JuceLibraryCode/JuceHeader.h
-/home/sam/Downloads/ece396/timbre-interp/MusicAE/JuceLibraryCode/JuceHeader.h
+/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/JuceLibraryCode/JuceHeader.h
 
 /home/sam/JUCE/modules/juce_audio_basics/audio_play_head/juce_AudioPlayHead.h
 

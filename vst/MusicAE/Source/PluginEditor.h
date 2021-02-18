@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <vector>
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
 
@@ -29,7 +30,12 @@ private:
     // access the processor object that created it.
     MusicAEAudioProcessor& audioProcessor;
     
-    juce::Slider midiVolume;
-
+    juce::Slider alpha;
+    juce::OwnedArray<juce::Slider> latentSliders;
+    
+    juce::TextEditor modelTextBox;
+    
+    juce::TextButton startButton, resetButton; 
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MusicAEAudioProcessorEditor)
 };

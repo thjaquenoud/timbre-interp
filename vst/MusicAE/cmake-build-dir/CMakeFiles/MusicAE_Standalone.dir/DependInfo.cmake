@@ -4,16 +4,16 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.cpp" "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.cpp.o"
-  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_1.cpp" "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_1.cpp.o"
-  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_2.cpp" "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_2.cpp.o"
-  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_3.cpp" "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_3.cpp.o"
-  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_4.cpp" "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_4.cpp.o"
-  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_utils.cpp" "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_utils.cpp.o"
-  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp" "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o"
-  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp" "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o"
-  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.cpp" "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.cpp.o"
-  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.cpp" "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.cpp.o"
+  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.cpp.o"
+  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_1.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_1.cpp.o"
+  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_2.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_2.cpp.o"
+  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_3.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_3.cpp.o"
+  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_4.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_4.cpp.o"
+  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_utils.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_utils.cpp.o"
+  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o"
+  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o"
+  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.cpp.o"
+  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -41,8 +41,8 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
   "JucePlugin_AAXIdentifier=com.yourcompany.MusicAE"
   "JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode"
   "JucePlugin_AAXProductId=JucePlugin_PluginCode"
-  "JucePlugin_AUExportPrefix=Audio_Plugin_ExampleAU"
-  "JucePlugin_AUExportPrefixQuoted=\"Audio_Plugin_ExampleAU\""
+  "JucePlugin_AUExportPrefix=MusicAEAU"
+  "JucePlugin_AUExportPrefixQuoted=\"MusicAEAU\""
   "JucePlugin_AUMainType='aufx'"
   "JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode"
   "JucePlugin_AUSubType=JucePlugin_PluginCode"
@@ -54,7 +54,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
   "JucePlugin_Build_VST3=0"
   "JucePlugin_Build_VST=0"
   "JucePlugin_CFBundleIdentifier=com.yourcompany.MusicAE"
-  "JucePlugin_Desc=\"Audio Plugin Example\""
+  "JucePlugin_Desc=\"MusicAE\""
   "JucePlugin_EditorRequiresKeyboardFocus=0"
   "JucePlugin_IsMidiEffect=0"
   "JucePlugin_IsSynth=0"
@@ -62,7 +62,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
   "JucePlugin_ManufacturerCode=0x4a756365"
   "JucePlugin_ManufacturerEmail=\"\""
   "JucePlugin_ManufacturerWebsite=\"\""
-  "JucePlugin_Name=\"Audio Plugin Example\""
+  "JucePlugin_Name=\"MusicAE\""
   "JucePlugin_PluginCode=0x44656d30"
   "JucePlugin_ProducesMidiOutput=0"
   "JucePlugin_VSTCategory=kPlugCategEffect"
@@ -91,7 +91,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/DependInfo.cmake"
+  "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

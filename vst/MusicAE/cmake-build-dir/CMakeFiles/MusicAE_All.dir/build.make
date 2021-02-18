@@ -62,10 +62,10 @@ RM = /opt/cmake-3.19.4-Linux-x86_64/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/sam/Downloads/ece396/timbre-interp/MusicAE
+CMAKE_SOURCE_DIR = /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir
+CMAKE_BINARY_DIR = /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir
 
 # Utility rule file for MusicAE_All.
 
@@ -86,6 +86,6 @@ CMakeFiles/MusicAE_All.dir/clean:
 .PHONY : CMakeFiles/MusicAE_All.dir/clean
 
 CMakeFiles/MusicAE_All.dir/depend:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sam/Downloads/ece396/timbre-interp/MusicAE /home/sam/Downloads/ece396/timbre-interp/MusicAE /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_All.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_All.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/MusicAE_All.dir/depend
 

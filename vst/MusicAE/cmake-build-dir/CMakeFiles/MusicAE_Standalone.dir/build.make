@@ -62,10 +62,10 @@ RM = /opt/cmake-3.19.4-Linux-x86_64/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/sam/Downloads/ece396/timbre-interp/MusicAE
+CMAKE_SOURCE_DIR = /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir
+CMAKE_BINARY_DIR = /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir
 
 # Include any dependencies generated for this target.
 include CMakeFiles/MusicAE_Standalone.dir/depend.make
@@ -78,7 +78,7 @@ include CMakeFiles/MusicAE_Standalone.dir/flags.make
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.cpp.o: CMakeFiles/MusicAE_Standalone.dir/flags.make
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.cpp.o: /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.cpp.o -c /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.cpp
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.cpp.i: cmake_force
@@ -91,7 +91,7 @@ CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_1.cpp.o: CMakeFiles/MusicAE_Standalone.dir/flags.make
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_1.cpp.o: /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_1.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_1.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_1.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_1.cpp.o -c /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_1.cpp
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_1.cpp.i: cmake_force
@@ -104,7 +104,7 @@ CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_2.cpp.o: CMakeFiles/MusicAE_Standalone.dir/flags.make
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_2.cpp.o: /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_2.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_2.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_2.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_2.cpp.o -c /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_2.cpp
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_2.cpp.i: cmake_force
@@ -117,7 +117,7 @@ CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_3.cpp.o: CMakeFiles/MusicAE_Standalone.dir/flags.make
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_3.cpp.o: /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_3.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_3.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_3.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_3.cpp.o -c /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_3.cpp
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_3.cpp.i: cmake_force
@@ -130,7 +130,7 @@ CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_4.cpp.o: CMakeFiles/MusicAE_Standalone.dir/flags.make
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_4.cpp.o: /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_4.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_4.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_4.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_4.cpp.o -c /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_4.cpp
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_4.cpp.i: cmake_force
@@ -143,7 +143,7 @@ CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_utils.cpp.o: CMakeFiles/MusicAE_Standalone.dir/flags.make
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_utils.cpp.o: /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_utils.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_utils.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_utils.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_utils.cpp.o -c /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_utils.cpp
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_utils.cpp.i: cmake_force
@@ -156,7 +156,7 @@ CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o: CMakeFiles/MusicAE_Standalone.dir/flags.make
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o: /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o -c /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.i: cmake_force
@@ -169,7 +169,7 @@ CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o: CMakeFiles/MusicAE_Standalone.dir/flags.make
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o: /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o -c /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.i: cmake_force
@@ -182,7 +182,7 @@ CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.cpp.o: CMakeFiles/MusicAE_Standalone.dir/flags.make
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.cpp.o: /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.cpp.o -c /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.cpp
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.cpp.i: cmake_force
@@ -195,7 +195,7 @@ CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.cpp.o: CMakeFiles/MusicAE_Standalone.dir/flags.make
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.cpp.o: /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.cpp.o -c /home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.cpp
 
 CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.cpp.i: cmake_force
@@ -222,26 +222,26 @@ MusicAE_Standalone_OBJECTS = \
 # External object files for target MusicAE_Standalone
 MusicAE_Standalone_EXTERNAL_OBJECTS =
 
-MusicAE_artefacts/Standalone/Audio\ Plugin\ Example: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.cpp.o
-MusicAE_artefacts/Standalone/Audio\ Plugin\ Example: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_1.cpp.o
-MusicAE_artefacts/Standalone/Audio\ Plugin\ Example: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_2.cpp.o
-MusicAE_artefacts/Standalone/Audio\ Plugin\ Example: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_3.cpp.o
-MusicAE_artefacts/Standalone/Audio\ Plugin\ Example: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_4.cpp.o
-MusicAE_artefacts/Standalone/Audio\ Plugin\ Example: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_utils.cpp.o
-MusicAE_artefacts/Standalone/Audio\ Plugin\ Example: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o
-MusicAE_artefacts/Standalone/Audio\ Plugin\ Example: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o
-MusicAE_artefacts/Standalone/Audio\ Plugin\ Example: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.cpp.o
-MusicAE_artefacts/Standalone/Audio\ Plugin\ Example: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.cpp.o
-MusicAE_artefacts/Standalone/Audio\ Plugin\ Example: CMakeFiles/MusicAE_Standalone.dir/build.make
-MusicAE_artefacts/Standalone/Audio\ Plugin\ Example: MusicAE_artefacts/libAudio\ Plugin\ Example_SharedCode.a
-MusicAE_artefacts/Standalone/Audio\ Plugin\ Example: /usr/lib/x86_64-linux-gnu/libfreetype.so
-MusicAE_artefacts/Standalone/Audio\ Plugin\ Example: /usr/lib/x86_64-linux-gnu/libasound.so
-MusicAE_artefacts/Standalone/Audio\ Plugin\ Example: CMakeFiles/MusicAE_Standalone.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable \"MusicAE_artefacts/Standalone/Audio Plugin Example\""
+MusicAE_artefacts/Standalone/MusicAE: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.cpp.o
+MusicAE_artefacts/Standalone/MusicAE: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_1.cpp.o
+MusicAE_artefacts/Standalone/MusicAE: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_2.cpp.o
+MusicAE_artefacts/Standalone/MusicAE: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_3.cpp.o
+MusicAE_artefacts/Standalone/MusicAE: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_4.cpp.o
+MusicAE_artefacts/Standalone/MusicAE: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_RTAS_utils.cpp.o
+MusicAE_artefacts/Standalone/MusicAE: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o
+MusicAE_artefacts/Standalone/MusicAE: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o
+MusicAE_artefacts/Standalone/MusicAE: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.cpp.o
+MusicAE_artefacts/Standalone/MusicAE: CMakeFiles/MusicAE_Standalone.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.cpp.o
+MusicAE_artefacts/Standalone/MusicAE: CMakeFiles/MusicAE_Standalone.dir/build.make
+MusicAE_artefacts/Standalone/MusicAE: MusicAE_artefacts/libMusicAE_SharedCode.a
+MusicAE_artefacts/Standalone/MusicAE: /usr/lib/x86_64-linux-gnu/libfreetype.so
+MusicAE_artefacts/Standalone/MusicAE: /usr/lib/x86_64-linux-gnu/libasound.so
+MusicAE_artefacts/Standalone/MusicAE: CMakeFiles/MusicAE_Standalone.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable MusicAE_artefacts/Standalone/MusicAE"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/MusicAE_Standalone.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/MusicAE_Standalone.dir/build: MusicAE_artefacts/Standalone/Audio\ Plugin\ Example
+CMakeFiles/MusicAE_Standalone.dir/build: MusicAE_artefacts/Standalone/MusicAE
 
 .PHONY : CMakeFiles/MusicAE_Standalone.dir/build
 
@@ -250,6 +250,6 @@ CMakeFiles/MusicAE_Standalone.dir/clean:
 .PHONY : CMakeFiles/MusicAE_Standalone.dir/clean
 
 CMakeFiles/MusicAE_Standalone.dir/depend:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sam/Downloads/ece396/timbre-interp/MusicAE /home/sam/Downloads/ece396/timbre-interp/MusicAE /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE_Standalone.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/MusicAE_Standalone.dir/depend
 

@@ -65,7 +65,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/sam/JUCE
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools
+CMAKE_BINARY_DIR = /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools
 
 # Include any dependencies generated for this target.
 include extras/Build/juceaide/CMakeFiles/juceaide.dir/depend.make
@@ -78,94 +78,94 @@ include extras/Build/juceaide/CMakeFiles/juceaide.dir/flags.make
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/Main.cpp.o: extras/Build/juceaide/CMakeFiles/juceaide.dir/flags.make
 extras/Build/juceaide/CMakeFiles/juceaide.dir/Main.cpp.o: /home/sam/JUCE/extras/Build/juceaide/Main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object extras/Build/juceaide/CMakeFiles/juceaide.dir/Main.cpp.o"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/juceaide.dir/Main.cpp.o -c /home/sam/JUCE/extras/Build/juceaide/Main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object extras/Build/juceaide/CMakeFiles/juceaide.dir/Main.cpp.o"
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/juceaide.dir/Main.cpp.o -c /home/sam/JUCE/extras/Build/juceaide/Main.cpp
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/Main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/juceaide.dir/Main.cpp.i"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sam/JUCE/extras/Build/juceaide/Main.cpp > CMakeFiles/juceaide.dir/Main.cpp.i
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sam/JUCE/extras/Build/juceaide/Main.cpp > CMakeFiles/juceaide.dir/Main.cpp.i
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/Main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/juceaide.dir/Main.cpp.s"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sam/JUCE/extras/Build/juceaide/Main.cpp -o CMakeFiles/juceaide.dir/Main.cpp.s
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sam/JUCE/extras/Build/juceaide/Main.cpp -o CMakeFiles/juceaide.dir/Main.cpp.s
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.o: extras/Build/juceaide/CMakeFiles/juceaide.dir/flags.make
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.o: /home/sam/JUCE/extras/Build/juce_build_tools/juce_build_tools.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object extras/Build/juceaide/CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.o"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.o -c /home/sam/JUCE/extras/Build/juce_build_tools/juce_build_tools.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object extras/Build/juceaide/CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.o"
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.o -c /home/sam/JUCE/extras/Build/juce_build_tools/juce_build_tools.cpp
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.i"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sam/JUCE/extras/Build/juce_build_tools/juce_build_tools.cpp > CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.i
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sam/JUCE/extras/Build/juce_build_tools/juce_build_tools.cpp > CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.i
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.s"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sam/JUCE/extras/Build/juce_build_tools/juce_build_tools.cpp -o CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.s
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sam/JUCE/extras/Build/juce_build_tools/juce_build_tools.cpp -o CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.s
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.o: extras/Build/juceaide/CMakeFiles/juceaide.dir/flags.make
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.o: /home/sam/JUCE/modules/juce_gui_basics/juce_gui_basics.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.o"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.o -c /home/sam/JUCE/modules/juce_gui_basics/juce_gui_basics.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.o"
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.o -c /home/sam/JUCE/modules/juce_gui_basics/juce_gui_basics.cpp
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.i"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sam/JUCE/modules/juce_gui_basics/juce_gui_basics.cpp > CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.i
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sam/JUCE/modules/juce_gui_basics/juce_gui_basics.cpp > CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.i
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.s"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sam/JUCE/modules/juce_gui_basics/juce_gui_basics.cpp -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.s
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sam/JUCE/modules/juce_gui_basics/juce_gui_basics.cpp -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.s
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.o: extras/Build/juceaide/CMakeFiles/juceaide.dir/flags.make
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.o: /home/sam/JUCE/modules/juce_graphics/juce_graphics.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.o"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.o -c /home/sam/JUCE/modules/juce_graphics/juce_graphics.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.o"
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.o -c /home/sam/JUCE/modules/juce_graphics/juce_graphics.cpp
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.i"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sam/JUCE/modules/juce_graphics/juce_graphics.cpp > CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.i
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sam/JUCE/modules/juce_graphics/juce_graphics.cpp > CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.i
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.s"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sam/JUCE/modules/juce_graphics/juce_graphics.cpp -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.s
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sam/JUCE/modules/juce_graphics/juce_graphics.cpp -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.s
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.o: extras/Build/juceaide/CMakeFiles/juceaide.dir/flags.make
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.o: /home/sam/JUCE/modules/juce_events/juce_events.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.o"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.o -c /home/sam/JUCE/modules/juce_events/juce_events.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.o"
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.o -c /home/sam/JUCE/modules/juce_events/juce_events.cpp
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.i"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sam/JUCE/modules/juce_events/juce_events.cpp > CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.i
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sam/JUCE/modules/juce_events/juce_events.cpp > CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.i
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.s"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sam/JUCE/modules/juce_events/juce_events.cpp -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.s
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sam/JUCE/modules/juce_events/juce_events.cpp -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.s
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.o: extras/Build/juceaide/CMakeFiles/juceaide.dir/flags.make
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.o: /home/sam/JUCE/modules/juce_core/juce_core.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.o"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.o -c /home/sam/JUCE/modules/juce_core/juce_core.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.o"
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.o -c /home/sam/JUCE/modules/juce_core/juce_core.cpp
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.i"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sam/JUCE/modules/juce_core/juce_core.cpp > CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.i
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sam/JUCE/modules/juce_core/juce_core.cpp > CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.i
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.s"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sam/JUCE/modules/juce_core/juce_core.cpp -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.s
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sam/JUCE/modules/juce_core/juce_core.cpp -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.s
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.o: extras/Build/juceaide/CMakeFiles/juceaide.dir/flags.make
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.o: /home/sam/JUCE/modules/juce_data_structures/juce_data_structures.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.o"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.o -c /home/sam/JUCE/modules/juce_data_structures/juce_data_structures.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.o"
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.o -c /home/sam/JUCE/modules/juce_data_structures/juce_data_structures.cpp
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.i"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sam/JUCE/modules/juce_data_structures/juce_data_structures.cpp > CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.i
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sam/JUCE/modules/juce_data_structures/juce_data_structures.cpp > CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.i
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.s"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sam/JUCE/modules/juce_data_structures/juce_data_structures.cpp -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.s
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sam/JUCE/modules/juce_data_structures/juce_data_structures.cpp -o CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.s
 
 # Object files for target juceaide
 juceaide_OBJECTS = \
@@ -190,8 +190,8 @@ extras/Build/juceaide/juceaide_artefacts/Debug/juceaide: extras/Build/juceaide/C
 extras/Build/juceaide/juceaide_artefacts/Debug/juceaide: extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make
 extras/Build/juceaide/juceaide_artefacts/Debug/juceaide: /usr/lib/x86_64-linux-gnu/libfreetype.so
 extras/Build/juceaide/juceaide_artefacts/Debug/juceaide: extras/Build/juceaide/CMakeFiles/juceaide.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable juceaide_artefacts/Debug/juceaide"
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/juceaide.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable juceaide_artefacts/Debug/juceaide"
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/juceaide.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 extras/Build/juceaide/CMakeFiles/juceaide.dir/build: extras/Build/juceaide/juceaide_artefacts/Debug/juceaide
@@ -199,10 +199,10 @@ extras/Build/juceaide/CMakeFiles/juceaide.dir/build: extras/Build/juceaide/jucea
 .PHONY : extras/Build/juceaide/CMakeFiles/juceaide.dir/build
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/clean:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && $(CMAKE_COMMAND) -P CMakeFiles/juceaide.dir/cmake_clean.cmake
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide && $(CMAKE_COMMAND) -P CMakeFiles/juceaide.dir/cmake_clean.cmake
 .PHONY : extras/Build/juceaide/CMakeFiles/juceaide.dir/clean
 
 extras/Build/juceaide/CMakeFiles/juceaide.dir/depend:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sam/JUCE /home/sam/JUCE/extras/Build/juceaide /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide/CMakeFiles/juceaide.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sam/JUCE /home/sam/JUCE/extras/Build/juceaide /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide/CMakeFiles/juceaide.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : extras/Build/juceaide/CMakeFiles/juceaide.dir/depend
 

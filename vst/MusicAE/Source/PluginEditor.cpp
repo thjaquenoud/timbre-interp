@@ -13,20 +13,42 @@
 MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
 {
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
-    setSize (200, 200);
-
+    
     // these define the parameters of our slider object
-    midiVolume.setSliderStyle (juce::Slider::LinearBarVertical);
-    midiVolume.setRange (0.0, 127.0, 1.0);
-    midiVolume.setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
-    midiVolume.setPopupDisplayEnabled (true, false, this);
-    midiVolume.setTextValueSuffix (" Volume");
-    midiVolume.setValue(1.0);
+    alpha.setSliderStyle (juce::Slider::LinearHorizontal);
+    alpha.setRange (0.0, 1.0, 0.01);
+    alpha.setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
+    alpha.setPopupDisplayEnabled (true, false, this);
+    alpha.setTextValueSuffix (" alpha");
+    alpha.setValue(0.5);
  
     // this function adds the slider to the editor
-    addAndMakeVisible (&midiVolume);
+    addAndMakeVisible (&alpha);
+        
+    for(int i = 0; i < 10; i++){
+        auto slider = latentSliders.add(new juce::Slider);
+        slider->setSliderStyle (juce::Slider::LinearVertical);
+        slider->setRange (0.0, 2.0, 0.01);
+        slider->setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
+        slider->setPopupDisplayEnabled (true, false, this);
+        slider->setTextValueSuffix (" alpha");
+        slider->setValue(1.0);
+        
+        addAndMakeVisible(slider);
+    }
+    
+    addAndMakeVisible(modelTextBox);
+    
+    startButton.setButtonText("Start");
+    addAndMakeVisible(startButton);
+
+    resetButton.setButtonText("Reset");
+    addAndMakeVisible(resetButton);
+
+    
+    // Make sure that before the constructor has finished, you've set the
+    // editor's size to whatever you need it to be.
+    setSize (800, 800);
 }
 
 MusicAEAudioProcessorEditor::~MusicAEAudioProcessorEditor()
@@ -45,7 +67,7 @@ void MusicAEAudioProcessorEditor::paint (juce::Graphics& g)
     // set the font size and draw text to the screen
     g.setFont (15.0f);
  
-    g.drawFittedText ("Midi Volume", 0, 0, getWidth(), 30, juce::Justification::centred, 1);
+    g.drawFittedText ("MusicAE", 0, 0, getWidth(), 30, juce::Justification::centred, 1);
 }
 
 void MusicAEAudioProcessorEditor::resized()
@@ -54,5 +76,15 @@ void MusicAEAudioProcessorEditor::resized()
     // subcomponents in your editor..
     
     // sets the position and size of the slider with arguments (x, y, width, height)
-    midiVolume.setBounds (40, 30, 20, getHeight() - 60);
+    alpha.setBounds (50, 550, 700, 75);
+    
+    int i = 0;
+    for(auto slider : latentSliders){
+        slider->setBounds(30 + 80*i, 100, 50, 400);
+        i++;
+    }
+    
+    modelTextBox.setBounds(100, 650, 200, 100);
+    startButton.setBounds(400, 650, 100, 100);
+    resetButton.setBounds(600, 650, 100, 100);
 }

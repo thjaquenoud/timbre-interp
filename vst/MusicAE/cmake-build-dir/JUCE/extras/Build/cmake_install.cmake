@@ -44,7 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/extras/Build/juceaide/cmake_install.cmake")
+  include("/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/extras/Build/juceaide/cmake_install.cmake")
 
 endif()
 

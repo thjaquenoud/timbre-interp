@@ -9,7 +9,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -19,7 +19,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -29,7 +29,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -39,7 +39,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -49,7 +49,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -73,7 +73,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -83,7 +83,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -93,7 +93,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -103,7 +103,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -113,7 +113,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -123,7 +123,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -133,7 +133,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -143,7 +143,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -153,7 +153,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -163,7 +163,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -173,7 +173,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -183,7 +183,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -193,7 +193,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -203,7 +203,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -213,7 +213,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -223,7 +223,7 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()
 
 # module_cpp at extras/Build/CMake/JUCEUtils.cmake:297 (file)
@@ -233,5 +233,5 @@ set(OLD_GLOB
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/cmake.verify_globs")
 endif()

@@ -70,7 +70,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/sam/JUCE
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools
+CMAKE_BINARY_DIR = /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -145,14 +145,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(CMAKE_COMMAND) -E cmake_progress_start /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide//CMakeFiles/progress.marks
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 extras/Build/juceaide/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles 0
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(CMAKE_COMMAND) -E cmake_progress_start /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/extras/Build/juceaide//CMakeFiles/progress.marks
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 extras/Build/juceaide/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 extras/Build/juceaide/clean
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 extras/Build/juceaide/clean
 .PHONY : clean
 
 # The main clean target
@@ -162,23 +162,23 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 extras/Build/juceaide/preinstall
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 extras/Build/juceaide/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 extras/Build/juceaide/preinstall
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 extras/Build/juceaide/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(CMAKE_COMMAND) -P /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/VerifyGlobs.cmake
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(CMAKE_COMMAND) -P /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/VerifyGlobs.cmake
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 extras/Build/juceaide/CMakeFiles/juceaide.dir/rule:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 extras/Build/juceaide/CMakeFiles/juceaide.dir/rule
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 extras/Build/juceaide/CMakeFiles/juceaide.dir/rule
 .PHONY : extras/Build/juceaide/CMakeFiles/juceaide.dir/rule
 
 # Convenience name for target.
@@ -188,7 +188,7 @@ juceaide: extras/Build/juceaide/CMakeFiles/juceaide.dir/rule
 
 # fast build rule for target.
 juceaide/fast:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/build
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/build
 .PHONY : juceaide/fast
 
 Main.o: Main.cpp.o
@@ -197,7 +197,7 @@ Main.o: Main.cpp.o
 
 # target to build an object file
 Main.cpp.o:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/Main.cpp.o
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/Main.cpp.o
 .PHONY : Main.cpp.o
 
 Main.i: Main.cpp.i
@@ -206,7 +206,7 @@ Main.i: Main.cpp.i
 
 # target to preprocess a source file
 Main.cpp.i:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/Main.cpp.i
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/Main.cpp.i
 .PHONY : Main.cpp.i
 
 Main.s: Main.cpp.s
@@ -215,7 +215,7 @@ Main.s: Main.cpp.s
 
 # target to generate assembly for a file
 Main.cpp.s:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/Main.cpp.s
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/Main.cpp.s
 .PHONY : Main.cpp.s
 
 __/__/__/modules/juce_core/juce_core.o: __/__/__/modules/juce_core/juce_core.cpp.o
@@ -224,7 +224,7 @@ __/__/__/modules/juce_core/juce_core.o: __/__/__/modules/juce_core/juce_core.cpp
 
 # target to build an object file
 __/__/__/modules/juce_core/juce_core.cpp.o:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.o
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.o
 .PHONY : __/__/__/modules/juce_core/juce_core.cpp.o
 
 __/__/__/modules/juce_core/juce_core.i: __/__/__/modules/juce_core/juce_core.cpp.i
@@ -233,7 +233,7 @@ __/__/__/modules/juce_core/juce_core.i: __/__/__/modules/juce_core/juce_core.cpp
 
 # target to preprocess a source file
 __/__/__/modules/juce_core/juce_core.cpp.i:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.i
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.i
 .PHONY : __/__/__/modules/juce_core/juce_core.cpp.i
 
 __/__/__/modules/juce_core/juce_core.s: __/__/__/modules/juce_core/juce_core.cpp.s
@@ -242,7 +242,7 @@ __/__/__/modules/juce_core/juce_core.s: __/__/__/modules/juce_core/juce_core.cpp
 
 # target to generate assembly for a file
 __/__/__/modules/juce_core/juce_core.cpp.s:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.s
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_core/juce_core.cpp.s
 .PHONY : __/__/__/modules/juce_core/juce_core.cpp.s
 
 __/__/__/modules/juce_data_structures/juce_data_structures.o: __/__/__/modules/juce_data_structures/juce_data_structures.cpp.o
@@ -251,7 +251,7 @@ __/__/__/modules/juce_data_structures/juce_data_structures.o: __/__/__/modules/j
 
 # target to build an object file
 __/__/__/modules/juce_data_structures/juce_data_structures.cpp.o:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.o
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.o
 .PHONY : __/__/__/modules/juce_data_structures/juce_data_structures.cpp.o
 
 __/__/__/modules/juce_data_structures/juce_data_structures.i: __/__/__/modules/juce_data_structures/juce_data_structures.cpp.i
@@ -260,7 +260,7 @@ __/__/__/modules/juce_data_structures/juce_data_structures.i: __/__/__/modules/j
 
 # target to preprocess a source file
 __/__/__/modules/juce_data_structures/juce_data_structures.cpp.i:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.i
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.i
 .PHONY : __/__/__/modules/juce_data_structures/juce_data_structures.cpp.i
 
 __/__/__/modules/juce_data_structures/juce_data_structures.s: __/__/__/modules/juce_data_structures/juce_data_structures.cpp.s
@@ -269,7 +269,7 @@ __/__/__/modules/juce_data_structures/juce_data_structures.s: __/__/__/modules/j
 
 # target to generate assembly for a file
 __/__/__/modules/juce_data_structures/juce_data_structures.cpp.s:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.s
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_data_structures/juce_data_structures.cpp.s
 .PHONY : __/__/__/modules/juce_data_structures/juce_data_structures.cpp.s
 
 __/__/__/modules/juce_events/juce_events.o: __/__/__/modules/juce_events/juce_events.cpp.o
@@ -278,7 +278,7 @@ __/__/__/modules/juce_events/juce_events.o: __/__/__/modules/juce_events/juce_ev
 
 # target to build an object file
 __/__/__/modules/juce_events/juce_events.cpp.o:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.o
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.o
 .PHONY : __/__/__/modules/juce_events/juce_events.cpp.o
 
 __/__/__/modules/juce_events/juce_events.i: __/__/__/modules/juce_events/juce_events.cpp.i
@@ -287,7 +287,7 @@ __/__/__/modules/juce_events/juce_events.i: __/__/__/modules/juce_events/juce_ev
 
 # target to preprocess a source file
 __/__/__/modules/juce_events/juce_events.cpp.i:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.i
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.i
 .PHONY : __/__/__/modules/juce_events/juce_events.cpp.i
 
 __/__/__/modules/juce_events/juce_events.s: __/__/__/modules/juce_events/juce_events.cpp.s
@@ -296,7 +296,7 @@ __/__/__/modules/juce_events/juce_events.s: __/__/__/modules/juce_events/juce_ev
 
 # target to generate assembly for a file
 __/__/__/modules/juce_events/juce_events.cpp.s:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.s
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_events/juce_events.cpp.s
 .PHONY : __/__/__/modules/juce_events/juce_events.cpp.s
 
 __/__/__/modules/juce_graphics/juce_graphics.o: __/__/__/modules/juce_graphics/juce_graphics.cpp.o
@@ -305,7 +305,7 @@ __/__/__/modules/juce_graphics/juce_graphics.o: __/__/__/modules/juce_graphics/j
 
 # target to build an object file
 __/__/__/modules/juce_graphics/juce_graphics.cpp.o:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.o
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.o
 .PHONY : __/__/__/modules/juce_graphics/juce_graphics.cpp.o
 
 __/__/__/modules/juce_graphics/juce_graphics.i: __/__/__/modules/juce_graphics/juce_graphics.cpp.i
@@ -314,7 +314,7 @@ __/__/__/modules/juce_graphics/juce_graphics.i: __/__/__/modules/juce_graphics/j
 
 # target to preprocess a source file
 __/__/__/modules/juce_graphics/juce_graphics.cpp.i:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.i
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.i
 .PHONY : __/__/__/modules/juce_graphics/juce_graphics.cpp.i
 
 __/__/__/modules/juce_graphics/juce_graphics.s: __/__/__/modules/juce_graphics/juce_graphics.cpp.s
@@ -323,7 +323,7 @@ __/__/__/modules/juce_graphics/juce_graphics.s: __/__/__/modules/juce_graphics/j
 
 # target to generate assembly for a file
 __/__/__/modules/juce_graphics/juce_graphics.cpp.s:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.s
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics.cpp.s
 .PHONY : __/__/__/modules/juce_graphics/juce_graphics.cpp.s
 
 __/__/__/modules/juce_gui_basics/juce_gui_basics.o: __/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.o
@@ -332,7 +332,7 @@ __/__/__/modules/juce_gui_basics/juce_gui_basics.o: __/__/__/modules/juce_gui_ba
 
 # target to build an object file
 __/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.o:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.o
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.o
 .PHONY : __/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.o
 
 __/__/__/modules/juce_gui_basics/juce_gui_basics.i: __/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.i
@@ -341,7 +341,7 @@ __/__/__/modules/juce_gui_basics/juce_gui_basics.i: __/__/__/modules/juce_gui_ba
 
 # target to preprocess a source file
 __/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.i:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.i
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.i
 .PHONY : __/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.i
 
 __/__/__/modules/juce_gui_basics/juce_gui_basics.s: __/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.s
@@ -350,7 +350,7 @@ __/__/__/modules/juce_gui_basics/juce_gui_basics.s: __/__/__/modules/juce_gui_ba
 
 # target to generate assembly for a file
 __/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.s:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.s
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.s
 .PHONY : __/__/__/modules/juce_gui_basics/juce_gui_basics.cpp.s
 
 __/juce_build_tools/juce_build_tools.o: __/juce_build_tools/juce_build_tools.cpp.o
@@ -359,7 +359,7 @@ __/juce_build_tools/juce_build_tools.o: __/juce_build_tools/juce_build_tools.cpp
 
 # target to build an object file
 __/juce_build_tools/juce_build_tools.cpp.o:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.o
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.o
 .PHONY : __/juce_build_tools/juce_build_tools.cpp.o
 
 __/juce_build_tools/juce_build_tools.i: __/juce_build_tools/juce_build_tools.cpp.i
@@ -368,7 +368,7 @@ __/juce_build_tools/juce_build_tools.i: __/juce_build_tools/juce_build_tools.cpp
 
 # target to preprocess a source file
 __/juce_build_tools/juce_build_tools.cpp.i:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.i
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.i
 .PHONY : __/juce_build_tools/juce_build_tools.cpp.i
 
 __/juce_build_tools/juce_build_tools.s: __/juce_build_tools/juce_build_tools.cpp.s
@@ -377,7 +377,7 @@ __/juce_build_tools/juce_build_tools.s: __/juce_build_tools/juce_build_tools.cpp
 
 # target to generate assembly for a file
 __/juce_build_tools/juce_build_tools.cpp.s:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.s
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(MAKE) $(MAKESILENT) -f extras/Build/juceaide/CMakeFiles/juceaide.dir/build.make extras/Build/juceaide/CMakeFiles/juceaide.dir/__/juce_build_tools/juce_build_tools.cpp.s
 .PHONY : __/juce_build_tools/juce_build_tools.cpp.s
 
 # Help Target
@@ -425,7 +425,7 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(CMAKE_COMMAND) -P /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/VerifyGlobs.cmake
-	cd /home/sam/Downloads/ece396/timbre-interp/MusicAE/cmake-build-dir/JUCE/tools && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(CMAKE_COMMAND) -P /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/CMakeFiles/VerifyGlobs.cmake
+	cd /home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -13,8 +13,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/MusicAE.dir/home/sam/JUCE/modules/juce_graphics/juce_graphics.cpp.o"
   "CMakeFiles/MusicAE.dir/home/sam/JUCE/modules/juce_gui_basics/juce_gui_basics.cpp.o"
   "CMakeFiles/MusicAE.dir/home/sam/JUCE/modules/juce_gui_extra/juce_gui_extra.cpp.o"
-  "MusicAE_artefacts/libAudio Plugin Example_SharedCode.a"
-  "MusicAE_artefacts/libAudio Plugin Example_SharedCode.pdb"
+  "MusicAE_artefacts/libMusicAE_SharedCode.a"
+  "MusicAE_artefacts/libMusicAE_SharedCode.pdb"
 )
 
 # Per-language clean rules from dependency scanning.
