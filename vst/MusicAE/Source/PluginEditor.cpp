@@ -28,11 +28,11 @@ MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor&
     for(int i = 0; i < 10; i++){
         auto slider = latentSliders.add(new juce::Slider);
         slider->setSliderStyle (juce::Slider::LinearVertical);
-        slider->setRange (0.0, 2.0, 0.01);
+        slider->setRange (0.0, 100.0, 0.01);
         slider->setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
         slider->setPopupDisplayEnabled (true, false, this);
         slider->setTextValueSuffix (" alpha");
-        slider->setValue(1.0);
+        slider->setValue(50.0);
         
         addAndMakeVisible(slider);
     }
@@ -88,3 +88,10 @@ void MusicAEAudioProcessorEditor::resized()
     startButton.setBounds(400, 650, 100, 100);
     resetButton.setBounds(600, 650, 100, 100);
 }
+
+void MusicAEAudioProcessorEditor::reset()
+{
+    for(auto slider : latentSliders)
+        slider->setValue(50.0);
+}
+

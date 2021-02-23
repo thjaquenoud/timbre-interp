@@ -135,5 +135,7 @@ int main(int argc, char* argv[]) {
     return -1;
   }
 
+  //std::cout << outputs[0].DebugString() << "\n";
+
   return 0;
 }

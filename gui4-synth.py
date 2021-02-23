@@ -119,7 +119,7 @@ class LoginScreen(BoxLayout):
         temp_max = temp_out_mag.max(axis=0)+0.000000001 #Used for normalizing STFT frames (with addition to avoid division by zero)
 
 
-        out_mag = temp_out_mag.T / temp_max
+        out_mag = temp_out_mag.T * temp_max
         E = out_mag
         _, temp_out = np.float32(signal.istft(0.24*E, fs=SAMP_RATE, noverlap=3*CHUNK))  #0.24 sus
         out = temp_out[CHUNK:-2*CHUNK]
