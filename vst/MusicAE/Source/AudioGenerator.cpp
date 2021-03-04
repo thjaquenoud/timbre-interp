@@ -32,6 +32,13 @@ void AudioGenerator::startNet()
 
 void AudioGenerator::genAudio(int seg_length)
 {
+    unsigned int windowCount = 1; // CHANGE FOR MIXER/EFFECTS
+    unsigned int windowSizeHalf = len_window / 2 + 1;
+    double **magnitudes = new double*[windowCount];
+    for (int i = 0; i < windowCount; i++) {
+        magnitudes[i] = new double[windowSizeHalf];
+    }
+    
     make_audio = false;
     
     input.push_back(temp_sliders);
@@ -42,6 +49,17 @@ void AudioGenerator::genAudio(int seg_length)
     std::vector<Tensor> outputs;
     tensorflow::Status run_status = session->Run({{input_layer, resized_tensor}},
                                    {output_layer}, {}, &outputs);
+                                   
+    for (int i = 0; i < windowCount; i++) {
+        double max = 0;
+        for (int j = 0; j < windowSizeHalf; j++) {
+            magnitudes[i][j] = outputs[0].flat<double>()(windowSizeHalf * i + j);
+            if (magnitudes[i][j] > max)
+                max = magnitudes[i][j]
+        }
+    }
+    
+    
     if (!run_status.ok()) {
         LOG(ERROR) << "Running model failed: " << run_status;
         return -1;

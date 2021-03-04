@@ -39,9 +39,12 @@ class AudioGenerator : public Timer
 {
 private:
     bool make_audio;
-    int num_chunks;
-    int batch_ind;
-    int chunk;
+    const unsigned int batches = 20;
+    const unsigned int num_chunks = batches - 1;
+    const unsigned int samp_rate = 44100;
+    unsigned int batch_ind;
+    const unsigned int chunk = 1024;
+    const unsigned int len_window = 4 * chunk;
     
     std::vector<juce::Slider*> sliders;
     std::vector<float> temp_sliders;

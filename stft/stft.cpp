@@ -36,7 +36,6 @@ int main(int argc, char** argv){
     double *norm = new double[newSampleCount];
 
     fftw_plan fftPlan  = fftw_plan_dft_r2c_1d( windowSize, window,    fftResult, FFTW_ESTIMATE );
-    fftw_plan ifftPlan = fftw_plan_dft_c2r_1d( windowSize, fftWindow, result,    FFTW_ESTIMATE );
 
     if (stft){
         // STFT
@@ -60,7 +59,9 @@ int main(int argc, char** argv){
             }
         }
     }
-    else{
+
+int istft(double **magnitudes, double **phases, unsigned int windowSize, unsigned int sampleCount, unsigned int slideWindowBy) 
+    fftw_plan ifftPlan = fftw_plan_dft_c2r_1d( windowSize, fftWindow, result,    FFTW_ESTIMATE );
         // INVERSE STFT
         for ( int currentWindow = 0; currentWindow < windowCount; ++currentWindow ){
             for ( int i = 0; i < windowSizeHalf; ++i ){

@@ -48,7 +48,7 @@ class LoginScreen(BoxLayout):
 
         self.alpha = 1
         self.num_latents = 10
-        self.temp_sliders = np.ones(self.num_latents)
+        self.temp_sliders = np.ones((1,self.num_latents))
         self.make_audio = False
         self.all_data = np.zeros((BATCHES,CHUNK))
 
@@ -115,16 +115,13 @@ class LoginScreen(BoxLayout):
         # temp_max = self.alpha*max_A+(1-self.alpha)*max_B #Unstack and Interpolate Normalizing gains
         # temp_out_mag = self.full_net.predict([ magA, magB, temp_alpha ,temp_negalpha ])
 
-        temp_out_mag = self.full_net.predict([self.temp_sliders])
-        temp_max = temp_out_mag.max(axis=0)+0.000000001 #Used for normalizing STFT frames (with addition to avoid division by zero)
+        temp_out_mag = self.full_net.predict([np.tile(self.temp_sliders, (BATCHES + 4, 1))])
 
-
-        out_mag = temp_out_mag.T * temp_max
+        out_mag = temp_out_mag.T
         E = out_mag
         _, temp_out = np.float32(signal.istft(0.24*E, fs=SAMP_RATE, noverlap=3*CHUNK))  #0.24 sus
         out = temp_out[CHUNK:-2*CHUNK]
         newdim = len(out)//CHUNK
-        print(len(out)/CHUNK)
         self.new_data = out.reshape((newdim,CHUNK))
 
     def loop(self, *args, **kwargs):
@@ -135,7 +132,7 @@ class LoginScreen(BoxLayout):
             self.gen_audio(NUM_CHUNKS)
 
         for w in range(self.num_latents):
-            self.temp_sliders[w]=self.sliders[w].value/100
+            self.temp_sliders[0,w]=self.sliders[w].value/100
 
 
     def start_net(self, *args, **kwargs):
@@ -158,10 +155,10 @@ class LoginScreen(BoxLayout):
         #time.sleep(0.1) ##### I DON"T KNOW IF WE NEED THIS
 
     def model_to_mem(self):
-        model_name = "long_embedding_synth"
+        model_name = "long_synth"
         #data_path_net = os.path.join(os.getcwd(),'models/'+self.model_name.get()+'_trained_network.h5')
         #for now that path is hard coded
-        data_path_net = os.path.join(os.getcwd(),'models/'+model_name+'_trained_network.h5')
+        data_path_net = os.path.join(os.getcwd(),'models/'+model_name+'_trained_network_synth.h5')
         self.full_net = load_model(data_path_net, compile=False)
         self.full_net._make_predict_function()
         self.full_net_graph = tf.get_default_graph()
