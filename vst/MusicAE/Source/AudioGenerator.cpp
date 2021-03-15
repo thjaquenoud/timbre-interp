@@ -10,6 +10,19 @@
 
 #include "AudioGenerator.h"
 
+AudioGenerator::AudioGenerator(unsigned int b, unsigned int sr, unsigned int c)
+    : Timer()
+{   
+    make_audio = false;
+    batches = b;
+    num_chunks = batches - 1;
+    samp_rate = r;
+    chunk = c;
+    len_window = 4 * chunk;
+    
+    startTimer(1);
+}
+
 void AudioGenerator::timerCallback() override
 {
     if(make_audio)
@@ -19,29 +32,19 @@ void AudioGenerator::timerCallback() override
         temp_sliders[i] = (sliders[i]->getValue()) / 100;
 }
 
-void AudioGenerator::startNet()
+double* AudioGenerator::genAudio(double *audio)
 {
-    modelToMem();
-    batch_ind = 0;
-    
-    make_audio = true;
-    gen_audio(num_chunks);
-    
-    /* PyAudio stuff */
-}
-
-void AudioGenerator::genAudio(int seg_length)
-{
-    unsigned int windowCount = 1; // CHANGE FOR MIXER/EFFECTS
+    unsigned int windowCount = batches + 3; // CHANGE FOR MIXER/EFFECTS
     unsigned int windowSizeHalf = len_window / 2 + 1;
     double **magnitudes = new double*[windowCount];
+    double **phases = new double*[windowCount];
     for (int i = 0; i < windowCount; i++) {
         magnitudes[i] = new double[windowSizeHalf];
+        phases[i] = new double[windowSizeHalf];
     }
     
-    make_audio = false;
-    
-    input.push_back(temp_sliders);
+    for (int i = 0; i < windowCount; i++)
+        input.push_back(temp_sliders);
     tensorflow::Input::Initializer input_tensor(input);
     const Tensor& resized_tensor = input_tensor.tensor;
     
@@ -50,21 +53,19 @@ void AudioGenerator::genAudio(int seg_length)
     tensorflow::Status run_status = session->Run({{input_layer, resized_tensor}},
                                    {output_layer}, {}, &outputs);
                                    
-    for (int i = 0; i < windowCount; i++) {
-        double max = 0;
-        for (int j = 0; j < windowSizeHalf; j++) {
-            magnitudes[i][j] = outputs[0].flat<double>()(windowSizeHalf * i + j);
-            if (magnitudes[i][j] > max)
-                max = magnitudes[i][j]
-        }
-    }
-    
-    
     if (!run_status.ok()) {
         LOG(ERROR) << "Running model failed: " << run_status;
         return -1;
     }
-
+                                   
+    for (int i = 0; i < windowCount; i++) {
+        for (int j = 0; j < windowSizeHalf; j++) {
+            magnitudes[i][j] = outputs[0].flat<double>()(windowSizeHalf * i + j);
+            phases[i][j] = 0.0;
+        }
+    }
+    
+    return istft(magnitudes, phases, len_window, windowCount, chunk*windowCount, chunk);
 }
 
 void AudioGenerator::modelToMem()

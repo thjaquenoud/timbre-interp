@@ -22,6 +22,7 @@ MusicAEAudioProcessor::MusicAEAudioProcessor()
                        )
 #endif
 {
+    generator = new AudioGenerator(batches, sampRate, chunk);
 }
 
 MusicAEAudioProcessor::~MusicAEAudioProcessor()
@@ -95,6 +96,12 @@ void MusicAEAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+    sampRate = sampleRate;
+    delayBuffer.setSize(1, 2 * batches * chunk + samplesPerBlock);
+    delayBufferReadIndex = delayBuffer.getNumSamples() - batches * chunk;
+    delayBuffer.clear();
+    
+    generator.modelToMem();
 }
 
 void MusicAEAudioProcessor::releaseResources()
@@ -129,7 +136,7 @@ bool MusicAEAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) 
 }
 #endif
 
-void MusicAEAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
+void MusicAEAudioProcessor::processBlock (juce::AudioBuffer<double>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
@@ -152,10 +159,40 @@ void MusicAEAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
     // interleaved by keeping the same state.
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
-        auto* channelData = buffer.getWritePointer (channel);
-
-        // ..do something to the data...
+        const int bufferLength = buffer.getNumSamples();
+        const int delayBufferLength = buffer.getNumSamples();
+        
+        // TODO: buffer larger than delay buffer?
+        if (delayBufferWriteIndex + bufferLength < delayBufferLength)
+            delayBuffer.copyFrom(0, delayBufferWriteIndex, buffer, channel, 0, bufferLength)
+        else{
+            const int spaceRemaining = delayBufferLength - delayBufferWriteIndex;
+            delayBuffer.copyFrom(0, delayBufferWriteIndex, buffer, channel, 0, spaceRemaining);
+            delayBuffer.copyFrom(0, 0, buffer, channel, spaceRemaining, bufferLength - spaceRemaining);
+        }
+        
+        delayBufferWriteIndex += bufferLength;
+        delayBufferWriteIndex %= delayBufferLength;
+        delayBufferProcessCounter += bufferLength;
+        
+        while (delayBufferProcessCounter > batches * chunk){
+            const int processStart = (delayBufferWriteIndex - delayBufferProcessCounter) % delayBufferLength;
+            // run model replace values
+            double *newData = generator.genAudio(delayBuffer.getReadPointer(0, processStart));
+            delayBuffer.copyFrom(0, processStart, newData, batches * chunk);
+            delayBufferProcessCounter -= batches * chunk;
+        }
     }
+    
+    if (delayBufferReadIndex + bufferLength < delayBufferLength)
+        buffer.copyFrom(0, 0, delayBuffer, 0, delayBufferReadIndex, bufferLength);
+    else{
+        const int spaceRemaining = delayBufferLength - delayBufferReadIndex;
+        buffer.copyFrom(0, 0, delayBuffer, 0, delayBufferReadIndex, spaceRemaining);
+        buffer.copyFrom(0, spaceRemaining, buffer, channel, 0, bufferLength - spaceRemaining);
+    }
+    delayBufferReadIndex += bufferLength;
+    delayBufferReadIndex %= delayBufferLength;
 }
 
 //==============================================================================

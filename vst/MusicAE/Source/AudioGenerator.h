@@ -15,6 +15,7 @@
 #include <vector>
 #include <JuceHeader.h>
 
+#include "stft.h"
 #include "tensorflow/cc/framework/ops.h"
 #include "tensorflow/cc/ops/const_op.h"
 #include "tensorflow/cc/ops/image_ops.h"
@@ -39,26 +40,25 @@ class AudioGenerator : public Timer
 {
 private:
     bool make_audio;
-    const unsigned int batches = 20;
-    const unsigned int num_chunks = batches - 1;
-    const unsigned int samp_rate = 44100;
+    const unsigned int batches {20};
+    const unsigned int num_chunks {batches - 1};
+    const unsigned int samp_rate {44100};
     unsigned int batch_ind;
-    const unsigned int chunk = 1024;
-    const unsigned int len_window = 4 * chunk;
+    const unsigned int chunk {1024};
+    const unsigned int len_window {4 * chunk};
     
     std::vector<juce::Slider*> sliders;
-    std::vector<float> temp_sliders;
+    std::vector<double> temp_sliders;
     std::string model_name;
     
-    std::vector<std::vector<float>> input;
+    std::vector<std::vector<double>> input;
     
     std::unique_ptr<tensorflow::Session> session;
     
 public:
     void timerCallback() override;
     
-    void genAudio(int seg_length);
-    void startNet();
+    double* genAudio(double *audio);
     void modelToMem();
     tensorflow::Status LoadGraph(const tensorflow::string& graph_file_name, std::unique_ptr<tensorflow::Session>* session);
 };

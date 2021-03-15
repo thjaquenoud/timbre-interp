@@ -54,6 +54,16 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
 private:
+    AudioGenerator generator;
+
+    juce::AudioBuffer<double> delayBuffer;
+    int delayBufferReadIndex {0};
+    int delayBufferWriteIndex {0};
+    int delayBufferProcessCounter {0};
+    double sampRate {44100};
+    const int batches {20};
+    const int chunk {1024};
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MusicAEAudioProcessor)
 };
