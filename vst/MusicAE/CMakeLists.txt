@@ -23,7 +23,26 @@ project(MUSICAE VERSION 0.0.1)
 
 #find_package(JUCE CONFIG REQUIRED)        # If you've installed JUCE to your system
 # or
-add_subdirectory("/home/sam/JUCE" JUCE)                    # If you've put JUCE in a subdirectory called JUCE
+add_subdirectory("/home/sam/ece396/JUCE" JUCE)                    # If you've put JUCE in a subdirectory called JUCE
+#add_subdirectory("/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow")
+#add_subdirectory("/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-tensorflow/external/eigen_archive")
+#add_subdirectory("/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-tensorflow/external/protobuf/src")
+#add_subdirectory("/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-bin")
+#add_subdirectory("/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-tensorflow/external/com_google_absl")
+
+list(APPEND CMAKE_MODULE_PATH /home/sam/ece396/timbre-interp/vst/MusicAE/cmake/Modules)
+
+find_package(TensorFlow REQUIRED)
+include_directories(${TensorFlow_INCLUDE_DIRS})
+
+# Eigen
+find_package(Eigen REQUIRED)
+include_directories(${Eigen_INCLUDE_DIRS})
+
+# Protobuf
+find_package(Protobuf REQUIRED)
+include_directories(${Protobuf_INCLUDE_DIRS})
+#target_link_libraries(MusicAE ${Protobuf_LIBRARIES})
 
 # If you are building a VST2 or AAX plugin, CMake needs to be told where to find these SDKs on your
 # system. This setup should be done before calling `juce_add_plugin`.
@@ -70,7 +89,9 @@ juce_add_plugin(MusicAE
 target_sources(MusicAE
     PRIVATE
         Source/PluginEditor.cpp
-        Source/PluginProcessor.cpp)
+        Source/PluginProcessor.cpp
+        Source/AudioGenerator.cpp
+        Source/stft.cpp)
 
 # `target_compile_definitions` adds some preprocessor definitions to our target. In a Projucer
 # project, these might be passed in the 'Preprocessor Definitions' field. JUCE modules also make use
@@ -95,6 +116,12 @@ target_compile_definitions(MusicAE
 
 # juce_add_binary_data(MusicAEData SOURCES ...)
 
+#add_library(tframework SHARED IMPORTED)
+#set_target_properties(tframework PROPERTIES IMPORTED_LOCATION /home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-bin/tensorflow/libtensorflow_framework.so)
+#add_library(tcc SHARED IMPORTED)
+#set_target_properties(tcc PROPERTIES IMPORTED_LOCATION /home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so)
+
+
 # `target_link_libraries` links libraries and JUCE modules to other libraries or executables. Here,
 # we're linking our executable target to the `juce::juce_audio_utils` module. Inter-module
 # dependencies are resolved automatically, so `juce_core`, `juce_events` and so on will also be
@@ -105,6 +132,10 @@ target_link_libraries(MusicAE
     PRIVATE
         # MusicAEData           # If we'd created a binary data target, we'd link to it here
         juce::juce_audio_utils
+        ${TensorFlow_LIBRARIES}
+        ${Protobuf_LIBRARIES}
+        # tframework
+        # tcc
     PUBLIC
         juce::juce_recommended_config_flags
         juce::juce_recommended_lto_flags

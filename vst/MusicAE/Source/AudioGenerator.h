@@ -13,7 +13,7 @@
 #include <fstream>
 #include <utility>
 #include <vector>
-#include <JuceHeader.h>
+#include "../JuceLibraryCode/JuceHeader.h"
 
 #include "stft.h"
 #include "tensorflow/cc/framework/ops.h"

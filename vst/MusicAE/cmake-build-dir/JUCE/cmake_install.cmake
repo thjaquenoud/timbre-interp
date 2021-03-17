@@ -1,4 +1,4 @@
-# Install script for directory: /home/sam/JUCE
+# Install script for directory: /home/sam/ece396/JUCE
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -37,33 +37,28 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
-# Set default install directory permissions.
-if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/usr/bin/objdump")
-endif()
-
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/JUCE-6.0.7" TYPE FILE FILES
-    "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/JUCEConfigVersion.cmake"
-    "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/JUCEConfig.cmake"
-    "/home/sam/JUCE/extras/Build/CMake/JUCEHelperTargets.cmake"
-    "/home/sam/JUCE/extras/Build/CMake/JUCECheckAtomic.cmake"
-    "/home/sam/JUCE/extras/Build/CMake/JUCEUtils.cmake"
-    "/home/sam/JUCE/extras/Build/CMake/LaunchScreen.storyboard"
-    "/home/sam/JUCE/extras/Build/CMake/PIPAudioProcessor.cpp.in"
-    "/home/sam/JUCE/extras/Build/CMake/PIPComponent.cpp.in"
-    "/home/sam/JUCE/extras/Build/CMake/PIPConsole.cpp.in"
-    "/home/sam/JUCE/extras/Build/CMake/RecentFilesMenuTemplate.nib"
-    "/home/sam/JUCE/extras/Build/CMake/UnityPluginGUIScript.cs.in"
-    "/home/sam/JUCE/extras/Build/CMake/copyDir.cmake"
-    "/home/sam/JUCE/extras/Build/CMake/juce_runtime_arch_detection.cpp"
+    "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/JUCEConfigVersion.cmake"
+    "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/JUCEConfig.cmake"
+    "/home/sam/ece396/JUCE/extras/Build/CMake/JUCEHelperTargets.cmake"
+    "/home/sam/ece396/JUCE/extras/Build/CMake/JUCECheckAtomic.cmake"
+    "/home/sam/ece396/JUCE/extras/Build/CMake/JUCEUtils.cmake"
+    "/home/sam/ece396/JUCE/extras/Build/CMake/LaunchScreen.storyboard"
+    "/home/sam/ece396/JUCE/extras/Build/CMake/PIPAudioProcessor.cpp.in"
+    "/home/sam/ece396/JUCE/extras/Build/CMake/PIPComponent.cpp.in"
+    "/home/sam/ece396/JUCE/extras/Build/CMake/PIPConsole.cpp.in"
+    "/home/sam/ece396/JUCE/extras/Build/CMake/RecentFilesMenuTemplate.nib"
+    "/home/sam/ece396/JUCE/extras/Build/CMake/UnityPluginGUIScript.cs.in"
+    "/home/sam/ece396/JUCE/extras/Build/CMake/copyDir.cmake"
+    "/home/sam/ece396/JUCE/extras/Build/CMake/juce_runtime_arch_detection.cpp"
     )
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/modules/cmake_install.cmake")
-  include("/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/extras/Build/cmake_install.cmake")
+  include("/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/modules/cmake_install.cmake")
+  include("/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/extras/Build/cmake_install.cmake")
 
 endif()
 

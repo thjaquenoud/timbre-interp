@@ -4,20 +4,22 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/Source/PluginEditor.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/Source/PluginEditor.cpp.o"
-  "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/Source/PluginProcessor.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/Source/PluginProcessor.cpp.o"
-  "/home/sam/JUCE/modules/juce_audio_basics/juce_audio_basics.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/JUCE/modules/juce_audio_basics/juce_audio_basics.cpp.o"
-  "/home/sam/JUCE/modules/juce_audio_devices/juce_audio_devices.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/JUCE/modules/juce_audio_devices/juce_audio_devices.cpp.o"
-  "/home/sam/JUCE/modules/juce_audio_formats/juce_audio_formats.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/JUCE/modules/juce_audio_formats/juce_audio_formats.cpp.o"
-  "/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_utils.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_utils.cpp.o"
-  "/home/sam/JUCE/modules/juce_audio_processors/juce_audio_processors.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/JUCE/modules/juce_audio_processors/juce_audio_processors.cpp.o"
-  "/home/sam/JUCE/modules/juce_audio_utils/juce_audio_utils.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/JUCE/modules/juce_audio_utils/juce_audio_utils.cpp.o"
-  "/home/sam/JUCE/modules/juce_core/juce_core.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/JUCE/modules/juce_core/juce_core.cpp.o"
-  "/home/sam/JUCE/modules/juce_data_structures/juce_data_structures.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/JUCE/modules/juce_data_structures/juce_data_structures.cpp.o"
-  "/home/sam/JUCE/modules/juce_events/juce_events.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/JUCE/modules/juce_events/juce_events.cpp.o"
-  "/home/sam/JUCE/modules/juce_graphics/juce_graphics.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/JUCE/modules/juce_graphics/juce_graphics.cpp.o"
-  "/home/sam/JUCE/modules/juce_gui_basics/juce_gui_basics.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/JUCE/modules/juce_gui_basics/juce_gui_basics.cpp.o"
-  "/home/sam/JUCE/modules/juce_gui_extra/juce_gui_extra.cpp" "/home/sam/Downloads/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/JUCE/modules/juce_gui_extra/juce_gui_extra.cpp.o"
+  "/home/sam/ece396/timbre-interp/vst/MusicAE/Source/AudioGenerator.cpp" "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/Source/AudioGenerator.cpp.o"
+  "/home/sam/ece396/timbre-interp/vst/MusicAE/Source/PluginEditor.cpp" "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/Source/PluginEditor.cpp.o"
+  "/home/sam/ece396/timbre-interp/vst/MusicAE/Source/PluginProcessor.cpp" "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/Source/PluginProcessor.cpp.o"
+  "/home/sam/ece396/timbre-interp/vst/MusicAE/Source/stft.cpp" "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/Source/stft.cpp.o"
+  "/home/sam/ece396/JUCE/modules/juce_audio_basics/juce_audio_basics.cpp" "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/ece396/JUCE/modules/juce_audio_basics/juce_audio_basics.cpp.o"
+  "/home/sam/ece396/JUCE/modules/juce_audio_devices/juce_audio_devices.cpp" "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/ece396/JUCE/modules/juce_audio_devices/juce_audio_devices.cpp.o"
+  "/home/sam/ece396/JUCE/modules/juce_audio_formats/juce_audio_formats.cpp" "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/ece396/JUCE/modules/juce_audio_formats/juce_audio_formats.cpp.o"
+  "/home/sam/ece396/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_utils.cpp" "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/ece396/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_utils.cpp.o"
+  "/home/sam/ece396/JUCE/modules/juce_audio_processors/juce_audio_processors.cpp" "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/ece396/JUCE/modules/juce_audio_processors/juce_audio_processors.cpp.o"
+  "/home/sam/ece396/JUCE/modules/juce_audio_utils/juce_audio_utils.cpp" "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/ece396/JUCE/modules/juce_audio_utils/juce_audio_utils.cpp.o"
+  "/home/sam/ece396/JUCE/modules/juce_core/juce_core.cpp" "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/ece396/JUCE/modules/juce_core/juce_core.cpp.o"
+  "/home/sam/ece396/JUCE/modules/juce_data_structures/juce_data_structures.cpp" "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/ece396/JUCE/modules/juce_data_structures/juce_data_structures.cpp.o"
+  "/home/sam/ece396/JUCE/modules/juce_events/juce_events.cpp" "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/ece396/JUCE/modules/juce_events/juce_events.cpp.o"
+  "/home/sam/ece396/JUCE/modules/juce_graphics/juce_graphics.cpp" "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/ece396/JUCE/modules/juce_graphics/juce_graphics.cpp.o"
+  "/home/sam/ece396/JUCE/modules/juce_gui_basics/juce_gui_basics.cpp" "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/ece396/JUCE/modules/juce_gui_basics/juce_gui_basics.cpp.o"
+  "/home/sam/ece396/JUCE/modules/juce_gui_extra/juce_gui_extra.cpp" "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/CMakeFiles/MusicAE.dir/home/sam/ece396/JUCE/modules/juce_gui_extra/juce_gui_extra.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -86,12 +88,14 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "/usr/local/include/google/tensorflow"
+  "/usr/local/include/eigen3"
+  "/usr/local/include/google"
   "MusicAE_artefacts/JuceLibraryCode"
-  "/home/sam/JUCE/modules"
-  "/home/sam/JUCE/modules/juce_audio_processors/format_types/VST3_SDK"
+  "/home/sam/ece396/JUCE/modules"
+  "/home/sam/ece396/JUCE/modules/juce_audio_processors/format_types/VST3_SDK"
   "/usr/include/freetype2"
   "/usr/include/libpng16"
-  "/usr/include/alsa"
   )
 
 # Targets to which this target links.
