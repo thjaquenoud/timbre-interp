@@ -11,18 +11,19 @@
 
 //==============================================================================
 MusicAEAudioProcessor::MusicAEAudioProcessor()
+    :
 #ifndef JucePlugin_PreferredChannelConfigurations
-     : AudioProcessor (BusesProperties()
+    AudioProcessor (BusesProperties()
                      #if ! JucePlugin_IsMidiEffect
                       #if ! JucePlugin_IsSynth
                        .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ),
 #endif
+    temp_sliders(10, 0.5)
 {
-    generator = new AudioGenerator(batches, sampRate, chunk);
 }
 
 MusicAEAudioProcessor::~MusicAEAudioProcessor()
@@ -96,12 +97,22 @@ void MusicAEAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+    generator = new AudioGenerator(batches, sampRate, chunk, temp_sliders);
+
+    if (isUsingDoublePrecision()){
+        dblDelayBuffer.setSize(1, 2 * batches * chunk + samplesPerBlock);
+        delayBufferReadIndex = dblDelayBuffer.getNumSamples() - batches * chunk;
+        dblDelayBuffer.clear();
+    }
+    else{
+        fltDelayBuffer.setSize(1, 2 * batches * chunk + samplesPerBlock);
+        delayBufferReadIndex = fltDelayBuffer.getNumSamples() - batches * chunk;
+        fltDelayBuffer.clear();
+    }
+
+    genInit = true;  
     sampRate = sampleRate;
-    delayBuffer.setSize(1, 2 * batches * chunk + samplesPerBlock);
-    delayBufferReadIndex = delayBuffer.getNumSamples() - batches * chunk;
-    delayBuffer.clear();
-    
-    generator.modelToMem();
+    generator->modelToMem();
 }
 
 void MusicAEAudioProcessor::releaseResources()
@@ -136,7 +147,18 @@ bool MusicAEAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) 
 }
 #endif
 
+void MusicAEAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
+{
+    processSamples(buffer, midiMessages, fltDelayBuffer);
+}
+
 void MusicAEAudioProcessor::processBlock (juce::AudioBuffer<double>& buffer, juce::MidiBuffer& midiMessages)
+{
+    processSamples(buffer, midiMessages, dblDelayBuffer);
+}
+
+template <typename Real>
+void MusicAEAudioProcessor::processSamples (juce::AudioBuffer<Real>& buffer, juce::MidiBuffer& midiMessages, juce::AudioBuffer<Real>& delayBuffer)
 {
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
@@ -157,14 +179,14 @@ void MusicAEAudioProcessor::processBlock (juce::AudioBuffer<double>& buffer, juc
     // the samples and the outer loop is handling the channels.
     // Alternatively, you can process the samples with the channels
     // interleaved by keeping the same state.
+    const int bufferLength = buffer.getNumSamples();
+    const int delayBufferLength = delayBuffer.getNumSamples();
+
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
-        const int bufferLength = buffer.getNumSamples();
-        const int delayBufferLength = buffer.getNumSamples();
-        
         // TODO: buffer larger than delay buffer?
         if (delayBufferWriteIndex + bufferLength < delayBufferLength)
-            delayBuffer.copyFrom(0, delayBufferWriteIndex, buffer, channel, 0, bufferLength)
+            delayBuffer.copyFrom(0, delayBufferWriteIndex, buffer, channel, 0, bufferLength);
         else{
             const int spaceRemaining = delayBufferLength - delayBufferWriteIndex;
             delayBuffer.copyFrom(0, delayBufferWriteIndex, buffer, channel, 0, spaceRemaining);
@@ -178,7 +200,8 @@ void MusicAEAudioProcessor::processBlock (juce::AudioBuffer<double>& buffer, juc
         while (delayBufferProcessCounter > batches * chunk){
             const int processStart = (delayBufferWriteIndex - delayBufferProcessCounter) % delayBufferLength;
             // run model replace values
-            double *newData = generator.genAudio(delayBuffer.getReadPointer(0, processStart));
+            Real *newData = generator->genAudio<Real>(delayBuffer.getReadPointer(0, processStart));
+                
             delayBuffer.copyFrom(0, processStart, newData, batches * chunk);
             delayBufferProcessCounter -= batches * chunk;
         }
@@ -189,7 +212,7 @@ void MusicAEAudioProcessor::processBlock (juce::AudioBuffer<double>& buffer, juc
     else{
         const int spaceRemaining = delayBufferLength - delayBufferReadIndex;
         buffer.copyFrom(0, 0, delayBuffer, 0, delayBufferReadIndex, spaceRemaining);
-        buffer.copyFrom(0, spaceRemaining, buffer, channel, 0, bufferLength - spaceRemaining);
+        buffer.copyFrom(0, spaceRemaining, buffer, 0, 0, bufferLength - spaceRemaining);
     }
     delayBufferReadIndex += bufferLength;
     delayBufferReadIndex %= delayBufferLength;

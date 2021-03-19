@@ -14,9 +14,12 @@
 #include <iostream>
 
 struct polarComplex{
-    double **magnitudes;
-    double **phases;
+    float **magnitudes;
+    float **phases;
 };
 
-struct polarComplex stft(double *input, unsigned int windowSize, unsigned windowCount, unsigned int sampleCount, unsigned int slideWindowBy);
-double* istft(double **magnitudes, double **phases, unsigned int windowSize, unsigned windowCount, unsigned int sampleCount, unsigned int slideWindowBy);
+template <typename Real>
+struct polarComplex stft(Real *input, int windowSize, int windowCount, int sampleCount, int slideWindowBy);
+
+template <typename Real>
+Real *istft(float **&magnitudes, float **&phases, const int &windowSize, int &windowCount, int sampleCount, const int &slideWindowBy, Real dummy);

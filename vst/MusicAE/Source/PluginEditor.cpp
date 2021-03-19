@@ -6,8 +6,8 @@
   ==============================================================================
 */
 
-#include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include "PluginProcessor.h"
 
 //==============================================================================
 MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor& p)
@@ -33,6 +33,7 @@ MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor&
         slider->setPopupDisplayEnabled (true, false, this);
         slider->setTextValueSuffix (" alpha");
         slider->setValue(50.0);
+        slider->addListener(this);
         
         addAndMakeVisible(slider);
     }
@@ -93,5 +94,17 @@ void MusicAEAudioProcessorEditor::reset()
 {
     for(auto slider : latentSliders)
         slider->setValue(50.0);
+}
+
+void MusicAEAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
+{
+    if (audioProcessor.genInit){
+        for (int i = 0; i < latentSliders.size(); i++)
+            audioProcessor.generator->sliders[i] = (float)latentSliders[i]->getValue() / 100;
+    }
+    else{
+        for (int i = 0; i < latentSliders.size(); i++)
+            audioProcessor.temp_sliders[i] = (float)latentSliders[i]->getValue() / 100;
+    }
 }
 

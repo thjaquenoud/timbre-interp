@@ -30,6 +30,7 @@ public:
    #endif
 
     void processBlock (juce::AudioBuffer<float>&, juce::MidiBuffer&) override;
+    void processBlock (juce::AudioBuffer<double>&, juce::MidiBuffer&) override;
 
     //==============================================================================
     juce::AudioProcessorEditor* createEditor() override;
@@ -54,16 +55,23 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
-private:
-    AudioGenerator generator;
+    bool genInit {false};
+    std::vector<float> temp_sliders;
 
-    juce::AudioBuffer<double> delayBuffer;
+    AudioGenerator *generator;
+
+private:
+    juce::AudioBuffer<float> fltDelayBuffer;
+    juce::AudioBuffer<double> dblDelayBuffer;
     int delayBufferReadIndex {0};
     int delayBufferWriteIndex {0};
     int delayBufferProcessCounter {0};
     double sampRate {44100};
     const int batches {20};
     const int chunk {1024};
+
+    template <typename Real>
+    void processSamples(juce::AudioBuffer<Real>& buffer, juce::MidiBuffer& midiMessages, juce::AudioBuffer<Real>& delayBuffer);
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MusicAEAudioProcessor)

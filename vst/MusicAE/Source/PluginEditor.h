@@ -15,7 +15,8 @@
 //==============================================================================
 /**
 */
-class MusicAEAudioProcessorEditor  : public juce::AudioProcessorEditor
+class MusicAEAudioProcessorEditor  : public juce::AudioProcessorEditor,
+                                     private juce::Slider::Listener
 {
 public:
     MusicAEAudioProcessorEditor (MusicAEAudioProcessor&);
@@ -36,6 +37,9 @@ private:
     juce::TextEditor modelTextBox;
     
     juce::TextButton startButton, resetButton; 
+
+    void reset();
+    void sliderValueChanged(juce::Slider* slider) override;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MusicAEAudioProcessorEditor)
 };

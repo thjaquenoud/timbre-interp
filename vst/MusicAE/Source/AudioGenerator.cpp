@@ -1,7 +1,7 @@
 /*
   ==============================================================================
 
-    MyTimer.cpp
+    AudioGenerator.cpp
     Created: 23 Feb 2021 3:43:23pm
     Author:  sam
 
@@ -10,46 +10,61 @@
 
 #include "AudioGenerator.h"
 
-AudioGenerator::AudioGenerator(unsigned int b, unsigned int sr, unsigned int c)
-    : Timer()
-{   
+AudioGenerator::AudioGenerator(const int& b, double& sr, const int& c, std::vector<float> temp_sliders)
+    : //Timer(),
+    sliders(temp_sliders.begin(), temp_sliders.end()),
+    batches(b),
+    num_chunks(b - 1),
+    samp_rate(sr),
+    chunk(c),
+    len_window(4 * c)
+{
+    /*doublePrecision = dp;
     make_audio = false;
     batches = b;
     num_chunks = batches - 1;
-    samp_rate = r;
+    samp_rate = sr;
     chunk = c;
     len_window = 4 * chunk;
     
-    startTimer(1);
+    startTimer(1);*/
 }
 
-void AudioGenerator::timerCallback() override
+/*AudioGenerator::AudioGenerator()
+    : Timer()
+{
+    doublePrecision = true;
+}*/
+
+/*void AudioGenerator::timerCallback() override
 {
     if(make_audio)
         gen_audio(num_chunks);
         
     for(int i = 0; i < sliders.size(); i++)
         temp_sliders[i] = (sliders[i]->getValue()) / 100;
-}
+}*/
 
-double* AudioGenerator::genAudio(double *audio)
+template <typename Real>
+Real* AudioGenerator::genAudio(const Real *audio)
 {
-    unsigned int windowCount = batches + 3; // CHANGE FOR MIXER/EFFECTS
-    unsigned int windowSizeHalf = len_window / 2 + 1;
-    double **magnitudes = new double*[windowCount];
-    double **phases = new double*[windowCount];
+    int windowCount = batches + 3; // CHANGE FOR MIXER/EFFECTS
+    int windowSizeHalf = len_window / 2 + 1;
+    float **magnitudes = new float*[windowCount];
+    float **phases = new float*[windowCount];
     for (int i = 0; i < windowCount; i++) {
-        magnitudes[i] = new double[windowSizeHalf];
-        phases[i] = new double[windowSizeHalf];
+        magnitudes[i] = new float[windowSizeHalf];
+        phases[i] = new float[windowSizeHalf];
     }
     
     for (int i = 0; i < windowCount; i++)
-        input.push_back(temp_sliders);
+        input.push_back(sliders);
     tensorflow::Input::Initializer input_tensor(input);
-    const Tensor& resized_tensor = input_tensor.tensor;
+    const tensorflow::Tensor& resized_tensor = input_tensor.tensor;
     
     // Actually run the image through the model.
-    std::vector<Tensor> outputs;
+    std::string input_layer = "Latent_Input", output_layer = "k2tfout_0"; // IMPORTANT: These are model dependent
+    std::vector<tensorflow::Tensor> outputs;
     tensorflow::Status run_status = session->Run({{input_layer, resized_tensor}},
                                    {output_layer}, {}, &outputs);
                                    
@@ -60,12 +75,13 @@ double* AudioGenerator::genAudio(double *audio)
                                    
     for (int i = 0; i < windowCount; i++) {
         for (int j = 0; j < windowSizeHalf; j++) {
-            magnitudes[i][j] = outputs[0].flat<double>()(windowSizeHalf * i + j);
+            magnitudes[i][j] = outputs[0].flat<float>()(windowSizeHalf * i + j);
             phases[i][j] = 0.0;
         }
     }
     
-    return istft(magnitudes, phases, len_window, windowCount, chunk*windowCount, chunk);
+    Real dummy = 1.0;
+    return istft(magnitudes, phases, len_window, windowCount, chunk*windowCount, chunk, dummy);
 }
 
 void AudioGenerator::modelToMem()
@@ -75,8 +91,8 @@ void AudioGenerator::modelToMem()
     char** argv;
     tensorflow::port::InitMain("musicae", &argc, &argv);
     if (argc > 1) {
-        LOG(ERROR) << "Unknown argument " << argv[1] << "\n" << usage;
-        return -1;
+        LOG(ERROR) << "Unknown argument " << argv[1] << "\n";
+        exit(EXIT_FAILURE);
     }
 
     // First we load and initialize the model.
@@ -84,7 +100,7 @@ void AudioGenerator::modelToMem()
     tensorflow::Status load_graph_status = LoadGraph(graph_path, &session);
     if (!load_graph_status.ok()) {
         LOG(ERROR) << load_graph_status;
-        return -1;
+        exit(EXIT_FAILURE);
     }
 }
 

@@ -1,42 +1,42 @@
 #include "stft.h"
 
-struct polarComplex stft(double *input, unsigned int windowSize, unsigned windowCount, unsigned int sampleCount, unsigned int slideWindowBy) {
-    unsigned int windowSizeHalf = windowSize / 2 + 1;
-    unsigned int windowCount    = sampleCount / slideWindowBy;
+template <typename Real>
+struct polarComplex stft(Real *input, int windowSize, int windowCount, int sampleCount, int slideWindowBy) {
+    int windowSizeHalf = windowSize / 2 + 1;
     if ( (windowCount * slideWindowBy) < sampleCount){
         windowCount += 1;
     }
-    unsigned int newSampleCount = windowCount * slideWindowBy + ( windowSize - slideWindowBy );
+    int newSampleCount = windowCount * slideWindowBy + ( windowSize - slideWindowBy );
 
-    double *window          = new double[windowSize];
-    fftw_complex *fftResult = new fftw_complex[windowSizeHalf];
-    fftw_complex *fftWindow = new fftw_complex[windowSizeHalf];
-    double *result          = new double[windowSize];
+    float *window          = new float[windowSize];
+    fftwf_complex *fftResult = new fftwf_complex[windowSizeHalf];
+    fftwf_complex *fftWindow = new fftwf_complex[windowSizeHalf];
+    float *result          = new float[windowSize];
 
-    double **magnitudes    = new double*[windowCount];
-    double **phases        = new double*[windowCount];
-    double **signalWindows = new double*[windowCount];
+    Real **magnitudes    = new float*[windowCount];
+    Real **phases        = new float*[windowCount];
+    Real **signalWindows = new float*[windowCount];
     for (int i = 0; i < windowCount; ++i){
-        magnitudes[i]    = new double[windowSizeHalf];
-        phases[i]        = new double[windowSizeHalf];
-        signalWindows[i] = new double[windowSize];
+        magnitudes[i]    = new float[windowSizeHalf];
+        phases[i]        = new float[windowSizeHalf];
+        signalWindows[i] = new float[windowSize];
     }
 
-    fftw_plan fftPlan  = fftw_plan_dft_r2c_1d( windowSize, window,    fftResult, FFTW_ESTIMATE );
+    fftwf_plan fftPlan  = fftwf_plan_dft_r2c_1d( windowSize, window,    fftResult, FFTW_ESTIMATE );
 
     // STFT
     for ( int currentWindow = 0; currentWindow < windowCount; ++currentWindow ){
         for (int i = 0; i < windowSize; ++i){
-            unsigned int currentSample = currentWindow * slideWindowBy + i;
+            int currentSample = currentWindow * slideWindowBy + i;
             if ( ( currentSample ) < 23552 ){
-                window[i] = 0.5 * (1 - cos(2 * M_PI * i / windowSize));
+                window[i] = 0.5 * (1 - cos(2 * M_PI * i / windowSize)) * (float)input[currentSample];
             }
             else{
                 window[i] = 0.0;
             }
         }
 
-        fftw_execute(fftPlan);
+        fftwf_execute(fftPlan);
 
         for (int i = 0; i < windowSizeHalf; ++i){
             magnitudes[currentWindow][i] = sqrt( fftResult[i][0]*fftResult[i][0] + fftResult[i][1]*fftResult[i][1] ) / 2048; // scipy scaling
@@ -50,18 +50,21 @@ struct polarComplex stft(double *input, unsigned int windowSize, unsigned window
     return ret;
 }
 
-double* istft(double **magnitudes, double **phases, unsigned int windowSize, unsigned windowCount, unsigned int sampleCount, unsigned int slideWindowBy) {
-    fftw_complex *fftWindow = new fftw_complex[windowSizeHalf];
-    double *result          = new double[windowSize];
-    double **signalWindows = new double*[windowCount];
-    unsigned int overlap = windowSize - slideWindowBy;
-    unsigned int newSampleCount = windowCount * slideWindowBy + overlap;
-    double *sampleSignals = new double[newSampleCount];
-    *norm = new double[newSampleCount];
+template <typename Real>
+Real *istft(float **&magnitudes, float **&phases, const int &windowSize, int &windowCount, int sampleCount, const int &slideWindowBy, Real dummy) {
+    int windowSizeHalf = windowSize / 2 + 1;
+    fftwf_complex *fftWindow = new fftwf_complex[windowSizeHalf];
+    float *result          = new float[windowSize];
+    float **signalWindows = new float*[windowCount];
+    int overlap = windowSize - slideWindowBy;
+    int newSampleCount = windowCount * slideWindowBy + overlap;
+    float *sampleSignals = new float[newSampleCount];
+    float *norm = new float[newSampleCount];
+    Real *sampleSignalsNew = new Real[newSampleCount];
     for (int i = 0; i < windowCount; ++i)
-        signalWindows[i] = new double[windowSize];
+        signalWindows[i] = new float[windowSize];
 
-    fftw_plan ifftPlan = fftw_plan_dft_c2r_1d( windowSize, fftWindow, result,    FFTW_ESTIMATE );
+    fftwf_plan ifftPlan = fftwf_plan_dft_c2r_1d( windowSize, fftWindow, result,    FFTW_ESTIMATE );
     // INVERSE STFT
     for ( int currentWindow = 0; currentWindow < windowCount; ++currentWindow ){
         for ( int i = 0; i < windowSizeHalf; ++i ){
@@ -69,7 +72,7 @@ double* istft(double **magnitudes, double **phases, unsigned int windowSize, uns
             fftWindow[i][1] = magnitudes[currentWindow][i] * sin( phases[currentWindow][i] );  // Imaginary
         }
 
-        fftw_execute(ifftPlan);
+        fftwf_execute(ifftPlan);
 
         for ( int i = 0; i < windowSize; ++i ){
             signalWindows[currentWindow][i] = result[i] / 2;            // getting normalized result
@@ -77,7 +80,7 @@ double* istft(double **magnitudes, double **phases, unsigned int windowSize, uns
         }
     }
 
-    unsigned int pos;
+    int pos;
 
     // HERE WE COMBINE RESULTED WINDOWS
 
@@ -105,10 +108,10 @@ double* istft(double **magnitudes, double **phases, unsigned int windowSize, uns
 
     norm[0] = 1e-16;
     for (int i = 0; i < newSampleCount; i++)
-        sampleSignals[i] = sampleSignals[i] / norm[i];
+        sampleSignalsNew[i] = (Real)(sampleSignals[i] / norm[i]);
 
     //for (int w = 0; w < newSampleCount; w++)
         //std::cout << sampleSignals[w] << "\t" << norm[w] << "\n";
 
-    return sampleSignalsReshaped;
+    return sampleSignalsNew;
 }
