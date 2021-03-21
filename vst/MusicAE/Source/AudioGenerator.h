@@ -46,8 +46,6 @@ private:
     const int chunk {1024};
     const int len_window {4 * chunk};
     
-    std::string model_name;
-    
     std::vector<std::vector<float>> input;
     
     std::unique_ptr<tensorflow::Session> session;
@@ -55,6 +53,7 @@ private:
     tensorflow::Status LoadGraph(const tensorflow::string& graph_file_name, std::unique_ptr<tensorflow::Session>* session);
 
 public:
+    std::string model_name;
     std::vector<float> sliders;
     
     AudioGenerator(const int& b, double& sr, const int& c, std::vector<float> temp_sliders);

@@ -24,6 +24,9 @@ MusicAEAudioProcessor::MusicAEAudioProcessor()
 #endif
     temp_sliders(10, 0.5)
 {
+    std::cerr << "sdf";
+    suspendProcessing(true);
+    generator = new AudioGenerator(batches, sampRate, chunk, temp_sliders);
 }
 
 MusicAEAudioProcessor::~MusicAEAudioProcessor()
@@ -97,7 +100,8 @@ void MusicAEAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
-    generator = new AudioGenerator(batches, sampRate, chunk, temp_sliders);
+    while (isSuspended())
+        ;
 
     if (isUsingDoublePrecision()){
         dblDelayBuffer.setSize(1, 2 * batches * chunk + samplesPerBlock);
@@ -112,7 +116,6 @@ void MusicAEAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
 
     genInit = true;  
     sampRate = sampleRate;
-    generator->modelToMem();
 }
 
 void MusicAEAudioProcessor::releaseResources()

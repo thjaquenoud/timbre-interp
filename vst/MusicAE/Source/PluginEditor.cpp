@@ -39,14 +39,29 @@ MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor&
     }
     
     addAndMakeVisible(modelTextBox);
-    
+
+    loadButton.setButtonText("Load");
+    addAndMakeVisible(loadButton);
+    loadButton.onClick = [this]()
+    {
+        this->audioProcessor.generator->model_name = this->modelTextBox.getText().toStdString();
+        this->audioProcessor.generator->modelToMem();
+        this->startButton.setEnabled(true);
+    };
+
     startButton.setButtonText("Start");
     addAndMakeVisible(startButton);
+    startButton.setEnabled(false);
+    startButton.onClick = [this]()
+    {
+        this->resetButton.setEnabled(true);
+        this->audioProcessor.suspendProcessing(false);
+    };
 
     resetButton.setButtonText("Reset");
     addAndMakeVisible(resetButton);
+    resetButton.setEnabled(false);
 
-    
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (800, 800);

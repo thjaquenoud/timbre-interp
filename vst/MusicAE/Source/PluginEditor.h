@@ -26,6 +26,8 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
 
+    juce::TextEditor modelTextBox;
+    juce::TextButton loadButton, startButton, resetButton;
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
@@ -34,10 +36,6 @@ private:
     juce::Slider alpha;
     juce::OwnedArray<juce::Slider> latentSliders;
     
-    juce::TextEditor modelTextBox;
-    
-    juce::TextButton startButton, resetButton; 
-
     void reset();
     void sliderValueChanged(juce::Slider* slider) override;
     
