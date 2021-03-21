@@ -9,6 +9,7 @@
 # information can be found in the CMake docs.
 
 cmake_minimum_required(VERSION 3.15)
+set(CMAKE_CXX_FLAGS "-fPIC")
 
 # The top-level CMakeLists.txt file for a project must contain a literal, direct call to the
 # `project()` command. `project()` sets up some helpful variables that describe source/binary
@@ -29,20 +30,6 @@ add_subdirectory("/home/sam/ece396/JUCE" JUCE)                    # If you've pu
 #add_subdirectory("/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-tensorflow/external/protobuf/src")
 #add_subdirectory("/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-bin")
 #add_subdirectory("/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-tensorflow/external/com_google_absl")
-
-list(APPEND CMAKE_MODULE_PATH /home/sam/ece396/timbre-interp/vst/MusicAE/cmake/Modules)
-
-find_package(TensorFlow REQUIRED)
-include_directories(${TensorFlow_INCLUDE_DIRS})
-
-# Eigen
-find_package(Eigen REQUIRED)
-include_directories(${Eigen_INCLUDE_DIRS})
-
-# Protobuf
-find_package(Protobuf REQUIRED)
-include_directories(${Protobuf_INCLUDE_DIRS})
-#target_link_libraries(MusicAE ${Protobuf_LIBRARIES})
 
 # If you are building a VST2 or AAX plugin, CMake needs to be told where to find these SDKs on your
 # system. This setup should be done before calling `juce_add_plugin`.
@@ -86,12 +73,21 @@ juce_add_plugin(MusicAE
 # Finally, we supply a list of source files that will be built into the target. This is a standard
 # CMake command.
 
+#target_compile_options(MusicAE PRIVATE -fPIC)
+
 target_sources(MusicAE
     PRIVATE
-        Source/stft.cpp
+#        Source/stft.cpp
         Source/AudioGenerator.cpp
         Source/PluginEditor.cpp
         Source/PluginProcessor.cpp)
+
+include_directories("/home/sam/ece396/timbre-interp/vst/MusicAE/Source")
+include_directories("/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow")
+include_directories("/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-tensorflow/external/eigen_archive")
+include_directories("/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-tensorflow/external/protobuf/src")
+include_directories("/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-bin")
+include_directories("/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-tensorflow/external/com_google_absl")
 
 # `target_compile_definitions` adds some preprocessor definitions to our target. In a Projucer
 # project, these might be passed in the 'Preprocessor Definitions' field. JUCE modules also make use
@@ -121,6 +117,19 @@ target_compile_definitions(MusicAE
 #add_library(tcc SHARED IMPORTED)
 #set_target_properties(tcc PROPERTIES IMPORTED_LOCATION /home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so)
 
+#list(APPEND CMAKE_MODULE_PATH /home/sam/ece396/timbre-interp/vst/MusicAE/cmake/Modules)
+
+#find_package(TensorFlow REQUIRED)
+#include_directories(${TensorFlow_INCLUDE_DIRS})
+
+# Eigen
+#find_package(Eigen REQUIRED)
+#include_directories(${Eigen_INCLUDE_DIRS})
+
+# Protobuf
+#find_package(Protobuf REQUIRED)
+#include_directories(${Protobuf_INCLUDE_DIRS})
+#target_link_libraries(MusicAE ${Protobuf_LIBRARIES})
 
 # `target_link_libraries` links libraries and JUCE modules to other libraries or executables. Here,
 # we're linking our executable target to the `juce::juce_audio_utils` module. Inter-module
@@ -128,12 +137,18 @@ target_compile_definitions(MusicAE
 # linked automatically. If we'd generated a binary data target above, we would need to link to it
 # here too. This is a standard CMake command.
 
+#message(STATUS "${TensorFlow_LIBRARIES}")
+#message(STATUS "${Protobuf_LIBRARIES}")
+
 target_link_libraries(MusicAE
     PRIVATE
         # MusicAEData           # If we'd created a binary data target, we'd link to it here
+        #${Protobuf_LIBRARIES}
+        #${TensorFlow_LIBRARIES}
         juce::juce_audio_utils
-        ${TensorFlow_LIBRARIES}
-        ${Protobuf_LIBRARIES}
+        fftw3f
+        /home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-bin/tensorflow/libtensorflow_framework.so
+        /home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so
         # tframework
         # tcc
     PUBLIC

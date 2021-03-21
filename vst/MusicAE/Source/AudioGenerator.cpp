@@ -12,12 +12,12 @@
 
 AudioGenerator::AudioGenerator(const int& b, double& sr, const int& c, std::vector<float> temp_sliders)
     : //Timer(),
-    sliders(temp_sliders.begin(), temp_sliders.end()),
     batches(b),
     num_chunks(b - 1),
     samp_rate(sr),
     chunk(c),
-    len_window(4 * c)
+    len_window(4 * c),
+    sliders(temp_sliders.begin(), temp_sliders.end())
 {
     /*doublePrecision = dp;
     make_audio = false;
@@ -45,45 +45,6 @@ AudioGenerator::AudioGenerator(const int& b, double& sr, const int& c, std::vect
         temp_sliders[i] = (sliders[i]->getValue()) / 100;
 }*/
 
-template <typename Real>
-Real* AudioGenerator::genAudio(const Real *audio)
-{
-    int windowCount = batches + 3; // CHANGE FOR MIXER/EFFECTS
-    int windowSizeHalf = len_window / 2 + 1;
-    float **magnitudes = new float*[windowCount];
-    float **phases = new float*[windowCount];
-    for (int i = 0; i < windowCount; i++) {
-        magnitudes[i] = new float[windowSizeHalf];
-        phases[i] = new float[windowSizeHalf];
-    }
-    
-    for (int i = 0; i < windowCount; i++)
-        input.push_back(sliders);
-    tensorflow::Input::Initializer input_tensor(input);
-    const tensorflow::Tensor& resized_tensor = input_tensor.tensor;
-    
-    // Actually run the image through the model.
-    std::string input_layer = "Latent_Input", output_layer = "k2tfout_0"; // IMPORTANT: These are model dependent
-    std::vector<tensorflow::Tensor> outputs;
-    tensorflow::Status run_status = session->Run({{input_layer, resized_tensor}},
-                                   {output_layer}, {}, &outputs);
-                                   
-    if (!run_status.ok()) {
-        LOG(ERROR) << "Running model failed: " << run_status;
-        return -1;
-    }
-                                   
-    for (int i = 0; i < windowCount; i++) {
-        for (int j = 0; j < windowSizeHalf; j++) {
-            magnitudes[i][j] = outputs[0].flat<float>()(windowSizeHalf * i + j);
-            phases[i][j] = 0.0;
-        }
-    }
-    
-    Real dummy = 1.0;
-    return istft(magnitudes, phases, len_window, windowCount, chunk*windowCount, chunk, dummy);
-}
-
 void AudioGenerator::modelToMem()
 {
     // We need to call this to set up global state for TensorFlow.
@@ -106,7 +67,7 @@ void AudioGenerator::modelToMem()
 
 // Reads a model graph definition from disk, and creates a session object you
 // can use to run it.
-tensorflow::Status LoadGraph(const tensorflow::string& graph_file_name,
+tensorflow::Status AudioGenerator::LoadGraph(const tensorflow::string& graph_file_name,
                  std::unique_ptr<tensorflow::Session>* session) {
     tensorflow::GraphDef graph_def;
     tensorflow::Status load_graph_status = ReadBinaryProto(tensorflow::Env::Default(), graph_file_name, &graph_def);
