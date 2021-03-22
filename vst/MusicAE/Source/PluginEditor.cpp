@@ -101,8 +101,9 @@ void MusicAEAudioProcessorEditor::resized()
     }
     
     modelTextBox.setBounds(100, 650, 200, 100);
-    startButton.setBounds(400, 650, 100, 100);
-    resetButton.setBounds(600, 650, 100, 100);
+    loadButton.setBounds(350, 650, 100, 100);
+    startButton.setBounds(500, 650, 100, 100);
+    resetButton.setBounds(650, 650, 100, 100);
 }
 
 void MusicAEAudioProcessorEditor::reset()
