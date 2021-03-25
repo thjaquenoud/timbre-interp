@@ -114,13 +114,17 @@ class LoginScreen(BoxLayout):
         # temp_phase = self.alpha*phaseA+(1-self.alpha)*phaseB #Unstack and Interpolate Phase
         # temp_max = self.alpha*max_A+(1-self.alpha)*max_B #Unstack and Interpolate Normalizing gains
         # temp_out_mag = self.full_net.predict([ magA, magB, temp_alpha ,temp_negalpha ])
-
+        #np.set_printoptions(threshold=sys.maxsize)
+        #print(self.temp_sliders)
         temp_out_mag = self.full_net.predict([np.tile(self.temp_sliders, (BATCHES + 4, 1))])
-
+        #print(temp_out_mag[0,:])
         out_mag = temp_out_mag.T
         E = out_mag
         _, temp_out = np.float32(signal.istft(0.24*E, fs=SAMP_RATE, noverlap=3*CHUNK))  #0.24 sus
         out = temp_out[CHUNK:-2*CHUNK]
+        #for i in range(len(out)):
+        #    print(out[i])
+        #    print("\n")
         newdim = len(out)//CHUNK
         self.new_data = out.reshape((newdim,CHUNK))
 
@@ -155,10 +159,10 @@ class LoginScreen(BoxLayout):
         #time.sleep(0.1) ##### I DON"T KNOW IF WE NEED THIS
 
     def model_to_mem(self):
-        model_name = "long_synth"
-        #data_path_net = os.path.join(os.getcwd(),'models/'+self.model_name.get()+'_trained_network.h5')
+        #model_name = "long_synth"
+        data_path_net = os.path.join(os.getcwd(),'models/'+self.textinput3.text+'_trained_network_synth.h5')
         #for now that path is hard coded
-        data_path_net = os.path.join(os.getcwd(),'models/'+model_name+'_trained_network_synth.h5')
+        #data_path_net = os.path.join(os.getcwd(),'models/'+model_name+'_trained_network_synth.h5')
         self.full_net = load_model(data_path_net, compile=False)
         self.full_net._make_predict_function()
         self.full_net_graph = tf.get_default_graph()

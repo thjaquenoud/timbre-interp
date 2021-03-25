@@ -38,86 +38,86 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_analytics")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_analytics")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_audio_basics")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_audio_basics")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_audio_devices")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_audio_devices")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_audio_formats")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_audio_formats")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_audio_plugin_client")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_audio_plugin_client")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_audio_processors")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_audio_processors")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_audio_utils")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_audio_utils")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_blocks_basics")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_blocks_basics")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_box2d")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_box2d")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_core")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_core")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_cryptography")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_cryptography")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_data_structures")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_data_structures")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_dsp")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_dsp")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_events")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_events")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_graphics")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_graphics")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_gui_basics")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_gui_basics")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_gui_extra")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_gui_extra")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_opengl")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_opengl")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_osc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_osc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_product_unlocking")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_product_unlocking")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.7/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_video")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/JUCE-6.0.8/modules" TYPE DIRECTORY FILES "/home/sam/ece396/JUCE/modules/juce_video")
 endif()
 

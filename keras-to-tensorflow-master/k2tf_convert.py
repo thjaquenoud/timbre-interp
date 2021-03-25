@@ -65,7 +65,7 @@ def convertGraph( modelPath, outdir, numoutputs, prefix, name):
     pred_node_names = [None]*numoutputs
     for i in range(numoutputs):
         pred_node_names[i] = prefix+'_'+str(i)
-        pred[i] = tf.identity(net_model.output[i], name=pred_node_names[i])
+        pred[i] = tf.identity(net_model.outputs[i], name=pred_node_names[i])
     print('Output nodes names are: ', pred_node_names)
 
     sess = tf.compat.v1.keras.backend.get_session()

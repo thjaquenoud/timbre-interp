@@ -48,7 +48,7 @@ juce_add_plugin(MusicAE
     # ICON_BIG ...                              # ICON_* arguments specify a path to an image file to use as an icon for the Standalone
     # ICON_SMALL ...
     # COMPANY_NAME ...                          # Specify the name of the plugin's author
-    # IS_SYNTH TRUE/FALSE                       # Is this a synth or an effect?
+     IS_SYNTH TRUE#/FALSE                       # Is this a synth or an effect?
     # NEEDS_MIDI_INPUT TRUE/FALSE               # Does the plugin need midi input?
     # NEEDS_MIDI_OUTPUT TRUE/FALSE              # Does the plugin need midi output?
     # IS_MIDI_EFFECT TRUE/FALSE                 # Is this plugin a MIDI effect?
@@ -78,9 +78,9 @@ juce_add_plugin(MusicAE
 target_sources(MusicAE
     PRIVATE
 #        Source/stft.cpp
-        Source/AudioGenerator.cpp
         Source/PluginEditor.cpp
-        Source/PluginProcessor.cpp)
+        Source/PluginProcessor.cpp
+        Source/AudioGenerator.cpp)
 
 include_directories("/home/sam/ece396/timbre-interp/vst/MusicAE/Source")
 include_directories("/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow")

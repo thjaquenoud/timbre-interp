@@ -75,10 +75,10 @@ Real *istft(float **&magnitudes, float **&phases, const int &windowSize, int &wi
     float *result          = new float[windowSize];
     float **signalWindows = new float*[windowCount];
     int overlap = windowSize - slideWindowBy;
-    int newSampleCount = windowCount * slideWindowBy + overlap;
-    float *sampleSignals = new float[newSampleCount];
-    float *norm = new float[newSampleCount];
-    Real *sampleSignalsNew = new Real[newSampleCount];
+    int newSampleEnd = windowCount * slideWindowBy;
+    float *sampleSignals = new float[newSampleEnd + overlap];
+    float *norm = new float[newSampleEnd + overlap];
+    Real *sampleSignalsNew = new Real[newSampleEnd - overlap];
     for (int i = 0; i < windowCount; ++i)
         signalWindows[i] = new float[windowSize];
 
@@ -125,8 +125,12 @@ Real *istft(float **&magnitudes, float **&phases, const int &windowSize, int &wi
     }
 
     norm[0] = 1e-16;
-    for (int i = 0; i < newSampleCount; i++)
-        sampleSignalsNew[i] = (Real)(sampleSignals[i] / norm[i]);
+    for (int i = overlap; i < newSampleEnd; i++){
+        sampleSignalsNew[i - overlap] = (Real)(sampleSignals[i] / norm[i]);
+        //std::cerr << sampleSignalsNew[i] << " ";
+    }
+        
+    //std::cerr << "end of buffer\n";
 
     //for (int w = 0; w < newSampleCount; w++)
         //std::cout << sampleSignals[w] << "\t" << norm[w] << "\n";

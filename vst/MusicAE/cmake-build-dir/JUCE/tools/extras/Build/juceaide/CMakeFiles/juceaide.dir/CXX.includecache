@@ -241,6 +241,20 @@ netinet/in.h
 -
 stdio.h
 -
+sys/types.h
+-
+sys/socket.h
+-
+errno.h
+-
+unistd.h
+-
+netinet/in.h
+-
+sys/stat.h
+-
+stdio.h
+-
 langinfo.h
 -
 ifaddrs.h
@@ -270,8 +284,6 @@ execinfo.h
 xlocale.h
 -
 mach/mach.h
--
-signal.h
 -
 ifaddrs.h
 -
@@ -461,14 +473,16 @@ native/juce_android_Threads.cpp
 /home/sam/ece396/JUCE/modules/juce_core/native/juce_android_Threads.cpp
 native/juce_android_RuntimePermissions.cpp
 /home/sam/ece396/JUCE/modules/juce_core/native/juce_android_RuntimePermissions.cpp
-threads/juce_ChildProcess.cpp
-/home/sam/ece396/JUCE/modules/juce_core/threads/juce_ChildProcess.cpp
+native/juce_wasm_SystemStats.cpp
+/home/sam/ece396/JUCE/modules/juce_core/native/juce_wasm_SystemStats.cpp
 threads/juce_HighResolutionTimer.cpp
 /home/sam/ece396/JUCE/modules/juce_core/threads/juce_HighResolutionTimer.cpp
 threads/juce_WaitableEvent.cpp
 /home/sam/ece396/JUCE/modules/juce_core/threads/juce_WaitableEvent.cpp
 network/juce_URL.cpp
 /home/sam/ece396/JUCE/modules/juce_core/network/juce_URL.cpp
+threads/juce_ChildProcess.cpp
+/home/sam/ece396/JUCE/modules/juce_core/threads/juce_ChildProcess.cpp
 network/juce_WebInputStream.cpp
 /home/sam/ece396/JUCE/modules/juce_core/network/juce_WebInputStream.cpp
 streams/juce_URLInputSource.cpp
@@ -1097,6 +1111,8 @@ CoreFoundation/CFAvailability.h
 /home/sam/ece396/JUCE/modules/juce_core/native/juce_posix_NamedPipe.cpp
 
 /home/sam/ece396/JUCE/modules/juce_core/native/juce_posix_SharedCode.h
+
+/home/sam/ece396/JUCE/modules/juce_core/native/juce_wasm_SystemStats.cpp
 
 /home/sam/ece396/JUCE/modules/juce_core/native/juce_win32_ComSmartPtr.h
 
@@ -3553,6 +3569,8 @@ native/x11/juce_linux_XWindowSystem.h
 /home/sam/ece396/JUCE/modules/juce_gui_basics/native/x11/juce_linux_XWindowSystem.h
 native/x11/juce_linux_X11_Symbols.h
 /home/sam/ece396/JUCE/modules/juce_gui_basics/native/x11/juce_linux_X11_Symbols.h
+native/juce_win32_ScopedThreadDPIAwarenessSetter.h
+/home/sam/ece396/JUCE/modules/juce_gui_basics/native/juce_win32_ScopedThreadDPIAwarenessSetter.h
 layout/juce_FlexItem.h
 /home/sam/ece396/JUCE/modules/juce_gui_basics/layout/juce_FlexItem.h
 layout/juce_FlexBox.h
@@ -3801,6 +3819,8 @@ layout/juce_Grid.h
 /home/sam/ece396/JUCE/modules/juce_gui_basics/native/juce_win32_DragAndDrop.cpp
 
 /home/sam/ece396/JUCE/modules/juce_gui_basics/native/juce_win32_FileChooser.cpp
+
+/home/sam/ece396/JUCE/modules/juce_gui_basics/native/juce_win32_ScopedThreadDPIAwarenessSetter.h
 
 /home/sam/ece396/JUCE/modules/juce_gui_basics/native/juce_win32_Windowing.cpp
 juce_audio_plugin_client/AAX/juce_AAX_Modifier_Injector.h

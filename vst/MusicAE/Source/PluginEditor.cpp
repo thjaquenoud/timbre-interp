@@ -13,7 +13,7 @@
 MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
 {
-    
+    //std::cerr << "plugin editor constructor\n";    
     // these define the parameters of our slider object
     alpha.setSliderStyle (juce::Slider::LinearHorizontal);
     alpha.setRange (0.0, 1.0, 0.01);
@@ -55,7 +55,7 @@ MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor&
     startButton.onClick = [this]()
     {
         this->resetButton.setEnabled(true);
-        this->audioProcessor.suspendProcessing(false);
+        this->audioProcessor.process = true;
     };
 
     resetButton.setButtonText("Reset");
@@ -88,6 +88,7 @@ void MusicAEAudioProcessorEditor::paint (juce::Graphics& g)
 
 void MusicAEAudioProcessorEditor::resized()
 {
+    //std::cerr << "resizing\n";
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
     
@@ -114,6 +115,7 @@ void MusicAEAudioProcessorEditor::reset()
 
 void MusicAEAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
 {
+    //std::cerr << "slider value changed\n";
     if (audioProcessor.genInit){
         for (int i = 0; i < latentSliders.size(); i++)
             audioProcessor.generator->sliders[i] = (float)latentSliders[i]->getValue() / 100;

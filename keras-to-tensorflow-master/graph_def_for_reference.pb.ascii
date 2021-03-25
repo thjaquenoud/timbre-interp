@@ -3840,42 +3840,42 @@ node {
 node {
   name: "VarIsInitializedOp"
   op: "VarIsInitializedOp"
-  input: "Decoder_Dense1/bias"
+  input: "Decoder_Dense3/kernel"
 }
 node {
   name: "VarIsInitializedOp_1"
   op: "VarIsInitializedOp"
-  input: "Decoder_Dense3/bias"
+  input: "Decoder_Dense2/bias"
 }
 node {
   name: "VarIsInitializedOp_2"
   op: "VarIsInitializedOp"
-  input: "Decoder_Dense4/kernel"
+  input: "Decoder_Dense1/bias"
 }
 node {
   name: "VarIsInitializedOp_3"
   op: "VarIsInitializedOp"
-  input: "Decoder_Dense1/kernel"
+  input: "Decoder_Dense2/kernel"
 }
 node {
   name: "VarIsInitializedOp_4"
   op: "VarIsInitializedOp"
-  input: "Decoder_Dense3/kernel"
+  input: "Decoder_Dense4/kernel"
 }
 node {
   name: "VarIsInitializedOp_5"
   op: "VarIsInitializedOp"
-  input: "Decoder_Dense4/bias"
+  input: "Decoder_Dense6/kernel"
 }
 node {
   name: "VarIsInitializedOp_6"
   op: "VarIsInitializedOp"
-  input: "Decoder_Dense5/kernel"
+  input: "Decoder_Dense5/bias"
 }
 node {
   name: "VarIsInitializedOp_7"
   op: "VarIsInitializedOp"
-  input: "Decoder_Dense5/bias"
+  input: "Decoder_Dense5/kernel"
 }
 node {
   name: "VarIsInitializedOp_8"
@@ -3885,17 +3885,17 @@ node {
 node {
   name: "VarIsInitializedOp_9"
   op: "VarIsInitializedOp"
-  input: "Decoder_Dense6/kernel"
+  input: "Decoder_Dense4/bias"
 }
 node {
   name: "VarIsInitializedOp_10"
   op: "VarIsInitializedOp"
-  input: "Decoder_Dense2/kernel"
+  input: "Decoder_Dense1/kernel"
 }
 node {
   name: "VarIsInitializedOp_11"
   op: "VarIsInitializedOp"
-  input: "Decoder_Dense2/bias"
+  input: "Decoder_Dense3/bias"
 }
 node {
   name: "init"
@@ -3914,131 +3914,9 @@ node {
   input: "^Decoder_Dense6/kernel/Assign"
 }
 node {
-  name: "strided_slice/stack"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
-        int_val: 0
-      }
-    }
-  }
-}
-node {
-  name: "strided_slice/stack_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
-        int_val: 1
-      }
-    }
-  }
-}
-node {
-  name: "strided_slice/stack_2"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
-        int_val: 1
-      }
-    }
-  }
-}
-node {
-  name: "strided_slice"
-  op: "StridedSlice"
-  input: "functional_3/Decoder_Dense6/Relu"
-  input: "strided_slice/stack"
-  input: "strided_slice/stack_1"
-  input: "strided_slice/stack_2"
-  attr {
-    key: "Index"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "begin_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "ellipsis_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "end_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "new_axis_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "shrink_axis_mask"
-    value {
-      i: 1
-    }
-  }
-}
-node {
   name: "k2tfout_0"
   op: "Identity"
-  input: "strided_slice"
+  input: "functional_3/Decoder_Dense6/Relu"
   attr {
     key: "T"
     value {

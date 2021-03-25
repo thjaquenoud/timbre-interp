@@ -38,7 +38,7 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/JUCE-6.0.7" TYPE FILE FILES
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/JUCE-6.0.8" TYPE FILE FILES
     "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/JUCEConfigVersion.cmake"
     "/home/sam/ece396/timbre-interp/vst/MusicAE/cmake-build-dir/JUCE/tools/JUCEConfig.cmake"
     "/home/sam/ece396/JUCE/extras/Build/CMake/JUCEHelperTargets.cmake"

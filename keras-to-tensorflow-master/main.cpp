@@ -123,9 +123,10 @@ int main(int argc, char* argv[]) {
     return -1;
   }
 
-  tensorflow::Input::Initializer latent({{1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f}});
+  tensorflow::Input::Initializer latent({{0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f},{0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f}});
   const Tensor& resized_tensor = latent.tensor;
 
+  std::cout << resized_tensor.shape() << "\n";
   // Actually run the image through the model.
   std::vector<Tensor> outputs;
   Status run_status = session->Run({{input_layer, resized_tensor}},
@@ -135,7 +136,13 @@ int main(int argc, char* argv[]) {
     return -1;
   }
 
-  //std::cout << outputs[0].DebugString() << "\n";
+  std::cout << outputs.size() << "\n";
+  std::cout << outputs[0].shape() << "\n";
+  for (int i = 0; i < 2 * 2049; i++){
+    std::cout << outputs[0].flat<float>()(i) << " ";
+    if (i == 2048)
+      std::cout << "\n";
+  }
 
   return 0;
 }

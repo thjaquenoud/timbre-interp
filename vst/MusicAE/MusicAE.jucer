@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="wEQXx2" name="MusicAE" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
+              pluginCharacteristicsValue="pluginIsSynth">
   <MAINGROUP id="JGFUWj" name="MusicAE">
     <GROUP id="{15FF1C12-759C-37E5-AC10-01F0F6F97075}" name="Source">
       <FILE id="qllVVE" name="PluginProcessor.cpp" compile="1" resource="0"
@@ -10,12 +11,13 @@
             file="Source/PluginProcessor.h"/>
       <FILE id="isyVq4" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
+      <FILE id="GurYHe" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+      <FILE id="TQlZb1" name="AudioGenerator.cpp" compile="1" resource="0"
+            file="Source/AudioGenerator.cpp"/>
+      <FILE id="ZOB1M1" name="AudioGenerator.h" compile="0" resource="0"
+            file="Source/AudioGenerator.h"/>
+      <FILE id="o291f5" name="stft.h" compile="0" resource="0" file="Source/stft.h"/>
     </GROUP>
-    <FILE id="GurYHe" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
-    <FILE id="TQlZb1" name="AudioGenerator.cpp" compile="1" resource="0"
-          file="Source/AudioGenerator.cpp"/>
-    <FILE id="ZOB1M1" name="AudioGenerator.h" compile="0" resource="0"
-          file="Source/AudioGenerator.h"/>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
   <EXPORTFORMATS>

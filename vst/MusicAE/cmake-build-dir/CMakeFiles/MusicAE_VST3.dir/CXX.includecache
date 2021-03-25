@@ -555,8 +555,6 @@ juce_audio_basics/juce_audio_basics.h
 -
 juce_audio_processors/juce_audio_processors.h
 -
-utility/juce_PluginHostType.h
-/home/sam/ece396/JUCE/modules/juce_audio_plugin_client/utility/juce_PluginHostType.h
 utility/juce_CreatePluginFilter.h
 /home/sam/ece396/JUCE/modules/juce_audio_plugin_client/utility/juce_CreatePluginFilter.h
 VST/juce_VSTCallbackHandler.h
@@ -639,8 +637,6 @@ objc/objc.h
 -
 objc/message.h
 -
-
-/home/sam/ece396/JUCE/modules/juce_audio_plugin_client/utility/juce_PluginHostType.h
 
 /home/sam/ece396/JUCE/modules/juce_audio_plugin_client/utility/juce_WindowsHooks.h
 
@@ -1637,6 +1633,8 @@ utilities/juce_ParameterAttachments.h
 /home/sam/ece396/JUCE/modules/juce_audio_processors/utilities/juce_ParameterAttachments.h
 utilities/juce_AudioProcessorValueTreeState.h
 /home/sam/ece396/JUCE/modules/juce_audio_processors/utilities/juce_AudioProcessorValueTreeState.h
+utilities/juce_PluginHostType.h
+/home/sam/ece396/JUCE/modules/juce_audio_processors/utilities/juce_PluginHostType.h
 
 /home/sam/ece396/JUCE/modules/juce_audio_processors/processors/juce_AudioPluginInstance.h
 
@@ -1675,6 +1673,8 @@ utilities/juce_AudioProcessorValueTreeState.h
 /home/sam/ece396/JUCE/modules/juce_audio_processors/utilities/juce_AudioProcessorValueTreeState.h
 
 /home/sam/ece396/JUCE/modules/juce_audio_processors/utilities/juce_ParameterAttachments.h
+
+/home/sam/ece396/JUCE/modules/juce_audio_processors/utilities/juce_PluginHostType.h
 
 /home/sam/ece396/JUCE/modules/juce_audio_processors/utilities/juce_RangedAudioParameter.h
 
@@ -3249,6 +3249,8 @@ native/x11/juce_linux_XWindowSystem.h
 /home/sam/ece396/JUCE/modules/juce_gui_basics/native/x11/juce_linux_XWindowSystem.h
 native/x11/juce_linux_X11_Symbols.h
 /home/sam/ece396/JUCE/modules/juce_gui_basics/native/x11/juce_linux_X11_Symbols.h
+native/juce_win32_ScopedThreadDPIAwarenessSetter.h
+/home/sam/ece396/JUCE/modules/juce_gui_basics/native/juce_win32_ScopedThreadDPIAwarenessSetter.h
 layout/juce_FlexItem.h
 /home/sam/ece396/JUCE/modules/juce_gui_basics/layout/juce_FlexItem.h
 layout/juce_FlexBox.h
@@ -3371,6 +3373,8 @@ layout/juce_Grid.h
 /home/sam/ece396/JUCE/modules/juce_gui_basics/mouse/juce_TextDragAndDropTarget.h
 
 /home/sam/ece396/JUCE/modules/juce_gui_basics/mouse/juce_TooltipClient.h
+
+/home/sam/ece396/JUCE/modules/juce_gui_basics/native/juce_win32_ScopedThreadDPIAwarenessSetter.h
 
 /home/sam/ece396/JUCE/modules/juce_gui_basics/native/x11/juce_linux_X11_Symbols.h
 

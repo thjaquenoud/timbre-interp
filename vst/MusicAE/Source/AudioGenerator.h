@@ -64,6 +64,7 @@ public:
     template <typename Real>
     Real* genAudio(const Real *audio)
     {
+        //std::cerr << "genaudio\n";
         int windowCount = batches + 3; // CHANGE FOR MIXER/EFFECTS
         int windowSizeHalf = len_window / 2 + 1;
         float **magnitudes = new float*[windowCount];
@@ -73,16 +74,33 @@ public:
             phases[i] = new float[windowSizeHalf];
         }
 
-        for (int i = 0; i < windowCount; i++)
+        tensorflow::Tensor input_tensor(tensorflow::DT_FLOAT, tensorflow::TensorShape({windowCount, 10}));
+        
+        for (int i = 0; i < windowCount; i++){
+            for (int j = 0; j < 10; j++){
+                input_tensor.flat<float>()(10 * i + j) = sliders[j];
+            }
+        }
+        
+        /*for (int i = 0; i < windowCount; i++){
+            for (int j = 0; j < 10; j++){
+                std::cerr << input_tensor.flat<float>()(10 * i + j) << " ";
+            }
+            std::cerr << "\n";
+        }*/
+        
+        //std::cerr << "\n";
+        
+        /*for (int i = 0; i < windowCount; i++)
             input.push_back(sliders);
         //tensorflow::Input::Initializer input_tensor(input, tensorflow::TensorShape({windowCount, 10}));
         tensorflow::Input::Initializer input_tensor({1.0});
-        const tensorflow::Tensor& resized_tensor = input_tensor.tensor;
+        const tensorflow::Tensor& resized_tensor = input_tensor.tensor;*/
 
         // Actually run the image through the model.
         std::string input_layer = "Latent_Input", output_layer = "k2tfout_0"; // IMPORTANT: These are model dependent
         std::vector<tensorflow::Tensor> outputs;
-        tensorflow::Status run_status = session->Run({{input_layer, resized_tensor}},
+        tensorflow::Status run_status = session->Run({{input_layer, input_tensor}},
                                        {output_layer}, {}, &outputs);
 
         if (!run_status.ok()) {
@@ -92,11 +110,14 @@ public:
                                
         for (int i = 0; i < windowCount; i++) {
             for (int j = 0; j < windowSizeHalf; j++) {
-                magnitudes[i][j] = outputs[0].flat<float>()(windowSizeHalf * i + j);
+                //std::cerr << outputs[0].flat<float>()(windowSizeHalf * i + j) << " ";
+                magnitudes[i][j] = 0.24 * outputs[0].flat<float>()(windowSizeHalf * i + j);
                 phases[i][j] = 0.0;
             }
+            //std::cerr << "\n";
         }
 
+        //std::cerr << "genaudio done\n";
         Real dummy = 1.0;
         return istft(magnitudes, phases, len_window, windowCount, chunk*windowCount, chunk, dummy);
     }  

@@ -24,9 +24,11 @@ MusicAEAudioProcessor::MusicAEAudioProcessor()
 #endif
     temp_sliders(10, 0.5)
 {
-    std::cerr << "sdf";
-    suspendProcessing(true);
+    //std::cerr << "processor constructor\n";
+    //createEditor();
+    //suspendProcessing(true);
     generator = new AudioGenerator(batches, sampRate, chunk, temp_sliders);
+    genInit = true;
 }
 
 MusicAEAudioProcessor::~MusicAEAudioProcessor()
@@ -98,24 +100,27 @@ void MusicAEAudioProcessor::changeProgramName (int index, const juce::String& ne
 //==============================================================================
 void MusicAEAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
+    //std::cerr << "prepare to play ";
+
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
-    while (isSuspended())
-        ;
-
     if (isUsingDoublePrecision()){
-        dblDelayBuffer.setSize(1, 2 * batches * chunk + samplesPerBlock);
+        //std::cerr << "double\n";
+        dblDelayBuffer.setSize(1, 2 * batches * chunk);
         delayBufferReadIndex = dblDelayBuffer.getNumSamples() - batches * chunk;
         dblDelayBuffer.clear();
     }
     else{
-        fltDelayBuffer.setSize(1, 2 * batches * chunk + samplesPerBlock);
+        //std::cerr << "float\n";
+        fltDelayBuffer.setSize(1, 2 * batches * chunk);
         delayBufferReadIndex = fltDelayBuffer.getNumSamples() - batches * chunk;
         fltDelayBuffer.clear();
     }
 
-    genInit = true;  
     sampRate = sampleRate;
+    
+    /*std::cerr << "sampling rate: " << sampleRate << "\n";
+    std::cerr << "samples per block estimate: " << samplesPerBlock << "\n";*/
 }
 
 void MusicAEAudioProcessor::releaseResources()
@@ -152,11 +157,13 @@ bool MusicAEAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) 
 
 void MusicAEAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
+    //std::cerr << "process block float\n";
     processSamples(buffer, midiMessages, fltDelayBuffer);
 }
 
 void MusicAEAudioProcessor::processBlock (juce::AudioBuffer<double>& buffer, juce::MidiBuffer& midiMessages)
 {
+    //std::cerr << "process block double\n";
     processSamples(buffer, midiMessages, dblDelayBuffer);
 }
 
@@ -184,41 +191,66 @@ void MusicAEAudioProcessor::processSamples (juce::AudioBuffer<Real>& buffer, juc
     // interleaved by keeping the same state.
     const int bufferLength = buffer.getNumSamples();
     const int delayBufferLength = delayBuffer.getNumSamples();
-
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    {
-        // TODO: buffer larger than delay buffer?
-        if (delayBufferWriteIndex + bufferLength < delayBufferLength)
-            delayBuffer.copyFrom(0, delayBufferWriteIndex, buffer, channel, 0, bufferLength);
-        else{
-            const int spaceRemaining = delayBufferLength - delayBufferWriteIndex;
-            delayBuffer.copyFrom(0, delayBufferWriteIndex, buffer, channel, 0, spaceRemaining);
-            delayBuffer.copyFrom(0, 0, buffer, channel, spaceRemaining, bufferLength - spaceRemaining);
-        }
-        
-        delayBufferWriteIndex += bufferLength;
-        delayBufferWriteIndex %= delayBufferLength;
-        delayBufferProcessCounter += bufferLength;
-        
-        while (delayBufferProcessCounter > batches * chunk){
-            const int processStart = (delayBufferWriteIndex - delayBufferProcessCounter) % delayBufferLength;
-            // run model replace values
-            Real *newData = generator->genAudio<Real>(delayBuffer.getReadPointer(0, processStart));
-                
-            delayBuffer.copyFrom(0, processStart, newData, batches * chunk);
-            delayBufferProcessCounter -= batches * chunk;
-        }
-    }
     
-    if (delayBufferReadIndex + bufferLength < delayBufferLength)
-        buffer.copyFrom(0, 0, delayBuffer, 0, delayBufferReadIndex, bufferLength);
-    else{
-        const int spaceRemaining = delayBufferLength - delayBufferReadIndex;
-        buffer.copyFrom(0, 0, delayBuffer, 0, delayBufferReadIndex, spaceRemaining);
-        buffer.copyFrom(0, spaceRemaining, buffer, 0, 0, bufferLength - spaceRemaining);
+    //std::cerr << "num samples: " << bufferLength << "\n";
+
+    if (process) {
+        //std::cerr << "processing\n";
+        /*for (int channel = 0; channel < totalNumInputChannels; ++channel)
+        {
+            // TODO: buffer larger than delay buffer?
+            if (delayBufferWriteIndex + bufferLength < delayBufferLength)
+                delayBuffer.copyFrom(0, delayBufferWriteIndex, buffer, channel, 0, bufferLength);
+            else{
+                const int spaceRemaining = delayBufferLength - delayBufferWriteIndex;
+                delayBuffer.copyFrom(0, delayBufferWriteIndex, buffer, channel, 0, spaceRemaining);
+                delayBuffer.copyFrom(0, 0, buffer, channel, spaceRemaining, bufferLength - spaceRemaining);
+            }*/
+
+            
+            
+            delayBufferWriteIndex += bufferLength;
+            delayBufferWriteIndex %= delayBufferLength;
+            delayBufferProcessCounter += bufferLength;
+
+            /*std::cerr << "delay buffer write index after update: " << delayBufferWriteIndex << "\n";
+            std::cerr << "delay buffer process counter after update: " << delayBufferProcessCounter << "\n";*/
+            
+            while (delayBufferProcessCounter >= batches * chunk){
+                std::cerr << "running genaudio\n";
+                
+                int processStart = (delayBufferWriteIndex - delayBufferProcessCounter) % delayBufferLength;
+                if (processStart < 0)
+                    processStart += delayBufferLength;
+                std::cerr << "processStart: " << processStart << "\n";
+                // run model replace values
+                Real *newData = generator->genAudio<Real>(delayBuffer.getReadPointer(0, processStart));
+
+                delayBuffer.copyFrom(0, processStart, newData, batches * chunk);
+                delayBufferProcessCounter -= batches * chunk;
+            }
+        //}
+        
+        delayBufferReadIndex += bufferLength;
+        delayBufferReadIndex %= delayBufferLength;
+        std::cerr << "delay buffer read index before filling: " << delayBufferReadIndex << "\n";
+        
+        for (int channel = 0; channel < totalNumOutputChannels; ++channel)
+        {
+            if (delayBufferReadIndex + bufferLength < delayBufferLength)
+                buffer.copyFrom(channel, 0, delayBuffer, 0, delayBufferReadIndex, bufferLength);
+            else{
+                const int spaceRemaining = delayBufferLength - delayBufferReadIndex;
+                buffer.copyFrom(channel, 0, delayBuffer, 0, delayBufferReadIndex, spaceRemaining);
+                buffer.copyFrom(channel, spaceRemaining, buffer, 0, 0, bufferLength - spaceRemaining);
+            }
+        }
+
+        if (process) {
+            for (int i = 0; i < chunk; i++)
+                std::cerr << *buffer.getReadPointer(0, i) << "\n";
+        }
     }
-    delayBufferReadIndex += bufferLength;
-    delayBufferReadIndex %= delayBufferLength;
 }
 
 //==============================================================================
