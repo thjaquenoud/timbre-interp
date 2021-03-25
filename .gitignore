@@ -2,3 +2,4 @@ tensorflow
 libtensorflow*
 CMakeLists.txt
 cmake-build-dir
+test
