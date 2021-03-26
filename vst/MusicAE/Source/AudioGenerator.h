@@ -15,7 +15,6 @@
 #include <vector>
 #include "../JuceLibraryCode/JuceHeader.h"
 
-#include "stft.h"
 #include "tensorflow/cc/framework/ops.h"
 #include "tensorflow/cc/ops/const_op.h"
 #include "tensorflow/cc/ops/image_ops.h"
@@ -35,6 +34,13 @@
 #include "tensorflow/core/platform/types.h"
 #include "tensorflow/core/public/session.h"
 #include "tensorflow/core/util/command_line_flags.h"
+#include "stft.h"
+
+enum MusicAE_state {
+        STATE_SYNTH,
+        STATE_EFFECTS,
+        STATE_MIXER
+}; 
 
 class AudioGenerator //: public juce::Timer
 {
@@ -54,6 +60,7 @@ private:
 
 public:
     std::string model_name;
+    float alpha;
     std::vector<float> sliders;
     
     AudioGenerator(const int& b, double& sr, const int& c, std::vector<float> temp_sliders);
@@ -62,7 +69,7 @@ public:
 //    void timerCallback() override;
 
     template <typename Real>
-    Real* genAudio(const Real *audio)
+    Real* genAudio(const Real *audio1, const Real *audio2, enum MusicAE_state state)
     {
         //std::cerr << "genaudio\n";
         int windowCount = batches + 3; // CHANGE FOR MIXER/EFFECTS
@@ -73,48 +80,106 @@ public:
             magnitudes[i] = new float[windowSizeHalf];
             phases[i] = new float[windowSizeHalf];
         }
+        
+        if (state == STATE_SYNTH) {
+            tensorflow::Tensor input_sliders(tensorflow::DT_FLOAT, tensorflow::TensorShape({windowCount, 10}));
 
-        tensorflow::Tensor input_tensor(tensorflow::DT_FLOAT, tensorflow::TensorShape({windowCount, 10}));
-        
-        for (int i = 0; i < windowCount; i++){
-            for (int j = 0; j < 10; j++){
-                input_tensor.flat<float>()(10 * i + j) = sliders[j];
+            for (int i = 0; i < windowCount; i++){
+                for (int j = 0; j < 10; j++){
+                    input_sliders.flat<float>()(10 * i + j) = sliders[j];
+                }
             }
-        }
-        
-        /*for (int i = 0; i < windowCount; i++){
-            for (int j = 0; j < 10; j++){
-                std::cerr << input_tensor.flat<float>()(10 * i + j) << " ";
-            }
-            std::cerr << "\n";
-        }*/
-        
-        //std::cerr << "\n";
-        
-        /*for (int i = 0; i < windowCount; i++)
-            input.push_back(sliders);
-        //tensorflow::Input::Initializer input_tensor(input, tensorflow::TensorShape({windowCount, 10}));
-        tensorflow::Input::Initializer input_tensor({1.0});
-        const tensorflow::Tensor& resized_tensor = input_tensor.tensor;*/
 
-        // Actually run the image through the model.
-        std::string input_layer = "Latent_Input", output_layer = "k2tfout_0"; // IMPORTANT: These are model dependent
-        std::vector<tensorflow::Tensor> outputs;
-        tensorflow::Status run_status = session->Run({{input_layer, input_tensor}},
-                                       {output_layer}, {}, &outputs);
-
-        if (!run_status.ok()) {
-            LOG(ERROR) << "Running model failed: " << run_status;
-            exit(EXIT_FAILURE);
-        }
-                               
-        for (int i = 0; i < windowCount; i++) {
-            for (int j = 0; j < windowSizeHalf; j++) {
-                //std::cerr << outputs[0].flat<float>()(windowSizeHalf * i + j) << " ";
-                magnitudes[i][j] = 0.24 * outputs[0].flat<float>()(windowSizeHalf * i + j);
-                phases[i][j] = 0.0;
+            for (int i = 0; i < windowCount; i++){
+                for (int j = 0; j < 10; j++){
+                    std::cerr << input_sliders.flat<float>()(10 * i + j) << " ";
+                }
+                std::cerr << "\n";
             }
+
             //std::cerr << "\n";
+
+            // Actually run the image through the model.
+            std::string input_layer = "Latent_Input", output_layer = "k2tfout_0"; // IMPORTANT: These are model dependent
+            std::vector<tensorflow::Tensor> outputs;
+            tensorflow::Status run_status = session->Run({{input_layer, input_sliders}},
+                                        {output_layer}, {}, &outputs);
+
+            if (!run_status.ok()) {
+                LOG(ERROR) << "Running model failed: " << run_status;
+                exit(EXIT_FAILURE);
+            }
+            
+            for (int i = 0; i < windowCount; i++) {
+                for (int j = 0; j < windowSizeHalf; j++) {
+                    //std::cerr << outputs[0].flat<float>()(windowSizeHalf * i + j) << " ";
+                    magnitudes[i][j] = 0.24 * outputs[0].flat<float>()(windowSizeHalf * i + j);
+                    phases[i][j] = 0.0;
+                }
+                //std::cerr << "\n";
+            }
+        }
+        else {
+            struct stftReturn input1 = stft(audio1, len_window, batches, chunk*batches, chunk);
+            if (state == STATE_EFFECTS){
+                tensorflow::Tensor input_effects(tensorflow::DT_FLOAT, tensorflow::TensorShape({batches, 10}));
+                for (int i = 0; i < batches; i++){
+                    for (int j = 0; j < 10; j++){
+                        input_effects.flat<float>()(10 * i + j) = sliders[j];
+                    }
+                }
+            
+                std::string track1_layer = "Track1_Input", latent_layer = "Latent_Input", output_layer = "k2tfout_0"; // IMPORTANT: These are model dependent
+                std::vector<tensorflow::Tensor> outputs;
+                tensorflow::Status run_status = session->Run({{track1_layer, input1.magnitudes}, {latent_layer, input_effects}},
+                                            {output_layer}, {}, &outputs);
+
+                if (!run_status.ok()) {
+                    LOG(ERROR) << "Running model failed: " << run_status;
+                    exit(EXIT_FAILURE);
+                }
+                
+                for (int i = 0; i < windowCount; i++) {
+                    for (int j = 0; j < windowSizeHalf; j++) {
+                        //std::cerr << outputs[0].flat<float>()(windowSizeHalf * i + j) << " ";
+                        magnitudes[i][j] = 0.24 * outputs[0].flat<float>()(windowSizeHalf * i + j) * input1.max[i];
+                        phases[i][j] = input1.phases[i][j];
+                    }
+                    //std::cerr << "\n";
+                }
+
+            }
+            else {           
+                struct stftReturn input2 = stft(audio2, len_window, batches, chunk*batches, chunk);
+                
+                tensorflow::Tensor input_alpha(tensorflow::DT_FLOAT, tensorflow::TensorShape({windowCount, 10}));
+                tensorflow::Tensor input_negalpha(tensorflow::DT_FLOAT, tensorflow::TensorShape({windowCount, 10}));
+                for (int i = 0; i < batches; i++){
+                    for (int j = 0; j < 10; j++){
+                        input_alpha.flat<float>()(10 * i + j) = alpha * sliders[j];
+                        input_negalpha.flat<float>()(10 * i + j) = (1-alpha) * sliders[j];
+                    }
+                }
+                
+                std::string track1_layer = "Track1_Input", track2_layer = "Track2_Input", alpha_layer = "Alpha_Input", negalpha_layer = "Negalpha_Layer", output_layer = "k2tfout_0"; // IMPORTANT: These are model dependent
+                std::vector<tensorflow::Tensor> outputs;
+                tensorflow::Status run_status = session->Run({{track1_layer, input1.magnitudes}, {track2_layer, input2.magnitudes}, {alpha_layer, input_alpha}, {negalpha_layer, input_negalpha}},
+                                            {output_layer}, {}, &outputs);
+
+                if (!run_status.ok()) {
+                    LOG(ERROR) << "Running model failed: " << run_status;
+                    exit(EXIT_FAILURE);
+                }
+
+                for (int i = 0; i < windowCount; i++) {
+                    for (int j = 0; j < windowSizeHalf; j++) {
+                        //std::cerr << outputs[0].flat<float>()(windowSizeHalf * i + j) << " ";
+                        magnitudes[i][j] = 0.24 * outputs[0].flat<float>()(windowSizeHalf * i + j) * (alpha * input1.max[i] + (1-alpha) * input2.max[i]);
+                        phases[i][j] = alpha * input1.phases[i][j] + (1-alpha) * input2.phases[i][j];
+                    }
+                    //std::cerr << "\n";
+                }
+            }
         }
 
         //std::cerr << "genaudio done\n";

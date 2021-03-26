@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <cstdio>
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "AudioGenerator.h"
 
@@ -30,7 +31,7 @@ public:
    #endif
 
     void processBlock (juce::AudioBuffer<float>&, juce::MidiBuffer&) override;
-    void processBlock (juce::AudioBuffer<double>&, juce::MidiBuffer&) override;
+    //void processBlock (juce::AudioBuffer<double>&, juce::MidiBuffer&) override;
 
     //==============================================================================
     juce::AudioProcessorEditor* createEditor() override;
@@ -55,8 +56,12 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    void updateState(enum MusicAE_state new_state);
+    
     bool process {false};
     bool genInit {false};
+    enum MusicAE_state state {STATE_SYNTH};
+    float temp_alpha;
     std::vector<float> temp_sliders;
 
     AudioGenerator *generator;
@@ -64,6 +69,8 @@ public:
 private:
     juce::AudioBuffer<float> fltDelayBuffer;
     juce::AudioBuffer<double> dblDelayBuffer;
+    juce::AudioBuffer<float> tempAudioBuffer[2]; // for temporary usage while we test on .wav files
+    int tempAudioBufferReadIndex[2] {0, 0};
     int delayBufferReadIndex {0};
     int delayBufferWriteIndex {0};
     int delayBufferProcessCounter {0};

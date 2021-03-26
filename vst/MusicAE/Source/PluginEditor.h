@@ -26,6 +26,7 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
 
+    juce::ToggleButton synthButton {"Synthesizer"}, effectsButton {"Effects"}, mixerButton {"Mixer"};
     juce::TextEditor modelTextBox;
     juce::TextButton loadButton, startButton, resetButton;
 private:
@@ -36,8 +37,14 @@ private:
     juce::Slider alpha;
     juce::OwnedArray<juce::Slider> latentSliders;
     
+    enum RadioButtonsIds
+    {
+        StateButtons = 1001
+    };
+    
     void reset();
     void sliderValueChanged(juce::Slider* slider) override;
+    void onStateChange(enum MusicAE_state new_state);
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MusicAEAudioProcessorEditor)
 };

@@ -13,13 +13,14 @@
 #include <cmath>
 #include <iostream>
 
-struct polarComplex{
-    float **magnitudes;
+struct stftReturn{
+    tensorflow::Tensor magnitudes;
     float **phases;
+    float *max;
 };
 
 template <typename Real>
-struct polarComplex stft(Real *input, int windowSize, int windowCount, int sampleCount, int slideWindowBy) {
+struct stftReturn stft(Real *input, int windowSize, int windowCount, int sampleCount, int slideWindowBy) {
     int windowSizeHalf = windowSize / 2 + 1;
     if ( (windowCount * slideWindowBy) < sampleCount){
         windowCount += 1;
@@ -30,10 +31,11 @@ struct polarComplex stft(Real *input, int windowSize, int windowCount, int sampl
     fftwf_complex *fftResult = new fftwf_complex[windowSizeHalf];
     fftwf_complex *fftWindow = new fftwf_complex[windowSizeHalf];
     float *result          = new float[windowSize];
+    float *max             = new float[windowCount];
 
-    Real **magnitudes    = new float*[windowCount];
-    Real **phases        = new float*[windowCount];
-    Real **signalWindows = new float*[windowCount];
+    float **magnitudes    = new float*[windowCount];
+    float **phases        = new float*[windowCount];
+    float **signalWindows = new float*[windowCount];
     for (int i = 0; i < windowCount; ++i){
         magnitudes[i]    = new float[windowSizeHalf];
         phases[i]        = new float[windowSizeHalf];
@@ -42,6 +44,8 @@ struct polarComplex stft(Real *input, int windowSize, int windowCount, int sampl
 
     fftwf_plan fftPlan  = fftwf_plan_dft_r2c_1d( windowSize, window,    fftResult, FFTW_ESTIMATE );
 
+    tensorflow::Tensor magnitudes_tensor(tensorflow::DT_FLOAT, tensorflow::TensorShape({windowCount, windowSizeHalf}));
+    
     // STFT
     for ( int currentWindow = 0; currentWindow < windowCount; ++currentWindow ){
         for (int i = 0; i < windowSize; ++i){
@@ -56,14 +60,23 @@ struct polarComplex stft(Real *input, int windowSize, int windowCount, int sampl
 
         fftwf_execute(fftPlan);
 
+        max[currentWindow] = 0;
         for (int i = 0; i < windowSizeHalf; ++i){
             magnitudes[currentWindow][i] = sqrt( fftResult[i][0]*fftResult[i][0] + fftResult[i][1]*fftResult[i][1] ) / 2048; // scipy scaling
             phases[currentWindow][i]     = atan2( fftResult[i][1], fftResult[i][0] );
+            if (magnitudes[currentWindow][i] > max[currentWindow])
+                max[currentWindow] = magnitudes[currentWindow][i];
+            //std::cout << magnitudes[currentWindow][i] << "\t" << phases[currentWindow][i] << "\n";
+        }
+        
+        max[currentWindow] += 1e-9;
+        for (int i = 0; i < windowSizeHalf; ++i){
+            magnitudes_tensor.flat<float>()(windowSizeHalf * currentWindow + i) = magnitudes[currentWindow][i] / max[currentWindow];
             //std::cout << magnitudes[currentWindow][i] << "\t" << phases[currentWindow][i] << "\n";
         }
     }
     
-    struct polarComplex ret = {magnitudes, phases};
+    struct stftReturn ret = {magnitudes_tensor, phases, max};
     
     return ret;
 }
@@ -127,7 +140,7 @@ Real *istft(float **&magnitudes, float **&phases, const int &windowSize, int &wi
     norm[0] = 1e-16;
     for (int i = overlap; i < newSampleEnd; i++){
         sampleSignalsNew[i - overlap] = (Real)(sampleSignals[i] / norm[i]);
-        //std::cerr << sampleSignalsNew[i] << " ";
+        //std::cerr << sampleSignalsNew[i-overlap] << " ";
     }
         
     //std::cerr << "end of buffer\n";

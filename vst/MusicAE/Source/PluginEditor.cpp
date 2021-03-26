@@ -21,6 +21,7 @@ MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor&
     alpha.setPopupDisplayEnabled (true, false, this);
     alpha.setTextValueSuffix (" alpha");
     alpha.setValue(0.5);
+    alpha.addListener(this);
  
     // this function adds the slider to the editor
     addAndMakeVisible (&alpha);
@@ -31,12 +32,34 @@ MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor&
         slider->setRange (0.0, 100.0, 0.01);
         slider->setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
         slider->setPopupDisplayEnabled (true, false, this);
-        slider->setTextValueSuffix (" alpha");
+        slider->setTextValueSuffix (" latent " + std::to_string(i));
         slider->setValue(50.0);
         slider->addListener(this);
         
         addAndMakeVisible(slider);
     }
+    
+    addAndMakeVisible(synthButton);
+    synthButton.onClick = [this]()
+    {
+        this->onStateChange(STATE_SYNTH);
+    };
+    
+    addAndMakeVisible(effectsButton);
+    effectsButton.onClick = [this]()
+    {
+        this->onStateChange(STATE_EFFECTS);
+    };
+    
+    addAndMakeVisible(mixerButton);
+    mixerButton.onClick = [this]()
+    {
+        this->onStateChange(STATE_MIXER);
+    };
+    
+    synthButton.setRadioGroupId(StateButtons);
+    effectsButton.setRadioGroupId(StateButtons);
+    mixerButton.setRadioGroupId(StateButtons);
     
     addAndMakeVisible(modelTextBox);
 
@@ -61,6 +84,10 @@ MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor&
     resetButton.setButtonText("Reset");
     addAndMakeVisible(resetButton);
     resetButton.setEnabled(false);
+    resetButton.onClick = [this]()
+    {
+        this->reset();
+    };
 
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
@@ -101,10 +128,14 @@ void MusicAEAudioProcessorEditor::resized()
         i++;
     }
     
-    modelTextBox.setBounds(100, 650, 200, 100);
-    loadButton.setBounds(350, 650, 100, 100);
-    startButton.setBounds(500, 650, 100, 100);
-    resetButton.setBounds(650, 650, 100, 100);
+    synthButton.setBounds(200, 650, 100, 50);
+    effectsButton.setBounds(350, 650, 100, 50);
+    mixerButton.setBounds(500, 650, 100, 50);
+    
+    modelTextBox.setBounds(100, 725, 200, 50);
+    loadButton.setBounds(350, 725, 100, 50);
+    startButton.setBounds(500, 725, 100, 50);
+    resetButton.setBounds(650, 725, 100, 50);
 }
 
 void MusicAEAudioProcessorEditor::reset()
@@ -117,12 +148,32 @@ void MusicAEAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
 {
     //std::cerr << "slider value changed\n";
     if (audioProcessor.genInit){
+        audioProcessor.generator->alpha = (float)alpha.getValue();
         for (int i = 0; i < latentSliders.size(); i++)
             audioProcessor.generator->sliders[i] = (float)latentSliders[i]->getValue() / 100;
     }
     else{
+        audioProcessor.temp_alpha = (float)alpha.getValue();
         for (int i = 0; i < latentSliders.size(); i++)
             audioProcessor.temp_sliders[i] = (float)latentSliders[i]->getValue() / 100;
     }
 }
 
+void MusicAEAudioProcessorEditor::onStateChange(enum MusicAE_state new_state)
+{
+    if (new_state == audioProcessor.state)
+        return;
+
+    if (new_state == STATE_SYNTH)
+        alpha.setVisible(false);
+    else
+        alpha.setVisible(true);
+
+    audioProcessor.updateState(new_state);
+    
+    reset();
+    
+    startButton.setEnabled(false);
+    resetButton.setEnabled(false);
+    loadButton.setEnabled(true);
+}

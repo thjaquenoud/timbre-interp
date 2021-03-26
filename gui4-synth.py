@@ -115,13 +115,14 @@ class LoginScreen(BoxLayout):
         # temp_max = self.alpha*max_A+(1-self.alpha)*max_B #Unstack and Interpolate Normalizing gains
         # temp_out_mag = self.full_net.predict([ magA, magB, temp_alpha ,temp_negalpha ])
         #np.set_printoptions(threshold=sys.maxsize)
-        #print(self.temp_sliders)
+        print(self.temp_sliders)
         temp_out_mag = self.full_net.predict([np.tile(self.temp_sliders, (BATCHES + 4, 1))])
         #print(temp_out_mag[0,:])
         out_mag = temp_out_mag.T
         E = out_mag
         _, temp_out = np.float32(signal.istft(0.24*E, fs=SAMP_RATE, noverlap=3*CHUNK))  #0.24 sus
         out = temp_out[CHUNK:-2*CHUNK]
+        print(out)
         #for i in range(len(out)):
         #    print(out[i])
         #    print("\n")

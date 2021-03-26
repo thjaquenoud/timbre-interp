@@ -8963,8 +8963,6 @@ vector
 -
 ../JuceLibraryCode/JuceHeader.h
 /home/sam/ece396/timbre-interp/vst/MusicAE/JuceLibraryCode/JuceHeader.h
-stft.h
-/home/sam/ece396/timbre-interp/vst/MusicAE/Source/stft.h
 tensorflow/cc/framework/ops.h
 /home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/cc/framework/ops.h
 tensorflow/cc/ops/const_op.h
@@ -9003,6 +9001,8 @@ tensorflow/core/public/session.h
 /home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/core/public/session.h
 tensorflow/core/util/command_line_flags.h
 /home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/core/util/command_line_flags.h
+stft.h
+/home/sam/ece396/timbre-interp/vst/MusicAE/Source/stft.h
 
 /home/sam/ece396/timbre-interp/vst/MusicAE/Source/PluginEditor.cpp
 PluginEditor.h
@@ -9025,6 +9025,8 @@ PluginEditor.h
 /home/sam/ece396/timbre-interp/vst/MusicAE/Source/PluginEditor.h
 
 /home/sam/ece396/timbre-interp/vst/MusicAE/Source/PluginProcessor.h
+cstdio
+-
 ../JuceLibraryCode/JuceHeader.h
 /home/sam/ece396/timbre-interp/vst/MusicAE/JuceLibraryCode/JuceHeader.h
 AudioGenerator.h
