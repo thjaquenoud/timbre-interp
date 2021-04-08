@@ -53,6 +53,7 @@ private:
     const int len_window {4 * chunk};
     
     std::vector<std::vector<float>> input;
+    bool first {true};
     
     std::unique_ptr<tensorflow::Session> session;
     
@@ -69,10 +70,10 @@ public:
 //    void timerCallback() override;
 
     template <typename Real>
-    Real* genAudio(const Real *audio1, const Real *audio2, enum MusicAE_state state)
+    Real* genAudio(const Real *audio1, const Real *excessAudio1, const Real *audio2, const Real *excessAudio2, int excess, const Real *fade, enum MusicAE_state state)
     {
-        //std::cerr << "genaudio\n";
-        int windowCount = batches + 3; // CHANGE FOR MIXER/EFFECTS
+        std::cerr << "genaudio" << state << "\n";
+        int windowCount = batches + 4; // CHANGE FOR MIXER/EFFECTS
         int windowSizeHalf = len_window / 2 + 1;
         float **magnitudes = new float*[windowCount];
         float **phases = new float*[windowCount];
@@ -90,12 +91,12 @@ public:
                 }
             }
 
-            for (int i = 0; i < windowCount; i++){
+            /*for (int i = 0; i < windowCount; i++){
                 for (int j = 0; j < 10; j++){
                     std::cerr << input_sliders.flat<float>()(10 * i + j) << " ";
                 }
                 std::cerr << "\n";
-            }
+            }*/
 
             //std::cerr << "\n";
 
@@ -120,14 +121,19 @@ public:
             }
         }
         else {
-            struct stftReturn input1 = stft(audio1, len_window, batches, chunk*batches, chunk);
+            struct stftReturn input1 = stft(audio1, excessAudio1, excess, len_window, windowCount, chunk*windowCount, chunk);
             if (state == STATE_EFFECTS){
-                tensorflow::Tensor input_effects(tensorflow::DT_FLOAT, tensorflow::TensorShape({batches, 10}));
-                for (int i = 0; i < batches; i++){
+                std::cerr << "finished stft\n";
+                tensorflow::Tensor input_effects(tensorflow::DT_FLOAT, tensorflow::TensorShape({windowCount, 10}));
+                for (int i = 0; i < windowCount; i++){
                     for (int j = 0; j < 10; j++){
                         input_effects.flat<float>()(10 * i + j) = sliders[j];
+                        //std::cerr << input_effects.flat<float>()(10 * i + j) << " ";
                     }
+                    //std::cerr << "\n";
                 }
+                std::cerr << "finished setting effects\n";
+
             
                 std::string track1_layer = "Track1_Input", latent_layer = "Latent_Input", output_layer = "k2tfout_0"; // IMPORTANT: These are model dependent
                 std::vector<tensorflow::Tensor> outputs;
@@ -139,29 +145,31 @@ public:
                     exit(EXIT_FAILURE);
                 }
                 
+                std::cerr << "finished model\n";
                 for (int i = 0; i < windowCount; i++) {
                     for (int j = 0; j < windowSizeHalf; j++) {
                         //std::cerr << outputs[0].flat<float>()(windowSizeHalf * i + j) << " ";
                         magnitudes[i][j] = 0.24 * outputs[0].flat<float>()(windowSizeHalf * i + j) * input1.max[i];
                         phases[i][j] = input1.phases[i][j];
                     }
-                    //std::cerr << "\n";
+                    //std::cerr << "finished setting mag and phases:" << i << "\n";
                 }
+                //std::cerr << "finished setting mag and phases\n";
 
             }
             else {           
-                struct stftReturn input2 = stft(audio2, len_window, batches, chunk*batches, chunk);
+                struct stftReturn input2 = stft(audio2, excessAudio2, excess, len_window, windowCount, chunk*windowCount, chunk);
                 
                 tensorflow::Tensor input_alpha(tensorflow::DT_FLOAT, tensorflow::TensorShape({windowCount, 10}));
                 tensorflow::Tensor input_negalpha(tensorflow::DT_FLOAT, tensorflow::TensorShape({windowCount, 10}));
-                for (int i = 0; i < batches; i++){
+                for (int i = 0; i < windowCount; i++){
                     for (int j = 0; j < 10; j++){
                         input_alpha.flat<float>()(10 * i + j) = alpha * sliders[j];
                         input_negalpha.flat<float>()(10 * i + j) = (1-alpha) * sliders[j];
                     }
                 }
                 
-                std::string track1_layer = "Track1_Input", track2_layer = "Track2_Input", alpha_layer = "Alpha_Input", negalpha_layer = "Negalpha_Layer", output_layer = "k2tfout_0"; // IMPORTANT: These are model dependent
+                std::string track1_layer = "Track1_Input", track2_layer = "Track2_Input", alpha_layer = "Alpha_Input", negalpha_layer = "Negalpha_Input", output_layer = "k2tfout_0"; // IMPORTANT: These are model dependent
                 std::vector<tensorflow::Tensor> outputs;
                 tensorflow::Status run_status = session->Run({{track1_layer, input1.magnitudes}, {track2_layer, input2.magnitudes}, {alpha_layer, input_alpha}, {negalpha_layer, input_negalpha}},
                                             {output_layer}, {}, &outputs);
@@ -182,9 +190,12 @@ public:
             }
         }
 
-        //std::cerr << "genaudio done\n";
-        Real dummy = 1.0;
-        return istft(magnitudes, phases, len_window, windowCount, chunk*windowCount, chunk, dummy);
+        std::cerr << "genaudio done\n";
+        Real *ret = istft(magnitudes, phases, len_window, windowCount, chunk*windowCount, chunk, fade, first);
+        
+        first = false;
+        return ret;
+
     }  
 
     void modelToMem();

@@ -184,7 +184,7 @@ class LoginScreen(BoxLayout):
         data_path = os.path.join(os.getcwd(),filename_in)
         self.track1, _ = librosa.load(data_path, sr=SAMP_RATE, mono=True)
 
-        filename_in = 'audio/' + self.textinput1.text
+        filename_in = 'audio/' + self.textinput2.text
         data_path = os.path.join(os.getcwd(),filename_in)
         self.track2, _ = librosa.load(data_path, sr=SAMP_RATE, mono=True)
 
@@ -214,10 +214,10 @@ class LoginScreen(BoxLayout):
         #time.sleep(0.1) ##### I DON"T KNOW IF WE NEED THIS
 
     def model_to_mem(self):
-        model_name = "long_embedding"
-        #data_path_net = os.path.join(os.getcwd(),'models/'+self.model_name.get()+'_trained_network.h5')
+        #model_name = "long_embedding"
+        data_path_net = os.path.join(os.getcwd(),'models/'+self.textinput3.text+'_trained_network_mixer.h5')
         #for now that path is hard coded
-        data_path_net = os.path.join(os.getcwd(),'models/'+model_name+'_trained_network.h5')
+        #data_path_net = os.path.join(os.getcwd(),'models/'+model_name+'_trained_network.h5')
         self.full_net = load_model(data_path_net, compile=False)
         self.full_net._make_predict_function()
         self.full_net_graph = tf.get_default_graph()

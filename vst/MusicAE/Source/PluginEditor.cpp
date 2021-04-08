@@ -13,7 +13,7 @@
 MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
 {
-    //std::cerr << "plugin editor constructor\n";    
+    std::cerr << "plugin editor constructor\n";    
     // these define the parameters of our slider object
     alpha.setSliderStyle (juce::Slider::LinearHorizontal);
     alpha.setRange (0.0, 1.0, 0.01);
@@ -25,6 +25,7 @@ MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor&
  
     // this function adds the slider to the editor
     addAndMakeVisible (&alpha);
+    alpha.setVisible(false);
         
     for(int i = 0; i < 10; i++){
         auto slider = latentSliders.add(new juce::Slider);
@@ -32,7 +33,7 @@ MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor&
         slider->setRange (0.0, 100.0, 0.01);
         slider->setTextBoxStyle (juce::Slider::NoTextBox, false, 90, 0);
         slider->setPopupDisplayEnabled (true, false, this);
-        slider->setTextValueSuffix (" latent " + std::to_string(i));
+        slider->setTextValueSuffix (" latent " + std::to_string(i+1));
         slider->setValue(50.0);
         slider->addListener(this);
         
@@ -40,18 +41,21 @@ MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor&
     }
     
     addAndMakeVisible(synthButton);
+    synthButton.setEnabled(false);
     synthButton.onClick = [this]()
     {
         this->onStateChange(STATE_SYNTH);
     };
     
     addAndMakeVisible(effectsButton);
+    effectsButton.setEnabled(true);
     effectsButton.onClick = [this]()
     {
         this->onStateChange(STATE_EFFECTS);
     };
     
     addAndMakeVisible(mixerButton);
+    mixerButton.setEnabled(true);
     mixerButton.onClick = [this]()
     {
         this->onStateChange(STATE_MIXER);
@@ -87,6 +91,7 @@ MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor&
     resetButton.onClick = [this]()
     {
         this->reset();
+        // audio gen first
     };
 
     // Make sure that before the constructor has finished, you've set the
@@ -161,10 +166,30 @@ void MusicAEAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
 
 void MusicAEAudioProcessorEditor::onStateChange(enum MusicAE_state new_state)
 {
+    std::cerr << new_state;
     if (new_state == audioProcessor.state)
         return;
 
-    if (new_state == STATE_SYNTH)
+    switch(new_state){
+        case STATE_SYNTH:
+            synthButton.setEnabled(false);
+            effectsButton.setEnabled(true);
+            mixerButton.setEnabled(true);
+            break;
+        case STATE_EFFECTS:
+            synthButton.setEnabled(true);
+            effectsButton.setEnabled(false);
+            mixerButton.setEnabled(true);
+            break;
+        case STATE_MIXER:
+            synthButton.setEnabled(true);
+            effectsButton.setEnabled(true);
+            mixerButton.setEnabled(false);
+            break;
+    }
+
+        
+    if (new_state != STATE_MIXER)
         alpha.setVisible(false);
     else
         alpha.setVisible(true);

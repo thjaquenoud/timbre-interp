@@ -17,6 +17,7 @@ AudioGenerator::AudioGenerator(const int& b, double& sr, const int& c, std::vect
     samp_rate(sr),
     chunk(c),
     len_window(4 * c),
+    first(true),
     sliders(temp_sliders.begin(), temp_sliders.end())
 {
     //std::cerr << "audio generator constructor\n";

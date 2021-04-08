@@ -69,17 +69,20 @@ public:
 private:
     juce::AudioBuffer<float> fltDelayBuffer;
     juce::AudioBuffer<double> dblDelayBuffer;
+    juce::AudioBuffer<float> fltFadeBuffer;
+    juce::AudioBuffer<double> dblFadeBuffer;
     juce::AudioBuffer<float> tempAudioBuffer[2]; // for temporary usage while we test on .wav files
     int tempAudioBufferReadIndex[2] {0, 0};
     int delayBufferReadIndex {0};
     int delayBufferWriteIndex {0};
     int delayBufferProcessCounter {0};
     double sampRate {44100};
-    const int batches {20};
+    int batches {20};
+    int overlap {0};
     const int chunk {1024};
 
     template <typename Real>
-    void processSamples(juce::AudioBuffer<Real>& buffer, juce::MidiBuffer& midiMessages, juce::AudioBuffer<Real>& delayBuffer);
+    juce::AudioBuffer<Real> processSamples(juce::AudioBuffer<Real>& buffer, juce::MidiBuffer& midiMessages, juce::AudioBuffer<Real>& delayBuffer, juce::AudioBuffer<Real>& fadeBuffer);
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MusicAEAudioProcessor)

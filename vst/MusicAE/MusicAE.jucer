@@ -19,12 +19,19 @@
       <FILE id="o291f5" name="stft.h" compile="0" resource="0" file="Source/stft.h"/>
     </GROUP>
   </MAINGROUP>
-  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"
+               JUCE_WEB_BROWSER="0"/>
   <EXPORTFORMATS>
-    <LINUX_MAKE targetFolder="Builds/LinuxMakefile">
+    <LINUX_MAKE targetFolder="Builds/LinuxMakefile" externalLibraries="fftw3f&#10;tensorflow_framework&#10;tensorflow_cc">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" targetName="MusicAE"/>
-        <CONFIGURATION isDebug="0" name="Release" targetName="MusicAE"/>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="MusicAE" binaryPath="/home/sam/.vst3"
+                       vst3BinaryLocation="/home/sam/.vst3" linuxArchitecture="-m64"
+                       headerPath="/home/sam/ece396/timbre-interp/vst/MusicAE/Source&#10;/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow&#10;/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-tensorflow/external/eigen_archive&#10;/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-tensorflow/external/protobuf/src&#10;/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-bin&#10;/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-tensorflow/external/com_google_absl"
+                       libraryPath="/usr/local/lib&#10;/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-bin/tensorflow"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="MusicAE" binaryPath="/home/sam/.vst3"
+                       vst3BinaryLocation="/home/sam/.vst3" headerPath="/home/sam/ece396/timbre-interp/vst/MusicAE/Source&#10;/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow&#10;/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-tensorflow/external/eigen_archive&#10;/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-tensorflow/external/protobuf/src&#10;/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-bin&#10;/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-tensorflow/external/com_google_absl"
+                       libraryPath="/usr/local/lib&#10;/home/sam/ece396/timbre-interp/vst/MusicAE/Source/tensorflow/bazel-bin/tensorflow"
+                       linuxArchitecture="-m64"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_core" path="../../../JUCE/modules"/>

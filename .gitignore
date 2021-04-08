@@ -3,3 +3,5 @@ libtensorflow*
 CMakeLists.txt
 cmake-build-dir
 test
+vst/MusicAE/Builds/LinuxMakefile/build/
+frames

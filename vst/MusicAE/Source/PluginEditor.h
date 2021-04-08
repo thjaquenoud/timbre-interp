@@ -26,7 +26,7 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
 
-    juce::ToggleButton synthButton {"Synthesizer"}, effectsButton {"Effects"}, mixerButton {"Mixer"};
+    juce::TextButton synthButton {"Synthesizer"}, effectsButton {"Effects"}, mixerButton {"Mixer"};
     juce::TextEditor modelTextBox;
     juce::TextButton loadButton, startButton, resetButton;
 private:
@@ -37,7 +37,7 @@ private:
     juce::Slider alpha;
     juce::OwnedArray<juce::Slider> latentSliders;
     
-    enum RadioButtonsIds
+    enum RadioButtonIds
     {
         StateButtons = 1001
     };

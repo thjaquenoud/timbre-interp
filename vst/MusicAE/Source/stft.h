@@ -20,12 +20,12 @@ struct stftReturn{
 };
 
 template <typename Real>
-struct stftReturn stft(Real *input, int windowSize, int windowCount, int sampleCount, int slideWindowBy) {
+struct stftReturn stft(Real *input, Real *excessInput, int excess, int windowSize, int windowCount, int sampleCount, int slideWindowBy) {
+    int mainInputEnd = sampleCount - excess;
     int windowSizeHalf = windowSize / 2 + 1;
     if ( (windowCount * slideWindowBy) < sampleCount){
         windowCount += 1;
     }
-    int newSampleCount = windowCount * slideWindowBy + ( windowSize - slideWindowBy );
 
     float *window          = new float[windowSize];
     fftwf_complex *fftResult = new fftwf_complex[windowSizeHalf];
@@ -46,18 +46,26 @@ struct stftReturn stft(Real *input, int windowSize, int windowCount, int sampleC
 
     tensorflow::Tensor magnitudes_tensor(tensorflow::DT_FLOAT, tensorflow::TensorShape({windowCount, windowSizeHalf}));
     
+    /*for (int i = 0; i < 1024; i++){
+        std::cerr << i << " " << input[i] << "\n";
+    }*/
     // STFT
+    std::cerr << mainInputEnd << " starting stft\n";
     for ( int currentWindow = 0; currentWindow < windowCount; ++currentWindow ){
         for (int i = 0; i < windowSize; ++i){
             int currentSample = currentWindow * slideWindowBy + i;
-            if ( ( currentSample ) < 23552 ){
-                window[i] = 0.5 * (1 - cos(2 * M_PI * i / windowSize)) * (float)input[currentSample];
+            if ( ( currentSample ) < sampleCount ){
+                if (currentSample < mainInputEnd)
+                    window[i] = 0.5 * (1 - cos(2 * M_PI * i / windowSize)) * (float)input[currentSample];
+                else
+                    window[i] = 0.5 * (1 - cos(2 * M_PI * i / windowSize)) * (float)excessInput[currentSample - mainInputEnd];
             }
             else{
                 window[i] = 0.0;
             }
         }
 
+        //std::cerr << "about to execute stft:" << currentWindow << "\n";
         fftwf_execute(fftPlan);
 
         max[currentWindow] = 0;
@@ -66,13 +74,16 @@ struct stftReturn stft(Real *input, int windowSize, int windowCount, int sampleC
             phases[currentWindow][i]     = atan2( fftResult[i][1], fftResult[i][0] );
             if (magnitudes[currentWindow][i] > max[currentWindow])
                 max[currentWindow] = magnitudes[currentWindow][i];
-            //std::cout << magnitudes[currentWindow][i] << "\t" << phases[currentWindow][i] << "\n";
+            //std::cerr << i << " " << magnitudes[currentWindow][i] << "\t" << phases[currentWindow][i] << "\n";
         }
         
+        //std::cerr << "setting tensor:" << currentWindow << "\n";
         max[currentWindow] += 1e-9;
+        //std::cerr << "max: " << max[currentWindow] << "\n";
         for (int i = 0; i < windowSizeHalf; ++i){
+            //std::cerr << i << " " << magnitudes[currentWindow][i] << "\t" << phases[currentWindow][i] << "\n";
             magnitudes_tensor.flat<float>()(windowSizeHalf * currentWindow + i) = magnitudes[currentWindow][i] / max[currentWindow];
-            //std::cout << magnitudes[currentWindow][i] << "\t" << phases[currentWindow][i] << "\n";
+            //std::cerr << magnitudes_tensor.flat<float>()(windowSizeHalf * currentWindow + i) << "\t" << phases[currentWindow][i] << "\n";
         }
     }
     
@@ -82,16 +93,16 @@ struct stftReturn stft(Real *input, int windowSize, int windowCount, int sampleC
 }
 
 template <typename Real>
-Real *istft(float **&magnitudes, float **&phases, const int &windowSize, int &windowCount, int sampleCount, const int &slideWindowBy, Real dummy) {
+Real* istft(float **&magnitudes, float **&phases, const int &windowSize, int &windowCount, int sampleCount, const int &slideWindowBy, const Real *fade, bool first) {
     int windowSizeHalf = windowSize / 2 + 1;
     fftwf_complex *fftWindow = new fftwf_complex[windowSizeHalf];
     float *result          = new float[windowSize];
     float **signalWindows = new float*[windowCount];
     int overlap = windowSize - slideWindowBy;
-    int newSampleEnd = windowCount * slideWindowBy;
+    int newSampleEnd = windowCount * slideWindowBy + slideWindowBy;
     float *sampleSignals = new float[newSampleEnd + overlap];
     float *norm = new float[newSampleEnd + overlap];
-    Real *sampleSignalsNew = new Real[newSampleEnd - overlap];
+    Real *newSampleSignals = new Real[newSampleEnd - overlap];
     for (int i = 0; i < windowCount; ++i)
         signalWindows[i] = new float[windowSize];
 
@@ -139,7 +150,12 @@ Real *istft(float **&magnitudes, float **&phases, const int &windowSize, int &wi
 
     norm[0] = 1e-16;
     for (int i = overlap; i < newSampleEnd; i++){
-        sampleSignalsNew[i - overlap] = (Real)(sampleSignals[i] / norm[i]);
+        int j = i - overlap;
+        newSampleSignals[j] = (Real)(sampleSignals[i] / norm[i]);
+        if (j < slideWindowBy && !first){
+            newSampleSignals[j] = (Real)(((float)j / (float)slideWindowBy) * newSampleSignals[j] + ((float)(slideWindowBy - j) / (float)slideWindowBy) * fade[j]);
+        }
+            
         //std::cerr << sampleSignalsNew[i-overlap] << " ";
     }
         
@@ -148,5 +164,5 @@ Real *istft(float **&magnitudes, float **&phases, const int &windowSize, int &wi
     //for (int w = 0; w < newSampleCount; w++)
         //std::cout << sampleSignals[w] << "\t" << norm[w] << "\n";
 
-    return sampleSignalsNew;
+    return newSampleSignals;
 }
