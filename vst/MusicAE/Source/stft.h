@@ -93,13 +93,15 @@ struct stftReturn stft(Real *input, Real *excessInput, int excess, int windowSiz
 }
 
 template <typename Real>
-Real* istft(float **&magnitudes, float **&phases, const int &windowSize, int &windowCount, int sampleCount, const int &slideWindowBy, const Real *fade, bool first) {
+Real* istft(float **&magnitudes, float **&phases, const int &windowSize, int &windowCount, int sampleCount, const int &slideWindowBy, const Real *fade, bool first, bool synth) {
     int windowSizeHalf = windowSize / 2 + 1;
     fftwf_complex *fftWindow = new fftwf_complex[windowSizeHalf];
     float *result          = new float[windowSize];
     float **signalWindows = new float*[windowCount];
     int overlap = windowSize - slideWindowBy;
-    int newSampleEnd = windowCount * slideWindowBy + slideWindowBy;
+    int newSampleEnd = windowCount * slideWindowBy;
+    if (!synth)
+        newSampleEnd += slideWindowBy;
     float *sampleSignals = new float[newSampleEnd + overlap];
     float *norm = new float[newSampleEnd + overlap];
     Real *newSampleSignals = new Real[newSampleEnd - overlap];
@@ -152,7 +154,7 @@ Real* istft(float **&magnitudes, float **&phases, const int &windowSize, int &wi
     for (int i = overlap; i < newSampleEnd; i++){
         int j = i - overlap;
         newSampleSignals[j] = (Real)(sampleSignals[i] / norm[i]);
-        if (j < slideWindowBy && !first){
+        if (j < slideWindowBy && !first && !synth){
             newSampleSignals[j] = (Real)(((float)j / (float)slideWindowBy) * newSampleSignals[j] + ((float)(slideWindowBy - j) / (float)slideWindowBy) * fade[j]);
         }
             

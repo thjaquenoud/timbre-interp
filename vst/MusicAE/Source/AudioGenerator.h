@@ -73,7 +73,7 @@ public:
     Real* genAudio(const Real *audio1, const Real *excessAudio1, const Real *audio2, const Real *excessAudio2, int excess, const Real *fade, enum MusicAE_state state)
     {
         std::cerr << "genaudio" << state << "\n";
-        int windowCount = batches + 4; // CHANGE FOR MIXER/EFFECTS
+        int windowCount = state == STATE_SYNTH ? batches + 3 : batches + 4; // CHANGE FOR MIXER/EFFECTS
         int windowSizeHalf = len_window / 2 + 1;
         float **magnitudes = new float*[windowCount];
         float **phases = new float*[windowCount];
@@ -191,7 +191,7 @@ public:
         }
 
         std::cerr << "genaudio done\n";
-        Real *ret = istft(magnitudes, phases, len_window, windowCount, chunk*windowCount, chunk, fade, first);
+        Real *ret = istft(magnitudes, phases, len_window, windowCount, chunk*windowCount, chunk, fade, first, state == STATE_SYNTH);
         
         first = false;
         return ret;
