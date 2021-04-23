@@ -51,11 +51,11 @@ void AudioGenerator::modelToMem()
 {
     //std::cerr << "model to mem\n";
     // We need to call this to set up global state for TensorFlow.
-    int argc;
+    int argc = 1;
     char** argv;
     tensorflow::port::InitMain("musicae", &argc, &argv);
     if (argc > 1) {
-        LOG(ERROR) << "Unknown argument " << argv[1] << "\n";
+        LOG(ERROR) << "Unknown error\n";
         exit(EXIT_FAILURE);
     }
 

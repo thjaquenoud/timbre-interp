@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="wEQXx2" name="MusicAE" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
-              pluginCharacteristicsValue="pluginIsSynth">
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="JGFUWj" name="MusicAE">
     <GROUP id="{15FF1C12-759C-37E5-AC10-01F0F6F97075}" name="Source">
       <FILE id="qllVVE" name="PluginProcessor.cpp" compile="1" resource="0"

@@ -29,17 +29,13 @@ struct stftReturn stft(Real *input, Real *excessInput, int excess, int windowSiz
 
     float *window          = new float[windowSize];
     fftwf_complex *fftResult = new fftwf_complex[windowSizeHalf];
-    fftwf_complex *fftWindow = new fftwf_complex[windowSizeHalf];
-    float *result          = new float[windowSize];
     float *max             = new float[windowCount];
 
     float **magnitudes    = new float*[windowCount];
     float **phases        = new float*[windowCount];
-    float **signalWindows = new float*[windowCount];
     for (int i = 0; i < windowCount; ++i){
         magnitudes[i]    = new float[windowSizeHalf];
         phases[i]        = new float[windowSizeHalf];
-        signalWindows[i] = new float[windowSize];
     }
 
     fftwf_plan fftPlan  = fftwf_plan_dft_r2c_1d( windowSize, window,    fftResult, FFTW_ESTIMATE );
@@ -89,6 +85,12 @@ struct stftReturn stft(Real *input, Real *excessInput, int excess, int windowSiz
     
     struct stftReturn ret = {magnitudes_tensor, phases, max};
     
+    delete window;
+    delete fftResult;
+    for (int i = 0; i < windowCount; i++)
+        delete magnitudes[i];
+    delete magnitudes;
+    
     return ret;
 }
 
@@ -115,6 +117,8 @@ Real* istft(float **&magnitudes, float **&phases, const int &windowSize, int &wi
             fftWindow[i][0] = magnitudes[currentWindow][i] * cos( phases[currentWindow][i] );  // Real
             fftWindow[i][1] = magnitudes[currentWindow][i] * sin( phases[currentWindow][i] );  // Imaginary
         }
+        delete magnitudes[currentWindow];
+        delete phases[currentWindow];
 
         fftwf_execute(ifftPlan);
 
@@ -123,6 +127,8 @@ Real* istft(float **&magnitudes, float **&phases, const int &windowSize, int &wi
             signalWindows[currentWindow][i] *= 0.5 * (1 - cos(2 * M_PI * i / windowSize)); // Hann window
         }
     }
+    delete magnitudes;
+    delete phases;
 
     int pos;
 
@@ -165,6 +171,14 @@ Real* istft(float **&magnitudes, float **&phases, const int &windowSize, int &wi
 
     //for (int w = 0; w < newSampleCount; w++)
         //std::cout << sampleSignals[w] << "\t" << norm[w] << "\n";
+        
+    delete fftWindow;
+    delete result;
+    for (int i = 0; i < windowCount; i++)
+        delete signalWindows[i];
+    delete signalWindows;
+    delete sampleSignals;
+    delete norm;
 
     return newSampleSignals;
 }

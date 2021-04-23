@@ -56,6 +56,7 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    void reset();
     void updateState(enum MusicAE_state new_state);
     
     bool process {false};

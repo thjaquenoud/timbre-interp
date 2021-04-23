@@ -22,6 +22,7 @@ MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor&
     alpha.setTextValueSuffix (" alpha");
     alpha.setValue(0.5);
     alpha.addListener(this);
+    alpha.setLookAndFeel(&sliderLookAndFeel);
  
     // this function adds the slider to the editor
     addAndMakeVisible (&alpha);
@@ -36,12 +37,14 @@ MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor&
         slider->setTextValueSuffix (" latent " + std::to_string(i+1));
         slider->setValue(50.0);
         slider->addListener(this);
+        slider->setLookAndFeel(&sliderLookAndFeel);
         
         addAndMakeVisible(slider);
     }
     
     addAndMakeVisible(synthButton);
     synthButton.setEnabled(false);
+    synthButton.setLookAndFeel(&buttonLookAndFeel);
     synthButton.onClick = [this]()
     {
         this->onStateChange(STATE_SYNTH);
@@ -49,6 +52,7 @@ MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor&
     
     addAndMakeVisible(effectsButton);
     effectsButton.setEnabled(true);
+    effectsButton.setLookAndFeel(&buttonLookAndFeel);
     effectsButton.onClick = [this]()
     {
         this->onStateChange(STATE_EFFECTS);
@@ -56,6 +60,7 @@ MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor&
     
     addAndMakeVisible(mixerButton);
     mixerButton.setEnabled(true);
+    mixerButton.setLookAndFeel(&buttonLookAndFeel);
     mixerButton.onClick = [this]()
     {
         this->onStateChange(STATE_MIXER);
@@ -65,9 +70,11 @@ MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor&
     effectsButton.setRadioGroupId(StateButtons);
     mixerButton.setRadioGroupId(StateButtons);
     
+    modelTextBox.setMultiLine(false);
+    modelTextBox.setTextToShowWhenEmpty("Model name", juce::Colour((juce::uint8)255, (juce::uint8)255, (juce::uint8)255, 0.3f));
     addAndMakeVisible(modelTextBox);
 
-    loadButton.setButtonText("Load");
+    loadButton.setLookAndFeel(&buttonLookAndFeel);
     addAndMakeVisible(loadButton);
     loadButton.onClick = [this]()
     {
@@ -76,27 +83,34 @@ MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor&
         this->startButton.setEnabled(true);
     };
 
-    startButton.setButtonText("Start");
     addAndMakeVisible(startButton);
     startButton.setEnabled(false);
+    startButton.setLookAndFeel(&buttonLookAndFeel);
     startButton.onClick = [this]()
     {
-        this->resetButton.setEnabled(true);
-        this->audioProcessor.process = true;
+        this->startStop(true);
     };
 
-    resetButton.setButtonText("Reset");
     addAndMakeVisible(resetButton);
-    resetButton.setEnabled(false);
+    resetButton.setLookAndFeel(&buttonLookAndFeel);
     resetButton.onClick = [this]()
     {
         this->reset();
         // audio gen first
     };
 
+    addAndMakeVisible(stopButton);
+    stopButton.setEnabled(false);
+    stopButton.setLookAndFeel(&buttonLookAndFeel);
+    stopButton.onClick = [this]()
+    {
+        this->startStop(false);
+        // audio gen first
+    };
+
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize (800, 800);
+    setSize (600, 600);
 }
 
 MusicAEAudioProcessorEditor::~MusicAEAudioProcessorEditor()
@@ -107,15 +121,15 @@ MusicAEAudioProcessorEditor::~MusicAEAudioProcessorEditor()
 void MusicAEAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // fill the whole window white
-    g.fillAll (juce::Colours::white);
+    g.fillAll (juce::Colour(0xff171752));
  
     // set the current drawing colour to black
-    g.setColour (juce::Colours::black);
+    g.setColour (juce::Colours::white);
  
     // set the font size and draw text to the screen
-    g.setFont (15.0f);
+    g.setFont (juce::Font(0.0625*getHeight(), juce::Font::bold));
  
-    g.drawFittedText ("MusicAE", 0, 0, getWidth(), 30, juce::Justification::centred, 1);
+    g.drawFittedText ("MusicAE", 0, 0.5*0.0625*getHeight(), 7*0.0625*getWidth(), 0.0625*getHeight(), juce::Justification::centred, 1);
 }
 
 void MusicAEAudioProcessorEditor::resized()
@@ -125,26 +139,60 @@ void MusicAEAudioProcessorEditor::resized()
     // subcomponents in your editor..
     
     // sets the position and size of the slider with arguments (x, y, width, height)
-    alpha.setBounds (50, 550, 700, 75);
+    float h = getHeight(), w = getWidth();
+    alpha.setBounds (0.0625*w, 10.5*0.0625*h, 7*0.125*w, 0.0625*h);
     
     int i = 0;
     for(auto slider : latentSliders){
-        slider->setBounds(30 + 80*i, 100, 50, 400);
+        slider->setBounds(0.5*0.0625*w + 1.5*0.0625*w*i, 0.125*h, 1.5*0.0625*w, 0.5*h);
         i++;
     }
     
-    synthButton.setBounds(200, 650, 100, 50);
-    effectsButton.setBounds(350, 650, 100, 50);
-    mixerButton.setBounds(500, 650, 100, 50);
+    synthButton.setBounds(7*0.0625*w, 0.5*0.0625*h, 0.125*w, 0.0625*h);
+    effectsButton.setBounds(10*0.0625*w, 0.5*0.0625*h, 0.125*w, 0.0625*h);
+    mixerButton.setBounds(13*0.0625*w, 0.5*0.0625*h, 0.125*w, 0.0625*h);
     
-    modelTextBox.setBounds(100, 725, 200, 50);
-    loadButton.setBounds(350, 725, 100, 50);
-    startButton.setBounds(500, 725, 100, 50);
-    resetButton.setBounds(650, 725, 100, 50);
+    modelTextBox.setBounds(0.0625*w, 6*0.125*h, 0.5*w, 0.0625*h);
+    modelTextBox.setFont(juce::Font(0.8*0.0625*h));
+    loadButton.setBounds(5*0.125*w, 6*0.125*h, 5*0.0625*w, 0.0625*h);
+    startButton.setBounds(0.0625*w, 14.5*0.0625*h, 4*0.0625*w, 0.0625*h);
+    resetButton.setBounds(3*0.125*w, 14.5*0.0625*h, 4*0.0625*w, 0.0625*h);
+    stopButton.setBounds(11*0.0625*w, 14.5*0.0625*h, 4*0.0625*w, 0.0625*h);
+}
+
+void MusicAEAudioProcessorEditor::startStop(bool start)
+{
+    if (!start){
+        audioProcessor.process = false;
+        audioProcessor.reset();
+        reset();
+    }
+        
+    switch(audioProcessor.state){
+        case STATE_SYNTH:
+            effectsButton.setVisible(!start);
+            mixerButton.setVisible(!start);
+            break;
+        case STATE_EFFECTS:
+            synthButton.setVisible(!start);
+            mixerButton.setVisible(!start);
+            break;
+        case STATE_MIXER:
+            synthButton.setVisible(!start);
+            effectsButton.setVisible(!start);
+            break;
+    }
+    
+    loadButton.setEnabled(!start);
+    startButton.setEnabled(!start);
+    stopButton.setEnabled(start);
+    audioProcessor.process = start;
 }
 
 void MusicAEAudioProcessorEditor::reset()
 {
+    alpha.setValue(0.5);
+    
     for(auto slider : latentSliders)
         slider->setValue(50.0);
 }
@@ -197,8 +245,4 @@ void MusicAEAudioProcessorEditor::onStateChange(enum MusicAE_state new_state)
     audioProcessor.updateState(new_state);
     
     reset();
-    
-    startButton.setEnabled(false);
-    resetButton.setEnabled(false);
-    loadButton.setEnabled(true);
 }

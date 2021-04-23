@@ -152,9 +152,12 @@ public:
                         magnitudes[i][j] = 0.24 * outputs[0].flat<float>()(windowSizeHalf * i + j) * input1.max[i];
                         phases[i][j] = input1.phases[i][j];
                     }
+                    delete input1.phases[i];
                     //std::cerr << "finished setting mag and phases:" << i << "\n";
                 }
                 //std::cerr << "finished setting mag and phases\n";
+                delete input1.phases;
+                delete input1.max;
 
             }
             else {           
@@ -186,12 +189,18 @@ public:
                         phases[i][j] = alpha * input1.phases[i][j] + (1-alpha) * input2.phases[i][j];
                     }
                     //std::cerr << "\n";
+                    delete input1.phases[i];
+                    delete input2.phases[i];
                 }
+                delete input1.phases;
+                delete input2.phases;
+                delete input1.max;
+                delete input2.max;
             }
         }
 
         std::cerr << "genaudio done\n";
-        Real *ret = istft(magnitudes, phases, len_window, windowCount, chunk*windowCount, chunk, fade, first, state == STATE_SYNTH);
+        Real *ret = istft(magnitudes, phases, len_window, windowCount, chunk*windowCount, chunk, fade, first, state == STATE_SYNTH); 
         
         first = false;
         return ret;

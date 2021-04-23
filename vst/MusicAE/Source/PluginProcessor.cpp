@@ -105,18 +105,7 @@ void MusicAEAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
 
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
-    if (isUsingDoublePrecision()){
-        //std::cerr << "double\n";
-        dblDelayBuffer.setSize(1, 2 * batches * chunk);
-        delayBufferReadIndex = dblDelayBuffer.getNumSamples() - batches * chunk;
-        dblDelayBuffer.clear();
-    }
-    else{
-        //std::cerr << "float\n";
-        fltDelayBuffer.setSize(1, 2 * batches * chunk);
-        delayBufferReadIndex = fltDelayBuffer.getNumSamples() - batches * chunk;
-        fltDelayBuffer.clear();
-    }
+    reset();
 
     sampRate = sampleRate;
     
@@ -207,7 +196,7 @@ juce::AudioBuffer<Real> MusicAEAudioProcessor::processSamples (juce::AudioBuffer
             //std::cerr << "temp audio read index:" << tempAudioBufferReadIndex[0] << "\n";
             //std::cerr << "temp audio buffer length:" << tempAudioBufferLength[0] << "\n";
             //std::cerr << "buffer num channels:" << buffer.getNumChannels() << "\n";
-            if (tempAudioBufferReadIndex[channel] + bufferLength < tempAudioBufferLength[channel])
+            /*if (tempAudioBufferReadIndex[channel] + bufferLength < tempAudioBufferLength[channel])
                 buffer.copyFrom(channel, 0, tempAudioBuffer[channel], 0, tempAudioBufferReadIndex[channel], bufferLength);
             else{
                 const int spaceRemaining = tempAudioBufferLength[channel] - tempAudioBufferReadIndex[channel];
@@ -215,7 +204,7 @@ juce::AudioBuffer<Real> MusicAEAudioProcessor::processSamples (juce::AudioBuffer
                 buffer.copyFrom(channel, spaceRemaining, tempAudioBuffer[channel], 0, 0, bufferLength - spaceRemaining);
             }
             
-            tempAudioBufferReadIndex[channel] += bufferLength;
+            tempAudioBufferReadIndex[channel] += bufferLength;*/
             
             //std::cerr << "writing to delayBuffer\n";
             // TODO: buffer larger than delay buffer?
@@ -249,7 +238,7 @@ juce::AudioBuffer<Real> MusicAEAudioProcessor::processSamples (juce::AudioBuffer
                     excessPtr2 = delayBuffer.getReadPointer(1, 0);
                     
                 processStart += delayBufferLength;
-                wrap = true;
+                wrap = processStart > delayBufferLength - (batches - overlap) * chunk;
                 excess = delayBufferWriteIndex;
             }
             
@@ -262,8 +251,8 @@ juce::AudioBuffer<Real> MusicAEAudioProcessor::processSamples (juce::AudioBuffer
             }
             
             if (wrap) {
-                delayBuffer.copyFrom(0, processStart, newData, batches * chunk - delayBufferWriteIndex);
-                delayBuffer.copyFrom(0, 0, newData + (batches * chunk - delayBufferWriteIndex), delayBufferWriteIndex - overlap * chunk);
+                delayBuffer.copyFrom(0, processStart, newData, delayBufferLength - processStart);
+                delayBuffer.copyFrom(0, 0, newData + (batches * chunk - delayBufferWriteIndex), (batches - overlap) * chunk - (delayBufferLength - processStart));
             }
             else 
                 delayBuffer.copyFrom(0, processStart, newData, (batches - overlap) * chunk);
@@ -282,7 +271,7 @@ juce::AudioBuffer<Real> MusicAEAudioProcessor::processSamples (juce::AudioBuffer
             else{
                 const int spaceRemaining = delayBufferLength - delayBufferReadIndex;
                 buffer.copyFrom(channel, 0, delayBuffer, 0, delayBufferReadIndex, spaceRemaining);
-                buffer.copyFrom(channel, spaceRemaining, buffer, 0, 0, bufferLength - spaceRemaining);
+                buffer.copyFrom(channel, spaceRemaining, delayBuffer, 0, 0, bufferLength - spaceRemaining);
             }
             
             //buffer.copyFrom(channel, 0, tempAudioBuffer[1], 0, tempAudioBufferReadIndex[1], bufferLength);
@@ -322,25 +311,23 @@ void MusicAEAudioProcessor::setStateInformation (const void* data, int sizeInByt
     // whose contents will have been created by the getStateInformation() call.
 }
 
-void MusicAEAudioProcessor::updateState(enum MusicAE_state new_state)
+void MusicAEAudioProcessor::reset()
 {
-    process = false;
-    state = new_state;
-    batches = state == STATE_SYNTH ? 20 : 24;
-    overlap = state == STATE_SYNTH ? 0 : 4;
-    
-    //std::cerr << "double\n";
     int numChannels = state == STATE_MIXER ? 2 : 1;
-    dblDelayBuffer.setSize(numChannels, (2 * batches - overlap) * chunk);
-    dblFadeBuffer.setSize(1, chunk);
-    delayBufferReadIndex = dblDelayBuffer.getNumSamples() - batches * chunk;
-    dblDelayBuffer.clear();
-
-    //std::cerr << "float\n";
-    fltDelayBuffer.setSize(numChannels, (2 * batches - overlap) * chunk);
-    fltFadeBuffer.setSize(1, chunk);
-    delayBufferReadIndex = fltDelayBuffer.getNumSamples() - batches * chunk;
-    fltDelayBuffer.clear();
+    if (isUsingDoublePrecision()){
+        //std::cerr << "double\n";
+        dblDelayBuffer.setSize(numChannels, (2 * batches - overlap) * chunk);
+        dblFadeBuffer.setSize(1, chunk);
+        delayBufferReadIndex = dblDelayBuffer.getNumSamples() - batches * chunk;
+        dblDelayBuffer.clear();
+    }
+    else{
+        //std::cerr << "float\n";
+        fltDelayBuffer.setSize(numChannels, (2 * batches - overlap) * chunk);
+        fltFadeBuffer.setSize(1, chunk);
+        delayBufferReadIndex = fltDelayBuffer.getNumSamples() - batches * chunk;
+        fltDelayBuffer.clear();
+    }
     
     tempAudioBufferReadIndex[0] = tempAudioBufferReadIndex[1] = 0;
     delayBufferWriteIndex = 0;
@@ -376,6 +363,15 @@ void MusicAEAudioProcessor::updateState(enum MusicAE_state new_state)
             }
         }
     }
+}
+
+void MusicAEAudioProcessor::updateState(enum MusicAE_state new_state)
+{
+    state = new_state;
+    batches = state == STATE_SYNTH ? 20 : 24;
+    overlap = state == STATE_SYNTH ? 0 : 4;
+    
+    reset();
 }
 
 //==============================================================================
