@@ -24,9 +24,6 @@ MusicAEAudioProcessor::MusicAEAudioProcessor()
 #endif
     temp_sliders(10, 0.5)
 {
-    std::cerr << "processor constructor\n";
-    //createEditor();
-    //suspendProcessing(true);
     generator = new AudioGenerator(batches, sampRate, chunk, temp_sliders);
     updateState(STATE_SYNTH);
     genInit = true;
@@ -101,16 +98,11 @@ void MusicAEAudioProcessor::changeProgramName (int index, const juce::String& ne
 //==============================================================================
 void MusicAEAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    std::cerr << "prepare to play ";
-
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
     reset();
 
     sampRate = sampleRate;
-    
-    /*std::cerr << "sampling rate: " << sampleRate << "\n";
-    std::cerr << "samples per block estimate: " << samplesPerBlock << "\n";*/
 }
 
 void MusicAEAudioProcessor::releaseResources()
@@ -147,15 +139,13 @@ bool MusicAEAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) 
 
 void MusicAEAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
-    //std::cerr << "process block float\n";
     fltFadeBuffer = processSamples(buffer, midiMessages, fltDelayBuffer, fltFadeBuffer);
 }
 
-/*void MusicAEAudioProcessor::processBlock (juce::AudioBuffer<double>& buffer, juce::MidiBuffer& midiMessages)
+void MusicAEAudioProcessor::processBlock (juce::AudioBuffer<double>& buffer, juce::MidiBuffer& midiMessages)
 {
-    //std::cerr << "process block double\n";    
     dblFadeBuffer = processSamples(buffer, midiMessages, dblDelayBuffer, dblFadeBuffer);
-}*/
+}
 
 template <typename Real>
 juce::AudioBuffer<Real> MusicAEAudioProcessor::processSamples (juce::AudioBuffer<Real>& buffer, juce::MidiBuffer& midiMessages, juce::AudioBuffer<Real>& delayBuffer, juce::AudioBuffer<Real>& fadeBuffer)
@@ -181,33 +171,11 @@ juce::AudioBuffer<Real> MusicAEAudioProcessor::processSamples (juce::AudioBuffer
     // interleaved by keeping the same state.
     const int bufferLength = buffer.getNumSamples();
     const int delayBufferLength = delayBuffer.getNumSamples();
-    
-    const int tempAudioBufferLength[2] = {tempAudioBuffer[0].getNumSamples(), tempAudioBuffer[1].getNumSamples()};
-    
-    //std::cerr << "num samples: " << bufferLength << "\n";
-
+        
     if (process) {
-        /*for (int i = 0; i < 23552; i++)
-                std::cerr << i << " " << *tempAudioBuffer[1].getReadPointer(0, i) << "\n";*/
-        //std::cerr << "processing\n";
         int numChannels = state == STATE_MIXER ? 2 : state == STATE_EFFECTS ? 1 : 0;
         for (int channel = 0; channel < numChannels; ++channel)
         {
-            //std::cerr << "temp audio read index:" << tempAudioBufferReadIndex[0] << "\n";
-            //std::cerr << "temp audio buffer length:" << tempAudioBufferLength[0] << "\n";
-            //std::cerr << "buffer num channels:" << buffer.getNumChannels() << "\n";
-            /*if (tempAudioBufferReadIndex[channel] + bufferLength < tempAudioBufferLength[channel])
-                buffer.copyFrom(channel, 0, tempAudioBuffer[channel], 0, tempAudioBufferReadIndex[channel], bufferLength);
-            else{
-                const int spaceRemaining = tempAudioBufferLength[channel] - tempAudioBufferReadIndex[channel];
-                buffer.copyFrom(channel, 0, tempAudioBuffer[channel], 0, tempAudioBufferReadIndex[channel], spaceRemaining);
-                buffer.copyFrom(channel, spaceRemaining, tempAudioBuffer[channel], 0, 0, bufferLength - spaceRemaining);
-            }
-            
-            tempAudioBufferReadIndex[channel] += bufferLength;*/
-            
-            //std::cerr << "writing to delayBuffer\n";
-            // TODO: buffer larger than delay buffer?
             if (delayBufferWriteIndex + bufferLength < delayBufferLength)
                 delayBuffer.copyFrom(channel, delayBufferWriteIndex, buffer, channel, 0, bufferLength);
             else{
@@ -220,13 +188,8 @@ juce::AudioBuffer<Real> MusicAEAudioProcessor::processSamples (juce::AudioBuffer
         delayBufferWriteIndex += bufferLength;
         delayBufferWriteIndex %= delayBufferLength;
         delayBufferProcessCounter += bufferLength;
-
-        //std::cerr << "delay buffer write index after update: " << delayBufferWriteIndex << "\n";
-        //std::cerr << "delay buffer process counter after update: " << delayBufferProcessCounter << "\n";
     
         while (delayBufferProcessCounter >= batches * chunk){
-            std::cerr << "running genaudio\n";
-
             int processStart = (delayBufferWriteIndex - delayBufferProcessCounter) % delayBufferLength;
             const Real *excessPtr1 = nullptr;
             const Real *excessPtr2 = nullptr;
@@ -242,7 +205,6 @@ juce::AudioBuffer<Real> MusicAEAudioProcessor::processSamples (juce::AudioBuffer
                 excess = delayBufferWriteIndex;
             }
             
-            std::cerr << "processStart: " << processStart << "\n";
             // run model replace values
             const Real *secondPtr = state == STATE_MIXER ? delayBuffer.getReadPointer(1, processStart) : nullptr;
             Real *newData = generator->genAudio<Real>(delayBuffer.getReadPointer(0, processStart), excessPtr1, secondPtr, excessPtr2, excess, fadeBuffer.getReadPointer(0, 0), state);
@@ -262,7 +224,6 @@ juce::AudioBuffer<Real> MusicAEAudioProcessor::processSamples (juce::AudioBuffer
         }
         delayBufferReadIndex += bufferLength;
         delayBufferReadIndex %= delayBufferLength;
-        //std::cerr << "delay buffer read index before filling: " << delayBufferReadIndex << "\n";
         
         for (int channel = 0; channel < totalNumOutputChannels; ++channel)
         {
@@ -273,14 +234,7 @@ juce::AudioBuffer<Real> MusicAEAudioProcessor::processSamples (juce::AudioBuffer
                 buffer.copyFrom(channel, 0, delayBuffer, 0, delayBufferReadIndex, spaceRemaining);
                 buffer.copyFrom(channel, spaceRemaining, delayBuffer, 0, 0, bufferLength - spaceRemaining);
             }
-            
-            //buffer.copyFrom(channel, 0, tempAudioBuffer[1], 0, tempAudioBufferReadIndex[1], bufferLength);
         }
-
-        /*if (process) {
-            for (int i = 0; i < chunk; i++)
-                std::cerr << *buffer.getReadPointer(0, i) << "\n";
-        }*/
     }
     
     return fadeBuffer;
@@ -315,54 +269,20 @@ void MusicAEAudioProcessor::reset()
 {
     int numChannels = state == STATE_MIXER ? 2 : 1;
     if (isUsingDoublePrecision()){
-        //std::cerr << "double\n";
         dblDelayBuffer.setSize(numChannels, (2 * batches - overlap) * chunk);
         dblFadeBuffer.setSize(1, chunk);
         delayBufferReadIndex = dblDelayBuffer.getNumSamples() - batches * chunk;
         dblDelayBuffer.clear();
     }
     else{
-        //std::cerr << "float\n";
         fltDelayBuffer.setSize(numChannels, (2 * batches - overlap) * chunk);
         fltFadeBuffer.setSize(1, chunk);
         delayBufferReadIndex = fltDelayBuffer.getNumSamples() - batches * chunk;
         fltDelayBuffer.clear();
     }
     
-    tempAudioBufferReadIndex[0] = tempAudioBufferReadIndex[1] = 0;
     delayBufferWriteIndex = 0;
     delayBufferProcessCounter = 0;
-    
-    tempAudioBuffer[0].clear();
-    tempAudioBuffer[1].clear();
-    
-    if (state != STATE_SYNTH) {
-        juce::File file1("/home/sam/ece396/timbre-interp/audio/s2.wav");
-        juce::AudioFormatManager formatManager;
-        formatManager.registerBasicFormats();
-        juce::ScopedPointer<juce::AudioFormatReader> reader = formatManager.createReaderFor(file1);
-        if (reader != nullptr) {
-            tempAudioBuffer[0].setSize(reader->numChannels, reader->lengthInSamples);
-            reader->read(&tempAudioBuffer[0], 0, reader->lengthInSamples, 0, true, true);
-        }
-        else {
-            std::cerr << "file error\n";
-            exit(EXIT_FAILURE);
-        }
-        
-        if (state == STATE_MIXER) {
-            juce::File file2("/home/sam/ece396/timbre-interp/audio/o2.wav");
-            reader = formatManager.createReaderFor(file2);
-            if (reader != nullptr) {
-                tempAudioBuffer[1].setSize(reader->numChannels, reader->lengthInSamples);
-                reader->read(&tempAudioBuffer[1], 0, reader->lengthInSamples, 0, true, true);
-            }
-            else {
-                std::cerr << "file error\n";
-                exit(EXIT_FAILURE);
-            }
-        }
-    }
 }
 
 void MusicAEAudioProcessor::updateState(enum MusicAE_state new_state)

@@ -3,7 +3,7 @@
 
     AudioGenerator.h
     Created: 23 Feb 2021 3:17:42pm
-    Author:  sam
+    Author:  MusicAE
 
   ==============================================================================
 */
@@ -42,7 +42,7 @@ enum MusicAE_state {
         STATE_MIXER
 }; 
 
-class AudioGenerator //: public juce::Timer
+class AudioGenerator
 {
 private:
     bool make_audio;
@@ -65,15 +65,11 @@ public:
     std::vector<float> sliders;
     
     AudioGenerator(const int& b, double& sr, const int& c, std::vector<float> temp_sliders);
-//    AudioGenerator();
-
-//    void timerCallback() override;
 
     template <typename Real>
     Real* genAudio(const Real *audio1, const Real *excessAudio1, const Real *audio2, const Real *excessAudio2, int excess, const Real *fade, enum MusicAE_state state)
     {
-        std::cerr << "genaudio" << state << "\n";
-        int windowCount = state == STATE_SYNTH ? batches + 3 : batches + 4; // CHANGE FOR MIXER/EFFECTS
+        int windowCount = state == STATE_SYNTH ? batches + 3 : batches + 4;
         int windowSizeHalf = len_window / 2 + 1;
         float **magnitudes = new float*[windowCount];
         float **phases = new float*[windowCount];
@@ -91,16 +87,6 @@ public:
                 }
             }
 
-            /*for (int i = 0; i < windowCount; i++){
-                for (int j = 0; j < 10; j++){
-                    std::cerr << input_sliders.flat<float>()(10 * i + j) << " ";
-                }
-                std::cerr << "\n";
-            }*/
-
-            //std::cerr << "\n";
-
-            // Actually run the image through the model.
             std::string input_layer = "Latent_Input", output_layer = "k2tfout_0"; // IMPORTANT: These are model dependent
             std::vector<tensorflow::Tensor> outputs;
             tensorflow::Status run_status = session->Run({{input_layer, input_sliders}},
@@ -113,27 +99,20 @@ public:
             
             for (int i = 0; i < windowCount; i++) {
                 for (int j = 0; j < windowSizeHalf; j++) {
-                    //std::cerr << outputs[0].flat<float>()(windowSizeHalf * i + j) << " ";
                     magnitudes[i][j] = 0.24 * outputs[0].flat<float>()(windowSizeHalf * i + j);
                     phases[i][j] = 0.0;
                 }
-                //std::cerr << "\n";
             }
         }
         else {
             struct stftReturn input1 = stft(audio1, excessAudio1, excess, len_window, windowCount, chunk*windowCount, chunk);
             if (state == STATE_EFFECTS){
-                std::cerr << "finished stft\n";
                 tensorflow::Tensor input_effects(tensorflow::DT_FLOAT, tensorflow::TensorShape({windowCount, 10}));
                 for (int i = 0; i < windowCount; i++){
                     for (int j = 0; j < 10; j++){
                         input_effects.flat<float>()(10 * i + j) = sliders[j];
-                        //std::cerr << input_effects.flat<float>()(10 * i + j) << " ";
                     }
-                    //std::cerr << "\n";
                 }
-                std::cerr << "finished setting effects\n";
-
             
                 std::string track1_layer = "Track1_Input", latent_layer = "Latent_Input", output_layer = "k2tfout_0"; // IMPORTANT: These are model dependent
                 std::vector<tensorflow::Tensor> outputs;
@@ -145,17 +124,13 @@ public:
                     exit(EXIT_FAILURE);
                 }
                 
-                std::cerr << "finished model\n";
                 for (int i = 0; i < windowCount; i++) {
                     for (int j = 0; j < windowSizeHalf; j++) {
-                        //std::cerr << outputs[0].flat<float>()(windowSizeHalf * i + j) << " ";
                         magnitudes[i][j] = 0.24 * outputs[0].flat<float>()(windowSizeHalf * i + j) * input1.max[i];
                         phases[i][j] = input1.phases[i][j];
                     }
                     delete input1.phases[i];
-                    //std::cerr << "finished setting mag and phases:" << i << "\n";
                 }
-                //std::cerr << "finished setting mag and phases\n";
                 delete input1.phases;
                 delete input1.max;
 
@@ -184,11 +159,9 @@ public:
 
                 for (int i = 0; i < windowCount; i++) {
                     for (int j = 0; j < windowSizeHalf; j++) {
-                        //std::cerr << outputs[0].flat<float>()(windowSizeHalf * i + j) << " ";
                         magnitudes[i][j] = 0.24 * outputs[0].flat<float>()(windowSizeHalf * i + j) * (alpha * input1.max[i] + (1-alpha) * input2.max[i]);
                         phases[i][j] = alpha * input1.phases[i][j] + (1-alpha) * input2.phases[i][j];
                     }
-                    //std::cerr << "\n";
                     delete input1.phases[i];
                     delete input2.phases[i];
                 }
@@ -199,7 +172,6 @@ public:
             }
         }
 
-        std::cerr << "genaudio done\n";
         Real *ret = istft(magnitudes, phases, len_window, windowCount, chunk*windowCount, chunk, fade, first, state == STATE_SYNTH); 
         
         first = false;

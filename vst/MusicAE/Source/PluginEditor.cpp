@@ -13,7 +13,6 @@
 MusicAEAudioProcessorEditor::MusicAEAudioProcessorEditor (MusicAEAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
 {
-    std::cerr << "plugin editor constructor\n";    
     // these define the parameters of our slider object
     alpha.setSliderStyle (juce::Slider::LinearHorizontal);
     alpha.setRange (0.0, 1.0, 0.01);

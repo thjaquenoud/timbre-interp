@@ -31,7 +31,7 @@ public:
    #endif
 
     void processBlock (juce::AudioBuffer<float>&, juce::MidiBuffer&) override;
-    //void processBlock (juce::AudioBuffer<double>&, juce::MidiBuffer&) override;
+    void processBlock (juce::AudioBuffer<double>&, juce::MidiBuffer&) override;
 
     //==============================================================================
     juce::AudioProcessorEditor* createEditor() override;
@@ -72,8 +72,6 @@ private:
     juce::AudioBuffer<double> dblDelayBuffer;
     juce::AudioBuffer<float> fltFadeBuffer;
     juce::AudioBuffer<double> dblFadeBuffer;
-    juce::AudioBuffer<float> tempAudioBuffer[2]; // for temporary usage while we test on .wav files
-    int tempAudioBufferReadIndex[2] {0, 0};
     int delayBufferReadIndex {0};
     int delayBufferWriteIndex {0};
     int delayBufferProcessCounter {0};

@@ -3,7 +3,7 @@
 
     stft.h
     Created: 8 Mar 2021 5:24:59pm
-    Author:  sam
+    Author:  MusicAE
 
   ==============================================================================
 */
@@ -42,11 +42,7 @@ struct stftReturn stft(Real *input, Real *excessInput, int excess, int windowSiz
 
     tensorflow::Tensor magnitudes_tensor(tensorflow::DT_FLOAT, tensorflow::TensorShape({windowCount, windowSizeHalf}));
     
-    /*for (int i = 0; i < 1024; i++){
-        std::cerr << i << " " << input[i] << "\n";
-    }*/
     // STFT
-    std::cerr << mainInputEnd << " starting stft\n";
     for ( int currentWindow = 0; currentWindow < windowCount; ++currentWindow ){
         for (int i = 0; i < windowSize; ++i){
             int currentSample = currentWindow * slideWindowBy + i;
@@ -61,7 +57,6 @@ struct stftReturn stft(Real *input, Real *excessInput, int excess, int windowSiz
             }
         }
 
-        //std::cerr << "about to execute stft:" << currentWindow << "\n";
         fftwf_execute(fftPlan);
 
         max[currentWindow] = 0;
@@ -70,16 +65,11 @@ struct stftReturn stft(Real *input, Real *excessInput, int excess, int windowSiz
             phases[currentWindow][i]     = atan2( fftResult[i][1], fftResult[i][0] );
             if (magnitudes[currentWindow][i] > max[currentWindow])
                 max[currentWindow] = magnitudes[currentWindow][i];
-            //std::cerr << i << " " << magnitudes[currentWindow][i] << "\t" << phases[currentWindow][i] << "\n";
         }
         
-        //std::cerr << "setting tensor:" << currentWindow << "\n";
         max[currentWindow] += 1e-9;
-        //std::cerr << "max: " << max[currentWindow] << "\n";
         for (int i = 0; i < windowSizeHalf; ++i){
-            //std::cerr << i << " " << magnitudes[currentWindow][i] << "\t" << phases[currentWindow][i] << "\n";
             magnitudes_tensor.flat<float>()(windowSizeHalf * currentWindow + i) = magnitudes[currentWindow][i] / max[currentWindow];
-            //std::cerr << magnitudes_tensor.flat<float>()(windowSizeHalf * currentWindow + i) << "\t" << phases[currentWindow][i] << "\n";
         }
     }
     
@@ -163,15 +153,8 @@ Real* istft(float **&magnitudes, float **&phases, const int &windowSize, int &wi
         if (j < slideWindowBy && !first && !synth){
             newSampleSignals[j] = (Real)(((float)j / (float)slideWindowBy) * newSampleSignals[j] + ((float)(slideWindowBy - j) / (float)slideWindowBy) * fade[j]);
         }
-            
-        //std::cerr << sampleSignalsNew[i-overlap] << " ";
     }
-        
-    //std::cerr << "end of buffer\n";
-
-    //for (int w = 0; w < newSampleCount; w++)
-        //std::cout << sampleSignals[w] << "\t" << norm[w] << "\n";
-        
+                
     delete fftWindow;
     delete result;
     for (int i = 0; i < windowCount; i++)
