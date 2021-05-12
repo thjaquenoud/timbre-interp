@@ -61,7 +61,6 @@ class LoginScreen(BoxLayout):
 
         self.sliders = []
         for i in range(0,10):
-            print(i)
             self.sliders.append(Slider(min=0, max=100, value=50, orientation='vertical'))
             self.sliders[i].fbind('value', self.slide)
             upper.add_widget(self.sliders[i])
@@ -98,9 +97,6 @@ class LoginScreen(BoxLayout):
         self.padAnchor42 = AnchorLayout(size_hint_y=0.3)
         self.alphaarr.append(Slider(min=0, max=100, value=50, orientation='horizontal'))
         self.alphaarr[0].fbind('value', self.slide)
-        #self.alphaarr.append(Slider(min=0, max=100, value=50, orientation='horizontal'))
-        #self.alphaSlider.fbind('value', self.slide)
-        #self.padAnchor42.add_widget(self.alphaSlider)
         self.padAnchor42.add_widget(self.alphaarr[0])
         lower.add_widget(self.padAnchor42)
 
@@ -122,8 +118,6 @@ class LoginScreen(BoxLayout):
         self.useSliderVals()
 
     def useSliderVals(self, *args, **kwargs):
-        #for slider in self.sliders:
-        #    print(slider.value)
         print()
 
     def gen_audio(self, seg_length, prog_ind):
@@ -151,9 +145,8 @@ class LoginScreen(BoxLayout):
         phaseB = np.angle(B) #Phase response of STFT
         
 
-        print(self.alpha)
         temp_alpha = np.tile(self.alpha*self.temp_sliders,(NUM_CHUNKS+5,1))      #NUM_CHUNKS+5 is really sus, might have
-        temp_negalpha = np.tile((1-self.alpha)*self.temp_sliders,(NUM_CHUNKS+5,1))    #
+        temp_negalpha = np.tile((1-self.alpha)*self.temp_sliders,(NUM_CHUNKS+5,1))
         temp_phase = self.alpha*phaseA+(1-self.alpha)*phaseB #Unstack and Interpolate Phase
         temp_max = self.alpha*max_A+(1-self.alpha)*max_B #Unstack and Interpolate Normalizing gains
         temp_out_mag = self.full_net.predict([ magA, magB, temp_alpha ,temp_negalpha ])
@@ -163,32 +156,26 @@ class LoginScreen(BoxLayout):
         _, temp_out = np.float32(signal.istft(0.24*E, fs=SAMP_RATE, noverlap=3*CHUNK))  #0.24 sus
         out = temp_out[CHUNK:-2*CHUNK]
         newdim = len(out)//CHUNK
-        #print(len(out)/CHUNK)
         self.new_data = out.reshape((newdim,CHUNK))
 
     def loop(self, *args, **kwargs):
-        #print("LOOP")
-        #FADE = 50 ################### this is the value of horizontal slider
         self.alpha = self.alphaarr[0].value/100
 
         
         if self.make_audio:
-            t = time.time() ################### we could get rid of it?
             self.gen_audio(NUM_CHUNKS, self.progress_ind)
 
         for w in range(self.num_latents):
             self.temp_sliders[w]=self.sliders[w].value/100
 
     def load_tracks(self, *args, **kwargs):       #inputs ### we should make the number variable 0 1 or 2
-        filename_in = 'audio/' + self.textinput1.text
+        filename_in = '../audio/' + self.textinput1.text
         data_path = os.path.join(os.getcwd(),filename_in)
         self.track1, _ = librosa.load(data_path, sr=SAMP_RATE, mono=True)
 
-        filename_in = 'audio/' + self.textinput2.text
+        filename_in = '../audio/' + self.textinput2.text
         data_path = os.path.join(os.getcwd(),filename_in)
         self.track2, _ = librosa.load(data_path, sr=SAMP_RATE, mono=True)
-
-        print('tracks loaded')
 
         self.start_net()
 
@@ -211,13 +198,9 @@ class LoginScreen(BoxLayout):
                                     stream_callback=self.callback)
 
         self.stream.start_stream()
-        #time.sleep(0.1) ##### I DON"T KNOW IF WE NEED THIS
 
     def model_to_mem(self):
-        #model_name = "long_embedding"
-        data_path_net = os.path.join(os.getcwd(),'models/'+self.textinput3.text+'_trained_network_mixer.h5')
-        #for now that path is hard coded
-        #data_path_net = os.path.join(os.getcwd(),'models/'+model_name+'_trained_network.h5')
+        data_path_net = os.path.join(os.getcwd(),'../models/'+self.textinput3.text+'_trained_network.h5')
         self.full_net = load_model(data_path_net, compile=False)
         self.full_net._make_predict_function()
         self.full_net_graph = tf.get_default_graph()

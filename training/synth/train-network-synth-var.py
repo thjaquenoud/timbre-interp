@@ -95,14 +95,14 @@ class Manne:
 		return outloss
 
 	def load_net(self):
-		enc_filename = os.path.join(os.getcwd(),'models/'+self.trained_model_name+'_trained_encoder.h5')
+		enc_filename = os.path.join(os.getcwd(),'../../models/'+self.trained_model_name+'_trained_encoder.h5')
 		print(enc_filename)
 		self.encoder = load_model(enc_filename,custom_objects={'sampling': self.sampling}, compile=False)
-		dec_filename = os.path.join(os.getcwd(),'models/'+self.trained_model_name+'_trained_decoder.h5')
+		dec_filename = os.path.join(os.getcwd(),'../../models/'+self.trained_model_name+'_trained_decoder.h5')
 		self.decoder = load_model(dec_filename,custom_objects={'sampling': self.sampling}, compile=False)
 
 	def load_dataset(self):
-		filename = 'frames/'+self.filename_in+'_frames.npy'	#Static Data used for training net
+		filename = '../../frames/'+self.filename_in+'_frames.npy'	#Static Data used for training net
 		filepath = os.path.join(os.getcwd(),filename)
 		orig_frames = np.load(filepath)
 		orig_frames_1 = np.asarray(orig_frames)
@@ -236,7 +236,7 @@ class Manne:
 
 		self.dnb_net = Model(inputs=[mlatent],
 			outputs=final_decoded)
-		self.dnb_net.save('models/'+self.filename_out+'_trained_network.h5')
+		self.dnb_net.save('../../models/'+self.filename_out+'_trained_network.h5')
 
 	def save_latents(self):
 		indat = self.frames

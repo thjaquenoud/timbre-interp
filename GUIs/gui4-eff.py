@@ -61,7 +61,6 @@ class LoginScreen(BoxLayout):
 
         self.sliders = []
         for i in range(0,10):
-            print(i)
             self.sliders.append(Slider(min=0, max=100, value=50, orientation='vertical'))
             self.sliders[i].fbind('value', self.slide)
             upper.add_widget(self.sliders[i])
@@ -107,34 +106,25 @@ class LoginScreen(BoxLayout):
         self.useSliderVals()
 
     def useSliderVals(self, *args, **kwargs):
-        for slider in self.sliders:
-            print(slider.value)
+        print()
 
     def gen_audio(self, seg_length, prog_ind):
         num_samps = seg_length*CHUNK
         self.make_audio = False
 
         ### Truncating track to window for STFT
-        print(num_samps*prog_ind)
         snip1 = self.track1[ (num_samps*prog_ind):(num_samps*(prog_ind+1)+LEN_WINDOW) ]
 
         np.set_printoptions(threshold=sys.maxsize)
-        print(snip1.shape)
         ### Perform Short Time Fourier Transform on Snip A
         _,_,A = signal.stft(snip1, nperseg=LEN_WINDOW, nfft=LEN_WINDOW, fs=SAMP_RATE, noverlap=3*CHUNK) #STFT
         mag = np.abs(A) #Magnitude response of the STFT
-        print(mag.shape)
         max_A = mag.max(axis=0)+0.000000001 #Used for normalizing STFT frames (with addition to avoid division by zero)
         magA = mag / max_A #Normalizing
         magA = magA.T
         phaseA = np.angle(A) #Phase response of STFT
-        print(max_A.shape)
-        print(max_A)
-        print(magA.shape)
-        print(phaseA.shape)
 
         temp_effects = np.tile(self.temp_sliders,(NUM_CHUNKS+5,1))      #NUM_CHUNKS+5 is really sus, might have
-        print(temp_effects.shape)
         temp_out_mag = self.full_net.predict([ magA, temp_effects ])
 
         out_mag = temp_out_mag.T * max_A
@@ -142,27 +132,22 @@ class LoginScreen(BoxLayout):
         _, temp_out = np.float32(signal.istft(0.24*E, fs=SAMP_RATE, noverlap=3*CHUNK))  #0.24 sus
         out = temp_out[CHUNK:-2*CHUNK]
         newdim = len(out)//CHUNK
-        print(len(out)/CHUNK)
         self.new_data = out.reshape((newdim,CHUNK))
 
     def loop(self, *args, **kwargs):
-        #print("LOOP")
         FADE = 50 ################### this is the value of horizontal slider
         self.alpha = FADE/100
 
         if self.make_audio:
-            t = time.time() ################### we could get rid of it?
             self.gen_audio(NUM_CHUNKS, self.progress_ind)
 
         for w in range(self.num_latents):
             self.temp_sliders[w]=self.sliders[w].value/100
 
     def load_tracks(self, *args, **kwargs):       #inputs ### we should make the number variable 0 1 or 2
-        filename_in = 'audio/' + self.textinput1.text
+        filename_in = '../audio/' + self.textinput1.text
         data_path = os.path.join(os.getcwd(),filename_in)
         self.track1, _ = librosa.load(data_path, sr=SAMP_RATE, mono=True)
-
-        print('tracks loaded')
 
         self.start_net()
 
@@ -185,13 +170,9 @@ class LoginScreen(BoxLayout):
                                     stream_callback=self.callback)
 
         self.stream.start_stream()
-        #time.sleep(0.1) ##### I DON"T KNOW IF WE NEED THIS
 
     def model_to_mem(self):
-        #model_name = "trained_network_effects"
-        data_path_net = os.path.join(os.getcwd(),'models/'+self.textinput3.text+'_trained_network_effects.h5')
-        #for now that path is hard coded
-        #data_path_net = os.path.join(os.getcwd(),'models/'+model_name+'_trained_network.h5')
+        data_path_net = os.path.join(os.getcwd(),'../models/'+self.textinput3.text+'_trained_network.h5')
         self.full_net = load_model(data_path_net, compile=False)
         self.full_net._make_predict_function()
         self.full_net_graph = tf.get_default_graph()

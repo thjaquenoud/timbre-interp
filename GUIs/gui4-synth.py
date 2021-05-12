@@ -61,7 +61,6 @@ class LoginScreen(BoxLayout):
 
         self.sliders = []
         for i in range(0,10):
-            print(i)
             self.sliders.append(Slider(min=0, max=100, value=50, orientation='vertical'))
             self.sliders[i].fbind('value', self.slide)
             upper.add_widget(self.sliders[i])
@@ -101,39 +100,23 @@ class LoginScreen(BoxLayout):
         self.useSliderVals()
 
     def useSliderVals(self, *args, **kwargs):
-        for slider in self.sliders:
-            print(slider.value)
+        print()
 
     def gen_audio(self, seg_length):
         num_samps = seg_length*CHUNK
         self.make_audio = False
 
 
-        # temp_alpha = np.tile(self.alpha*self.temp_sliders,(NUM_CHUNKS+5,1))      #NUM_CHUNKS+5 is really sus, might have
-        # temp_negalpha = np.tile((1-self.alpha)*self.temp_sliders,(NUM_CHUNKS+5,1))    #
-        # temp_phase = self.alpha*phaseA+(1-self.alpha)*phaseB #Unstack and Interpolate Phase
-        # temp_max = self.alpha*max_A+(1-self.alpha)*max_B #Unstack and Interpolate Normalizing gains
-        # temp_out_mag = self.full_net.predict([ magA, magB, temp_alpha ,temp_negalpha ])
-        #np.set_printoptions(threshold=sys.maxsize)
-        print(self.temp_sliders)
         temp_out_mag = self.full_net.predict([np.tile(self.temp_sliders, (BATCHES + 4, 1))])
-        #print(temp_out_mag[0,:])
         out_mag = temp_out_mag.T
         E = out_mag
         _, temp_out = np.float32(signal.istft(0.24*E, fs=SAMP_RATE, noverlap=3*CHUNK))  #0.24 sus
         out = temp_out[CHUNK:-2*CHUNK]
-        print(out)
-        #for i in range(len(out)):
-        #    print(out[i])
-        #    print("\n")
         newdim = len(out)//CHUNK
         self.new_data = out.reshape((newdim,CHUNK))
 
     def loop(self, *args, **kwargs):
-        #print("LOOP")
-        
         if self.make_audio:
-            t = time.time() ################### we could get rid of it?
             self.gen_audio(NUM_CHUNKS)
 
         for w in range(self.num_latents):
@@ -157,13 +140,9 @@ class LoginScreen(BoxLayout):
                                     stream_callback=self.callback)
 
         self.stream.start_stream()
-        #time.sleep(0.1) ##### I DON"T KNOW IF WE NEED THIS
-
-    def model_to_mem(self):
-        #model_name = "long_synth"
-        data_path_net = os.path.join(os.getcwd(),'models/'+self.textinput3.text+'_trained_network_synth.h5')
-        #for now that path is hard coded
-        #data_path_net = os.path.join(os.getcwd(),'models/'+model_name+'_trained_network_synth.h5')
+        
+def model_to_mem(self):
+        data_path_net = os.path.join(os.getcwd(),'../models/'+self.textinput3.text+'_trained_network.h5')
         self.full_net = load_model(data_path_net, compile=False)
         self.full_net._make_predict_function()
         self.full_net_graph = tf.get_default_graph()
